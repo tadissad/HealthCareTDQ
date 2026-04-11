@@ -77,7 +77,7 @@
         </thead>
         <tbody>
           {% for item in cart_items %}
-          <tr data-price="{{ item.product.price|default:0 }}" data-id="{{ item.id }}">
+          <tr data-price="{{ item.product.price|floatformat:"0"|default:0 }}" data-id="{{ item.id }}">
             <td style="text-align: left;">
               <span class="c-product-name">
                 {% if item.product.name %}{{ item.product.name }}{% else %}Sản phẩm #{{ item.product_id }}{% endif %}
@@ -85,9 +85,9 @@
             </td>
             <td style="text-align: center;">
               <div class="c-qty-pill">
-                <button type="button" class="c-qty-btn" onclick="changeCartQty({{ item.id }}, -1, {{ item.product.price|default:0 }})">−</button>
+                <button type="button" class="c-qty-btn" onclick="changeCartQty({{ item.id }}, -1, {{ item.product.price|floatformat:"0"|default:0 }})">−</button>
                 <input type="number" class="c-qty-num" value="{{ item.quantity }}" id="qty-{{ item.id }}" readonly>
-                <button type="button" class="c-qty-btn" onclick="changeCartQty({{ item.id }}, 1, {{ item.product.price|default:0 }})">+</button>
+                <button type="button" class="c-qty-btn" onclick="changeCartQty({{ item.id }}, 1, {{ item.product.price|floatformat:"0"|default:0 }})">+</button>
               </div>
             </td>
             <td class="c-unit-price">{{ item.product.price|floatformat:"0"|default:"—" }} VND</td>

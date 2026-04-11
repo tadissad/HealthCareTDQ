@@ -222,7 +222,7 @@
       {% endif %}
 
       <div style="display:flex; align-items:baseline; gap:0.25rem;">
-        <span class="product-price">{{ p.price }}</span>
+        <span class="product-price">{{ p.price|floatformat:"0" }}</span>
         <span class="product-unit">VND / {{ p.unit }}</span>
       </div>
 
