@@ -336,19 +336,29 @@ def fetch_all_products(limit: int = 10) -> List[Dict]:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def generate_with_gemini(prompt: str) -> Optional[str]:
-    """Goi Gemini 2.0 Flash API de sinh cau tra loi."""
+    """Goi Gemini Flash API de sinh cau tra loi."""
     if not GEMINI_AVAILABLE or '_genai_client' not in globals() or _genai_client is None:
         logger.warning("[Gemini] Chua cau hinh. Dung template fallback.")
         return None
-    try:
-        response = _genai_client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt,
-        )
-        return response.text
-    except Exception as e:
-        logger.error(f"[Gemini] Loi generate: {e}")
-        return None
+    # Thu theo thu tu uu tien: model moi nhat -> cu hon
+    models_to_try = ["gemini-flash-latest", "gemini-2.0-flash-lite", "gemini-2.0-flash"]
+    for model_name in models_to_try:
+        try:
+            response = _genai_client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+            )
+            logger.info(f"[Gemini] Generated with {model_name}")
+            return response.text
+        except Exception as e:
+            errmsg = str(e)
+            if "429" in errmsg or "RESOURCE_EXHAUSTED" in errmsg:
+                logger.warning(f"[Gemini] {model_name} rate limited, trying next...")
+                continue
+            logger.error(f"[Gemini] Loi generate voi {model_name}: {e}")
+            return None
+    logger.error("[Gemini] Tat ca models deu that bai.")
+    return None
 
 def _template_response(query: str, products: List[Dict], intent: str) -> str:
     """Fallback khi không có Gemini API key – trả về response cấu trúc sẵn."""
