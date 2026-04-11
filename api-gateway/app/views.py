@@ -119,6 +119,10 @@ class IndexView(View):
                 request,
                 params={'product_ids': ids_str},
             )
+            # Fallback nếu service lỗi trả về []
+            if not isinstance(review_summary, dict):
+                review_summary = {}
+
             for p in products:
                 pid = str(p['id'])
                 p['avg_rating'] = review_summary.get(pid, {}).get('avg')
