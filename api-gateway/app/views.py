@@ -219,6 +219,8 @@ class LoginView(View):
         request.session['jwt_token']  = token
 
         logger.info(f"[GW] Đăng nhập thành công: {username} (role={account.role})")
+        if account.role == 'admin':
+            return redirect('/admin/dashboard/')
         next_url = request.GET.get('next', '/')
         return redirect(next_url)
 
@@ -255,14 +257,14 @@ class RegisterView(View):
         )
 
         # Tạo hồ sơ bệnh nhân trong patient-service
-        _service_post(f"{PATIENT_URL}/patients/", data={
+        _service_post(f"{PATIENT_URL}/customers/", data={
             'account_id': account.id,
             'name':  fullname,
             'phone': phone,
             'email': email,
         })
 
-        logger.info(f"[GW] Tài khoản mới: {username} (id={account.id})")
+        logger.info(f"[GW] Tài khoản mới: {username} (id={account.id} - Customer profile created)")
 
         # Auto-login sau đăng ký
         jwt_data, _ = _service_post(
@@ -437,6 +439,24 @@ class CartRemoveView(View):
         return redirect('/cart/')
 
 
+class CartPatchView(View):
+    """AJAX PATCH: cập nhật số lượng 1 item trong giỏ hàng không reload trang."""
+    @login_required
+    def post(self, request, item_id):
+        from django.http import JsonResponse
+        quantity = request.POST.get('quantity')
+        try:
+            r = requests.patch(
+                f"{PRESCRIPTION_URL}/cart-items/{item_id}/",
+                json={'quantity': int(quantity)},
+                headers=_internal_headers(request),
+                timeout=5,
+            )
+            return JsonResponse({'ok': True, 'quantity': int(quantity)})
+        except Exception as e:
+            return JsonResponse({'ok': False, 'error': str(e)}, status=500)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # CHECKOUT / ORDERS
 # ══════════════════════════════════════════════════════════════════════════════
@@ -458,23 +478,33 @@ class CheckoutView(View):
             total += item['subtotal']
             enriched_items.append(item)
 
+        # Lấy địa chỉ đã lưu từ patient-service để pre-fill
+        saved_address = ''
+        try:
+            profile_r = _service_get(f"{PATIENT_URL}/customers/by-account/{account_id}/", request)
+            if isinstance(profile_r, dict):
+                saved_address = profile_r.get('address', '')
+        except Exception:
+            pass
+
         return render(request, 'checkout.html', {
-            'cart_items': enriched_items,
-            'total':      total,
-            'username':   request.session.get('username', ''),
-            'account_id': account_id,
+            'cart_items':       enriched_items,
+            'total':            total,
+            'username':         request.session.get('username', ''),
+            'account_id':       account_id,
+            'shipping_address': saved_address,
         })
 
     @login_required
     def post(self, request):
-        account_id      = request.session.get('account_id')
-        payment_method  = request.POST.get('payment_method', 'Cash')
-        shipping_method = request.POST.get('shipping_method', 'Standard')
-        note            = request.POST.get('note', '')
-        # BHYT discount_rate: client sends 0.0–1.0, default 0
+        account_id       = request.session.get('account_id')
+        payment_method   = request.POST.get('payment_method', 'Cash')
+        shipping_method  = request.POST.get('shipping_method', 'Standard')
+        shipping_address = request.POST.get('shipping_address', '')
+        note             = request.POST.get('note', '')
         try:
             discount_rate = float(request.POST.get('discount_rate', '0'))
-            discount_rate = max(0.0, min(1.0, discount_rate))  # clamp
+            discount_rate = max(0.0, min(1.0, discount_rate))
         except (ValueError, TypeError):
             discount_rate = 0.0
 
@@ -482,11 +512,12 @@ class CheckoutView(View):
             f"{DISPENSING_URL}/orders/create/",
             request,
             data={
-                'customer_id':    account_id,
-                'payment_method': payment_method,
+                'customer_id':     account_id,
+                'payment_method':  payment_method,
                 'shipping_method': shipping_method,
-                'note':           note,
-                'discount_rate':  discount_rate,
+                'shipping_address': shipping_address,
+                'note':            note,
+                'discount_rate':   discount_rate,
             },
         )
 
@@ -609,9 +640,8 @@ class ProfileView(View):
     @login_required
     def get(self, request):
         account_id = request.session.get('account_id')
-        profile_data = _service_get(
-            f"{PATIENT_URL}/patients/by-account/{account_id}/", request
-        )
+        profile_data = _service_get(f"{PATIENT_URL}/customers/by-account/{account_id}/", request)
+
         orders = _service_get(
             f"{DISPENSING_URL}/orders/",
             request,
@@ -660,25 +690,37 @@ class ProfileSettingsView(View):
         request.session['fullname'] = fullname
 
         # Cập nhật hồ sơ bệnh nhân qua patient-service
-        profile_data = _service_get(f"{PATIENT_URL}/patients/by-account/{account_id}/", request)
+        profile_data = _service_get(f"{PATIENT_URL}/customers/by-account/{account_id}/", request)
         patient_id   = profile_data.get('id') if isinstance(profile_data, dict) else None
+        
         if patient_id:
             update_data = {'name': fullname, 'phone': phone, 'email': email_val, 'address': address}
             if blood_type:     update_data['blood_type']     = blood_type
             if insurance_code: update_data['insurance_code'] = insurance_code
 
             try:
-                requests.patch(
-                    f"{PATIENT_URL}/patients/{patient_id}/",
+                requests.put(
+                    f"{PATIENT_URL}/customers/by-account/{account_id}/",
                     headers=_internal_headers(request),
                     json=update_data,
                     timeout=8,
                 )
             except Exception as e:
-                logger.warning(f"[GW] Cập nhật patient {patient_id} thất bại: {e}")
+                logger.warning(f"[GW] Cập nhật patient {account_id} thất bại: {e}")
+        else:
+            # Nếu chưa có profile thì tự động tạo
+            try:
+                requests.post(
+                    f"{PATIENT_URL}/customers/by-account/{account_id}/",
+                    headers=_internal_headers(request),
+                    json={'name': fullname, 'phone': phone, 'email': email_val, 'address': address},
+                    timeout=8,
+                )
+            except Exception as e:
+                logger.warning(f"[GW] Tạo mới patient {account_id} thất bại: {e}")
 
         # Re-fetch & render
-        profile_data = _service_get(f"{PATIENT_URL}/patients/by-account/{account_id}/", request)
+        profile_data = _service_get(f"{PATIENT_URL}/customers/by-account/{account_id}/", request)
         orders = _service_get(f"{DISPENSING_URL}/orders/", request, params={'customer_id': account_id})
         return render(request, 'profile.html', {
             'profile': profile_data, 'orders': orders,
@@ -719,3 +761,147 @@ class HealthView(View):
             'gateway':  'UP',
             'services': services_status,
         })
+
+
+# ------------------------------------------------------------------------------
+# ADMIN PORTAL
+# ------------------------------------------------------------------------------
+
+def admin_required(view_func):
+    from functools import wraps
+    @wraps(view_func)
+    def _wrapped(self, request, *args, **kwargs):
+        req = request if hasattr(request, 'session') else self
+        if req.session.get('role') != 'admin':
+            messages.error(req, 'Bạn không có quyền truy cập trang quản trị.')
+            return redirect('/')
+        return view_func(self, request, *args, **kwargs)
+    return _wrapped
+
+
+class AdminDashboardView(View):
+    @admin_required
+    def get(self, request):
+        users_count   = Account.objects.exclude(role='admin').count()
+        products_data = _service_get(f'{PHARMACY_URL}/products/', request) or []
+        orders_data   = _service_get(f'{DISPENSING_URL}/orders/', request) or []
+        pending_orders = [o for o in orders_data if o.get('status') == 'Pending'] if isinstance(orders_data, list) else []
+        return render(request, 'admin/dashboard.html', {
+            'users_count':    users_count,
+            'products_count': len(products_data) if isinstance(products_data, list) else 0,
+            'orders_count':   len(orders_data) if isinstance(orders_data, list) else 0,
+            'pending_count':  len(pending_orders),
+            'recent_orders':  orders_data[:10] if isinstance(orders_data, list) else [],
+            'username': 'Admin',
+        })
+
+
+class AdminProductListView(View):
+    @admin_required
+    def get(self, request):
+        products = _service_get(f'{PHARMACY_URL}/products/', request) or []
+        return render(request, 'admin/products.html', {
+            'products': products if isinstance(products, list) else [],
+            'username': 'Admin',
+        })
+
+
+class AdminProductCreateView(View):
+    @admin_required
+    def get(self, request):
+        return render(request, 'admin/product_form.html', {'product': None, 'username': 'Admin'})
+
+    @admin_required
+    def post(self, request):
+        data = {
+            'name': request.POST.get('name', ''),
+            'generic_name': request.POST.get('generic_name', ''),
+            'category': request.POST.get('category', 'other'),
+            'price': request.POST.get('price', 0),
+            'stock': request.POST.get('stock', 0),
+            'unit': request.POST.get('unit', 'vien'),
+            'dosage_strength': request.POST.get('dosage_strength', ''),
+            'description': request.POST.get('description', ''),
+            'requires_prescription': request.POST.get('requires_prescription') == 'on',
+            'manufacturer': request.POST.get('manufacturer', ''),
+        }
+        result, status_code = _service_post(f'{PHARMACY_URL}/products/', request, data=data)
+        if status_code in (200, 201):
+            messages.success(request, f"Da them san pham.")
+            return redirect('/admin/products/')
+        messages.error(request, f"Loi them san pham.")
+        return redirect('/admin/products/create/')
+
+
+class AdminProductEditView(View):
+    @admin_required
+    def get(self, request, product_id):
+        product = _service_get(f'{PHARMACY_URL}/products/{product_id}/', request) or {}
+        return render(request, 'admin/product_form.html', {'product': product, 'username': 'Admin'})
+
+    @admin_required
+    def post(self, request, product_id):
+        data = {
+            'name': request.POST.get('name', ''),
+            'generic_name': request.POST.get('generic_name', ''),
+            'category': request.POST.get('category', 'other'),
+            'price': request.POST.get('price', 0),
+            'stock': request.POST.get('stock', 0),
+            'unit': request.POST.get('unit', 'vien'),
+            'dosage_strength': request.POST.get('dosage_strength', ''),
+            'description': request.POST.get('description', ''),
+            'requires_prescription': request.POST.get('requires_prescription') == 'on',
+            'manufacturer': request.POST.get('manufacturer', ''),
+        }
+        try:
+            r = requests.put(f'{PHARMACY_URL}/products/{product_id}/', json=data, headers=_internal_headers(request), timeout=8)
+            if r.ok:
+                messages.success(request, 'Da cap nhat san pham.')
+                return redirect('/admin/products/')
+            messages.error(request, f'Loi cap nhat.')
+        except Exception as e:
+            messages.error(request, f'Loi ket noi: {e}')
+        return redirect(f'/admin/products/{product_id}/edit/')
+
+
+class AdminProductDeleteView(View):
+    @admin_required
+    def post(self, request, product_id):
+        try:
+            requests.delete(f'{PHARMACY_URL}/products/{product_id}/', headers=_internal_headers(request), timeout=5)
+            messages.success(request, 'Da xoa san pham.')
+        except Exception as e:
+            messages.error(request, f'Loi xoa: {e}')
+        return redirect('/admin/products/')
+
+
+class AdminOrderListView(View):
+    @admin_required
+    def get(self, request):
+        orders = _service_get(f'{DISPENSING_URL}/orders/', request) or []
+        accounts = {a.id: a.username for a in Account.objects.all()}
+        for o in (orders if isinstance(orders, list) else []):
+            o['customer_name'] = accounts.get(o.get('customer_id'), f"ID {o.get('customer_id')}")
+        return render(request, 'admin/orders.html', {
+            'orders': orders if isinstance(orders, list) else [],
+            'username': 'Admin',
+        })
+
+
+class AdminOrderUpdateView(View):
+    @admin_required
+    def post(self, request, order_id):
+        new_status = request.POST.get('status')
+        try:
+            requests.patch(f'{DISPENSING_URL}/orders/{order_id}/', json={'status': new_status}, headers=_internal_headers(request), timeout=5)
+            messages.success(request, f'Cap nhat don #{order_id} thanh {new_status}')
+        except Exception as e:
+            messages.error(request, f'Loi: {e}')
+        return redirect('/admin/orders/')
+
+
+class AdminUserListView(View):
+    @admin_required
+    def get(self, request):
+        users = list(Account.objects.exclude(role='admin').values('id', 'username', 'role'))
+        return render(request, 'admin/users.html', {'users': users, 'username': 'Admin'})

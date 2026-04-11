@@ -26,16 +26,17 @@ class Order(models.Model):
         ('Pickup',   'Nhận tại nhà thuốc'),
     ]
 
-    customer_id      = models.IntegerField(db_index=True, verbose_name="ID khách hàng")
-    status           = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
-    payment_method   = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, default='Cash')
-    shipping_method  = models.CharField(max_length=20, choices=SHIPPING_CHOICES, default='Standard')
-    total_amount     = models.DecimalField(max_digits=15, decimal_places=2, default=0)
-    discount_rate    = models.FloatField(default=0.0, verbose_name="Tỷ lệ giảm giá (0.0-1.0)")
-    note             = models.TextField(blank=True, verbose_name="Ghi chú đơn thuốc")
+    customer_id       = models.IntegerField(db_index=True, verbose_name="ID khách hàng")
+    status            = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    payment_method    = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, default='Cash')
+    shipping_method   = models.CharField(max_length=20, choices=SHIPPING_CHOICES, default='Standard')
+    shipping_address  = models.TextField(blank=True, verbose_name="Địa chỉ giao hàng")
+    total_amount      = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    discount_rate     = models.FloatField(default=0.0, verbose_name="Tỷ lệ giảm giá (0.0-1.0)")
+    note              = models.TextField(blank=True, verbose_name="Ghi chú đơn thuốc")
     prescription_code = models.CharField(max_length=100, blank=True, verbose_name="Mã đơn thuốc")
-    created_at       = models.DateTimeField(auto_now_add=True)
-    updated_at       = models.DateTimeField(auto_now=True)
+    created_at        = models.DateTimeField(auto_now_add=True)
+    updated_at        = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-created_at']

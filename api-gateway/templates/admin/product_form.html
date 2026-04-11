@@ -1,0 +1,93 @@
+{% extends 'admin/base.html' %}
+{% block title %}{% if product %}Sửa sản phẩm{% else %}Thêm sản phẩm{% endif %} – Admin{% endblock %}
+{% block active_prod %}active{% endblock %}
+{% block topbar_title %}{% if product %}Chỉnh sửa Sản phẩm #{{ product.id }}{% else %}Thêm Sản phẩm Mới{% endif %}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="page-title">{% if product %}✏️ Chỉnh sửa: {{ product.name }}{% else %}➕ Thêm sản phẩm mới{% endif %}</div>
+  </div>
+  <a href="/admin/products/" class="a-btn a-btn-outline">← Quay lại danh sách</a>
+</div>
+
+<div class="a-card" style="max-width:860px;">
+  <div style="padding:1.5rem;">
+    <form method="POST" action="{% if product %}/admin/products/{{ product.id }}/edit/{% else %}/admin/products/create/{% endif %}">
+      {% csrf_token %}
+
+      <div class="a-form-group">
+        <label class="a-label">Tên sản phẩm *</label>
+        <input class="a-input" type="text" name="name" required value="{{ product.name|default:'' }}">
+      </div>
+
+      <div class="a-grid-2">
+        <div class="a-form-group">
+          <label class="a-label">Tên hoạt chất (generic_name)</label>
+          <input class="a-input" type="text" name="generic_name" value="{{ product.generic_name|default:'' }}" placeholder="Ví dụ: Paracetamol">
+        </div>
+        <div class="a-form-group">
+          <label class="a-label">Hàm lượng</label>
+          <input class="a-input" type="text" name="dosage_strength" value="{{ product.dosage_strength|default:'' }}" placeholder="500mg, 10mg/ml...">
+        </div>
+      </div>
+
+      <div class="a-grid-3">
+        <div class="a-form-group">
+          <label class="a-label">Danh mục *</label>
+          <select class="a-input" name="category">
+            {% for val, label in categories %}
+            <option value="{{ val }}" {% if product.category == val %}selected{% endif %}>{{ label }}</option>
+            {% empty %}
+            <option value="antibiotic" {% if product.category == 'antibiotic' %}selected{% endif %}>Kháng sinh</option>
+            <option value="analgesic"  {% if product.category == 'analgesic' %}selected{% endif %}>Giảm đau</option>
+            <option value="vitamin"    {% if product.category == 'vitamin' %}selected{% endif %}>Vitamin</option>
+            <option value="gastro"     {% if product.category == 'gastro' %}selected{% endif %}>Tiêu hóa</option>
+            <option value="cardiac"    {% if product.category == 'cardiac' %}selected{% endif %}>Tim mạch</option>
+            <option value="respiratory" {% if product.category == 'respiratory' %}selected{% endif %}>Hô hấp</option>
+            <option value="other"      {% if product.category == 'other' %}selected{% endif %}>Khác</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="a-form-group">
+          <label class="a-label">Đơn vị</label>
+          <input class="a-input" type="text" name="unit" value="{{ product.unit|default:'viên' }}" placeholder="viên, chai, gói...">
+        </div>
+        <div class="a-form-group">
+          <label class="a-label">Nhà sản xuất</label>
+          <input class="a-input" type="text" name="manufacturer" value="{{ product.manufacturer|default:'' }}">
+        </div>
+      </div>
+
+      <div class="a-grid-2">
+        <div class="a-form-group">
+          <label class="a-label">Giá bán (VND) *</label>
+          <input class="a-input" type="number" name="price" min="0" step="100" required value="{{ product.price|default:0 }}">
+        </div>
+        <div class="a-form-group">
+          <label class="a-label">Số lượng tồn kho *</label>
+          <input class="a-input" type="number" name="stock" min="0" required value="{{ product.stock|default:0 }}">
+        </div>
+      </div>
+
+      <div class="a-form-group">
+        <label class="a-label">Mô tả sản phẩm</label>
+        <textarea class="a-input" name="description" rows="4" placeholder="Công dụng, liều dùng, chỉ định...">{{ product.description|default:'' }}</textarea>
+      </div>
+
+      <div class="a-form-group" style="display:flex; align-items:center; gap:0.65rem;">
+        <input type="checkbox" name="requires_prescription" id="rx" {% if product.requires_prescription %}checked{% endif %}
+               style="width:16px;height:16px; accent-color:var(--brand);">
+        <label for="rx" class="a-label" style="margin:0; cursor:pointer;">Thuốc kê đơn (yêu cầu toa bác sĩ)</label>
+      </div>
+
+      <div style="display:flex; gap:0.75rem; margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border);">
+        <button type="submit" class="a-btn a-btn-primary">
+          {% if product %}💾 Lưu thay đổi{% else %}➕ Thêm sản phẩm{% endif %}
+        </button>
+        <a href="/admin/products/" class="a-btn a-btn-outline">Hủy</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

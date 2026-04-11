@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Admin Portal – Health-AI{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand:     #1F6F5F;
+      --mint:      #6FCF97;
+      --slate:     #1e293b;
+      --slate-mid: #334155;
+      --slate-nav: #cbd5e1;
+      --bg-page:   #F4F6F6;
+      --white:     #ffffff;
+      --border:    #e2e8f0;
+      --text:      #0f172a;
+      --text-sub:  #64748b;
+      --warn:      #F57C00;
+      --danger:    #E53935;
+      --radius:    8px;
+      --shadow:    0 4px 12px rgba(0,0,0,0.03);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-page); color: var(--text); display: flex; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .admin-sidebar {
+      width: 250px; flex-shrink: 0;
+      background: var(--slate);
+      display: flex; flex-direction: column;
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 1.75rem 1.5rem 1.25rem;
+      font-size: 1.05rem; font-weight: 900; color: #fff;
+      letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar-logo span { color: var(--mint); }
+    .sidebar-section { padding: 1rem 0.75rem 0.5rem; font-size: 0.68rem; font-weight: 700; color: #475569; letter-spacing: 1.5px; text-transform: uppercase; }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.65rem 1.25rem; margin: 1px 0;
+      color: var(--slate-nav); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      border-radius: 6px; margin: 2px 0.5rem;
+      transition: all 0.15s;
+    }
+    .sidebar-link:hover { background: var(--slate-mid); color: #fff; }
+    .sidebar-link.active { background: rgba(111,207,151,0.12); color: var(--mint); font-weight: 600; border-left: 3px solid var(--mint); border-radius: 0 6px 6px 0; margin-left: 0; padding-left: calc(1.25rem - 3px); }
+    .sidebar-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-footer { margin-top: auto; padding: 1rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .sidebar-footer a { color: #ef4444; font-size: 0.82rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* ── MAIN ── */
+    .admin-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+    /* ── TOPBAR ── */
+    .admin-topbar {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.75rem; display: flex; align-items: center; gap: 1rem;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .topbar-title { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+    .topbar-search {
+      flex: 1; max-width: 340px; margin-left: auto;
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--bg-page); border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.45rem 0.85rem;
+    }
+    .topbar-search input { border: none; background: none; outline: none; font-family: inherit; font-size: 0.875rem; color: var(--text); width: 100%; }
+    .topbar-admin { display: flex; align-items: center; gap: 0.65rem; cursor: pointer; position: relative; margin-left: 1rem; }
+    .topbar-avatar { width: 34px; height: 34px; background: var(--brand); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; }
+    .topbar-name { font-size: 0.875rem; font-weight: 600; }
+    .topbar-dropdown { position: absolute; top: 100%; right: 0; margin-top: 6px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); min-width: 160px; display: none; z-index: 100; }
+    .topbar-admin:hover .topbar-dropdown { display: block; }
+    .topbar-dropdown a { display: block; padding: 0.7rem 1rem; font-size: 0.875rem; text-decoration: none; color: var(--danger); font-weight: 500; }
+    .topbar-dropdown a:hover { background: #fff5f5; }
+
+    /* ── CONTENT ── */
+    .admin-content { padding: 1.75rem; flex: 1; }
+    .page-header { margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .page-title { font-size: 1.3rem; font-weight: 800; color: var(--text); }
+    .page-sub { font-size: 0.82rem; color: var(--text-sub); margin-top: 2px; }
+
+    /* ── STAT CARDS ── */
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 1.75rem; }
+    .stat-card { background: var(--white); padding: 1.4rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border-left: 4px solid var(--brand); }
+    .stat-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-sub); margin-bottom: 0.5rem; }
+    .stat-value { font-size: 2rem; font-weight: 900; color: var(--text); line-height: 1; }
+    .stat-sub { font-size: 0.75rem; color: var(--text-sub); margin-top: 0.4rem; }
+
+    /* ── CARD ── */
+    .a-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .a-card-head { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .a-card-title { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+
+    /* ── TABLE ── */
+    .a-table { width: 100%; border-collapse: collapse; }
+    .a-table th { padding: 0.75rem 1.25rem; text-align: left; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-sub); background: #f8fafc; border-bottom: 1px solid var(--border); }
+    .a-table td { padding: 0.85rem 1.25rem; font-size: 0.875rem; border-bottom: 1px solid var(--border); color: var(--text); }
+    .a-table tbody tr:last-child td { border-bottom: none; }
+    .a-table tbody tr:hover td { background: #f1f5f9; }
+
+    /* ── BADGE ── */
+    .a-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
+    .a-badge-green  { background: rgba(111,207,151,0.2); color: #1F6F5F; }
+    .a-badge-orange { background: rgba(245,124,0,0.12); color: #B45309; }
+    .a-badge-red    { background: rgba(229,57,53,0.12);  color: #B91C1C; }
+    .a-badge-blue   { background: rgba(59,130,246,0.12); color: #1D4ED8; }
+    .a-badge-gray   { background: #f1f5f9; color: var(--text-sub); }
+
+    /* ── BUTTONS ── */
+    .a-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.82rem; font-weight: 600; cursor: pointer; text-decoration: none; border: none; transition: all 0.15s; font-family: inherit; }
+    .a-btn-primary { background: var(--brand); color: #fff; }
+    .a-btn-primary:hover { background: #175f51; }
+    .a-btn-outline { background: transparent; color: var(--text-sub); border: 1px solid var(--border); }
+    .a-btn-outline:hover { border-color: var(--brand); color: var(--brand); }
+    .a-btn-link { background: transparent; color: #2FA084; border: none; padding: 0.3rem 0; font-size: 0.82rem; }
+    .a-btn-link:hover { color: var(--brand); }
+    .a-btn-danger-link { background: transparent; color: var(--danger); border: none; padding: 0.3rem 0; font-size: 0.82rem; }
+
+    /* ── FORM ── */
+    .a-form-group { margin-bottom: 1rem; }
+    .a-label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-sub); margin-bottom: 0.4rem; }
+    .a-input { width: 100%; padding: 0.6rem 0.85rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.875rem; color: var(--text); outline: none; transition: border-color 0.15s; }
+    .a-input:focus { border-color: var(--mint); }
+    .a-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+    .a-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 1rem; }
+
+    /* ── ALERT ── */
+    .a-alert { padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.875rem; margin-bottom: 1rem; }
+    .a-alert-success { background: rgba(111,207,151,0.15); color: #1F6F5F; border: 1px solid rgba(111,207,151,0.4); }
+    .a-alert-error   { background: rgba(229,57,53,0.10); color: #B91C1C; border: 1px solid rgba(229,57,53,0.3); }
+
+    @media(max-width: 900px) { .stat-grid { grid-template-columns: repeat(2,1fr); } .admin-sidebar { display: none; } }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="admin-sidebar">
+  <div class="sidebar-logo">ADMIN<span>.</span></div>
+
+  <div class="sidebar-section">Tổng quan</div>
+  <a href="/admin/dashboard/" class="sidebar-link {% block active_dash %}{% endblock %}">
+    <span class="sidebar-icon">📊</span> Bảng điều khiển
+  </a>
+
+  <div class="sidebar-section">Nghiệp vụ</div>
+  <a href="/admin/products/" class="sidebar-link {% block active_prod %}{% endblock %}">
+    <span class="sidebar-icon">💊</span> Quản lý Sản phẩm
+  </a>
+  <a href="/admin/orders/" class="sidebar-link {% block active_ord %}{% endblock %}">
+    <span class="sidebar-icon">📦</span> Kiểm soát Đơn hàng
+  </a>
+  <a href="/admin/users/" class="sidebar-link {% block active_usr %}{% endblock %}">
+    <span class="sidebar-icon">👥</span> Dữ liệu Khách hàng
+  </a>
+
+  <div class="sidebar-section">Hệ thống</div>
+  <a href="/" class="sidebar-link">
+    <span class="sidebar-icon">🏪</span> Xem Store
+  </a>
+  <a href="/ai/chat/" class="sidebar-link">
+    <span class="sidebar-icon">🤖</span> AI Chat
+  </a>
+
+  <div class="sidebar-footer">
+    <a href="/logout/">🚪 Đăng xuất</a>
+  </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<div class="admin-main">
+  <!-- Top Bar -->
+  <div class="admin-topbar">
+    <span class="topbar-title">{% block topbar_title %}Admin Portal{% endblock %}</span>
+    <div class="topbar-search">
+      <span style="color:#94a3b8;">🔍</span>
+      <input type="text" placeholder="Tìm ID đơn hàng, khách hàng...">
+    </div>
+    <div class="topbar-admin">
+      <div class="topbar-avatar">A</div>
+      <span class="topbar-name">Admin</span>
+      <div class="topbar-dropdown">
+        <a href="/logout/">🚪 Đăng xuất</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Messages - Floating Toast -->
+  {% if messages %}
+  <div style="position: fixed; top: 80px; right: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 0.5rem; max-width: 350px;">
+    {% for msg in messages %}
+    <div class="a-alert {% if 'success' in msg.tags %}a-alert-success{% else %}a-alert-error{% endif %}" style="margin-bottom:0; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      {{ msg }}
+    </div>
+    {% endfor %}
+  </div>
+  
+  <script>
+    // Tự động ẩn thông báo sau 4 giây
+    setTimeout(() => {
+      const alerts = document.querySelectorAll('.a-alert');
+      alerts.forEach(alert => {
+        alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        alert.style.opacity = '0';
+        alert.style.transform = 'translateY(-10px)';
+        setTimeout(() => alert.remove(), 500);
+      });
+    }, 4000);
+  </script>
+  {% endif %}
+
+  <!-- Content -->
+  <div class="admin-content">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+</body>
+</html>

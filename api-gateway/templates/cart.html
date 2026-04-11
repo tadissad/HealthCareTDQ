@@ -3,105 +3,176 @@
 
 {% block extra_css %}
 <style>
-  .cart-grid { display:grid; grid-template-columns: 1fr 320px; gap:1.5rem; align-items:start; }
-  .cart-table { width:100%; border-collapse:collapse; }
-  .cart-table th { text-align:left; font-size:0.8rem; font-weight:600; color:var(--text-sub); padding:0 1rem 0.75rem; border-bottom:2px solid var(--border); }
-  .cart-table td { padding:1rem; border-bottom:1px solid var(--border); vertical-align:middle; font-size:0.9rem; }
-  .cart-table tr:last-child td { border-bottom:none; }
-  .cart-table tr:hover td { background:var(--bg-light); }
-  .cart-product-name { font-weight:600; color:var(--primary); }
-  .cart-product-sub  { font-size:0.78rem; color:var(--text-sub); margin-top:2px; }
-  .cart-qty-wrap { display:flex; align-items:center; border:1.5px solid var(--border-dark); border-radius:var(--radius-btn); width:fit-content; overflow:hidden; }
-  .cart-qty-btn { width:30px; height:30px; background:var(--bg); border:none; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:var(--transition); }
-  .cart-qty-btn:hover { background:var(--border-dark); }
-  .cart-qty-num { width:36px; height:30px; text-align:center; border:none; border-left:1px solid var(--border); border-right:1px solid var(--border); font-size:0.875rem; font-weight:600; outline:none; }
-  .summary-box { background:var(--bg-light); border-radius:var(--radius-card); padding:1.5rem; }
-  @media(max-width:900px) { .cart-grid { grid-template-columns:1fr; } }
+  /* 
+    Prompt styling: 
+    - Main background: light gray #EEEEEE (from base.html body by default, but let's ensure it)
+    - Card: clean white #FFFFFF with subtle box-shadow
+    - Title: clean, bold font with Deep Teal #1F6F5F, accompanied by cart icon
+    - Header row: clean, grey #757575 text, left aligned (except maybe unit/total right aligned)
+    - Data row: flawlessly aligned, significant padding
+    - Product name: clean sans-serif #333333
+    - Quantity selector: minimalist pill design (mid-teal #2FA084 +/-, central numeral 1 in #333333)
+    - Unit price: right aligned #333333
+    - Total price: crisp vibrant teal #2FA084, bold, right aligned
+    - Delete link: clean refined red #E53935, right aligned
+  */
+  
+  .cart-container { padding: 3rem 1.5rem; max-width: 1000px; margin: 0 auto; }
+  .cart-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; }
+  .cart-header h1 { font-family: 'Inter', sans-serif; font-size: 1.75rem; font-weight: 800; color: #1F6F5F; margin: 0; }
+  .cart-header-icon { font-size: 1.8rem; color: #1F6F5F; }
+
+  .cart-card { background: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); padding: 0.5rem 1.5rem 2rem; }
+  
+  .c-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .c-table th { padding: 1.25rem 1rem; font-size: 0.85rem; font-weight: 500; color: #757575; letter-spacing: 0.3px; border-bottom: 1px solid #EEEEEE; }
+  .c-table td { padding: 1.5rem 1rem; border-bottom: 1px solid #EEEEEE; vertical-align: middle; }
+  .c-table tr:last-child td { border-bottom: none; }
+  
+  .c-product-name { font-family: 'Inter', sans-serif; font-weight: 500; color: #333333; font-size: 0.95rem; }
+  
+  .c-qty-pill { display: inline-flex; align-items: center; background: #FFFFFF; border: 1px solid #E0E0E0; border-radius: 999px; overflow: hidden; height: 36px; }
+  .c-qty-btn { background: transparent; border: none; font-size: 1.1rem; width: 36px; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #2FA084; outline: none; }
+  .c-qty-btn:hover { background: rgba(47, 160, 132, 0.08); }
+  .c-qty-num { border: none; width: 40px; text-align: center; font-size: 0.95rem; font-weight: 600; color: #333333; outline: none; background: transparent; padding: 0; pointer-events: none; }
+  
+  .c-unit-price { color: #333333; font-size: 0.95rem; font-weight: 400; text-align: right; }
+  .c-total-price { color: #2FA084; font-size: 0.95rem; font-weight: 700; text-align: right; }
+  
+  .c-delete { color: #E53935; font-size: 0.85rem; font-weight: 500; text-decoration: none; display: inline-block; cursor: pointer; border: none; background: none; font-family: inherit; }
+  .c-delete:hover { opacity: 0.8; }
+  
+  /* Footer Actions */
+  .cart-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; padding: 0 1rem; }
+  .cart-grand-total { font-family: 'Inter', sans-serif; font-size: 1.2rem; color: #333333; font-weight: 500; }
+  .cart-grand-total-val { font-size: 1.4rem; color: #1F6F5F; font-weight: 800; margin-left: 0.5rem; }
+  
+  .c-btn-checkout { background: #1F6F5F; color: #FFFFFF; border: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; padding: 0.85rem 2rem; cursor: pointer; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 12px rgba(31, 111, 95, 0.2); }
+  .c-btn-checkout:hover { background: #155548; transform: translateY(-1px); }
+
+  .empty-cart { text-align: center; padding: 4rem 0; }
+  .empty-cart-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+  .empty-cart-text { font-size: 1.1rem; color: #757575; font-weight: 500; margin-bottom: 1.5rem; }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1 class="page-title">🛒 Giỏ hàng</h1>
+<div class="cart-container">
+  <div class="cart-header">
+    <span class="cart-header-icon">🛒</span>
+    <h1>Giỏ hàng</h1>
+  </div>
 
-  {% if cart_items %}
-  <div class="cart-grid">
-    {# Danh sách dạng table #}
-    <div class="card" style="padding:0;">
-      <table class="cart-table">
+  <div class="cart-card">
+    {% if cart_items %}
+      <table class="c-table">
         <thead>
           <tr>
-            <th style="padding-left:1.5rem;">Sản phẩm</th>
-            <th>Số lượng</th>
-            <th>Đơn giá</th>
-            <th>Thành tiền</th>
-            <th></th>
+            <th style="text-align: left;">Sản phẩm</th>
+            <th style="text-align: center;">Số lượng</th>
+            <th style="text-align: right;">Đơn giá</th>
+            <th style="text-align: right;">Thành tiền</th>
+            <th style="text-align: right;"></th>
           </tr>
         </thead>
         <tbody>
           {% for item in cart_items %}
-          <tr>
-            <td style="padding-left:1.5rem;">
-              <div class="cart-product-name">{{ item.product.name|default:"Sản phẩm #"|add:item.product_id }}</div>
-              <div class="cart-product-sub">{{ item.product.generic_name|default:"" }} {{ item.product.dosage_strength|default:"" }}</div>
+          <tr data-price="{{ item.product.price|default:0 }}" data-id="{{ item.id }}">
+            <td style="text-align: left;">
+              <span class="c-product-name">
+                {% if item.product.name %}{{ item.product.name }}{% else %}Sản phẩm #{{ item.product_id }}{% endif %}
+              </span>
             </td>
-            <td>
-              <div class="cart-qty-wrap">
-                <button type="button" class="cart-qty-btn" onclick="changeCartQty({{ item.id }}, -1)">−</button>
-                <input type="number" class="cart-qty-num" value="{{ item.quantity }}" min="1" id="qty-{{ item.id }}" readonly>
-                <button type="button" class="cart-qty-btn" onclick="changeCartQty({{ item.id }}, 1)">+</button>
+            <td style="text-align: center;">
+              <div class="c-qty-pill">
+                <button type="button" class="c-qty-btn" onclick="changeCartQty({{ item.id }}, -1, {{ item.product.price|default:0 }})">−</button>
+                <input type="number" class="c-qty-num" value="{{ item.quantity }}" id="qty-{{ item.id }}" readonly>
+                <button type="button" class="c-qty-btn" onclick="changeCartQty({{ item.id }}, 1, {{ item.product.price|default:0 }})">+</button>
               </div>
             </td>
-            <td>{{ item.product.price|default:"—" }} VND</td>
-            <td style="font-weight:700; color:var(--secondary);">{{ item.subtotal|floatformat:"0" }} VND</td>
-            <td style="padding-right:1.5rem;">
-              <form method="POST" action="/cart/remove/{{ item.id }}/" style="display:inline;">
+            <td class="c-unit-price">{{ item.product.price|floatformat:"0"|default:"—" }} VND</td>
+            <td class="c-total-price" id="sub-{{ item.id }}">{{ item.subtotal|floatformat:"0" }} VND</td>
+            <td style="text-align: right;">
+              <form method="POST" action="/cart/remove/{{ item.id }}/" style="display:inline;" id="del-form-{{ item.id }}">
                 {% csrf_token %}
-                <button type="submit" class="btn-text btn-text-danger" style="font-size:0.82rem;">Xóa</button>
+                <button type="submit" class="c-delete" title="Xóa rỗng">Xóa</button>
               </form>
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-    </div>
 
-    {# Summary sidebar #}
-    <div>
-      <div class="summary-box">
-        <div style="font-size:1rem; font-weight:700; color:var(--text); margin-bottom:1rem;">Tổng kết đơn hàng</div>
-        <div style="display:flex; justify-content:space-between; font-size:0.875rem; color:var(--text-sub); margin-bottom:0.6rem;">
-          <span>Tạm tính:</span>
-          <span>{{ total|floatformat:"0" }} VND</span>
+      <div class="cart-footer">
+        <a href="/" style="font-size:0.9rem; color:#757575; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; font-weight:500;">
+          ← Tiếp tục mua sắm
+        </a>
+        <div style="display: flex; align-items: center; gap: 2rem;">
+          <div class="cart-grand-total">
+            Tổng cộng: <span class="cart-grand-total-val cart-total-display">{{ total|floatformat:"0" }} VND</span>
+          </div>
+          <a href="/checkout/" class="c-btn-checkout">Thanh toán ngay</a>
         </div>
-        <div style="display:flex; justify-content:space-between; font-size:0.875rem; color:var(--text-sub); margin-bottom:1rem;">
-          <span>Phí vận chuyển:</span>
-          <span style="color:var(--secondary);">Miễn phí</span>
-        </div>
-        <hr class="divider">
-        <div style="display:flex; justify-content:space-between; font-size:1.15rem; font-weight:800; color:var(--primary); margin-bottom:1.25rem;">
-          <span>Tổng tiền:</span>
-          <span>{{ total|floatformat:"0" }} VND</span>
-        </div>
-        <a href="/checkout/" class="btn btn-secondary btn-full btn-lg">💳 Thanh toán ngay</a>
-        <a href="/" class="btn btn-outline btn-full" style="margin-top:0.6rem; padding:0.6rem;">← Tiếp tục mua</a>
       </div>
-    </div>
+    {% else %}
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛍️</div>
+        <div class="empty-cart-text">Giỏ hàng của bạn đang trống.</div>
+        <a href="/" class="c-btn-checkout" style="display: inline-block;">Thêm sản phẩm</a>
+      </div>
+    {% endif %}
   </div>
-
-  {% else %}
-  <div style="text-align:center; padding:5rem 2rem; background:var(--white); border-radius:var(--radius-card); box-shadow:var(--shadow-card);">
-    <div style="font-size:3.5rem; margin-bottom:1rem;">🛒</div>
-    <h2 style="color:var(--primary); margin-bottom:0.5rem;">Giỏ hàng trống</h2>
-    <p style="color:var(--text-sub); margin-bottom:1.5rem;">Hãy thêm sản phẩm vào giỏ để tiếp tục.</p>
-    <a href="/" class="btn btn-primary">🏪 Xem sản phẩm</a>
-  </div>
-  {% endif %}
 </div>
+
 <script>
-function changeCartQty(itemId, delta) {
-  const inp = document.getElementById('qty-' + itemId);
-  inp.value = Math.max(1, parseInt(inp.value) + delta);
+const CSRF = '{{ csrf_token }}';
+
+function changeCartQty(itemId, delta, unitPrice) {
+  const inp  = document.getElementById('qty-' + itemId);
+  const cur  = parseInt(inp.value);
+  const next = cur + delta;
+
+  if (next <= 0) {
+    if (confirm('Bạn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+      document.getElementById('del-form-' + itemId).submit();
+    }
+    return;
+  }
+
+  // Cập nhật UI ngay lập tức
+  inp.value = next;
+  updateSubtotal(itemId, unitPrice, next);
+
+  // Gọi PATCH API lên server để lưu
+  fetch(`/cart/patch/${itemId}/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `quantity=${next}&csrfmiddlewaretoken=${CSRF}`,
+  }).catch(() => {
+    // Nếu lỗi, revert về giá trị cũ
+    inp.value = cur;
+    updateSubtotal(itemId, unitPrice, cur);
+  });
+}
+
+function updateSubtotal(itemId, unitPrice, qty) {
+  const sub = document.getElementById('sub-' + itemId);
+  if (sub) {
+    sub.textContent = Math.round(unitPrice * qty).toLocaleString('vi-VN') + ' VND';
+  }
+  recalcTotal();
+}
+
+function recalcTotal() {
+  let total = 0;
+  document.querySelectorAll('[data-price]').forEach(el => {
+    const qty = parseInt(document.getElementById('qty-' + el.dataset.id).value);
+    total += parseFloat(el.dataset.price) * qty;
+  });
+  const rounded = Math.round(total);
+  document.querySelectorAll('.cart-total-display').forEach(el => {
+    el.textContent = rounded.toLocaleString('vi-VN') + ' VND';
+  });
 }
 </script>
 {% endblock %}

@@ -237,10 +237,17 @@
   </div>
   <div class="nav-actions">
     {% if account_id %}
-      <a href="/cart/" class="nav-cart-link">
-        🛒 Giỏ hàng
-        {% if cart_count > 0 %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}
-      </a>
+      {% if role == 'admin' %}
+        <a href="/admin/dashboard/" class="btn btn-sm"
+           style="background:#1e293b; color:#6FCF97; font-weight:700; letter-spacing:0.5px;">
+          🛡️ Quản trị
+        </a>
+      {% else %}
+        <a href="/cart/" class="nav-cart-link">
+          🛒 Giỏ hàng
+          {% if cart_count > 0 %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}
+        </a>
+      {% endif %}
       <a href="/profile/" class="btn btn-outline btn-sm">👤 {{ username }}</a>
       <a href="/logout/" class="btn btn-sm" style="background:var(--bg);color:var(--text-sub);">Đăng xuất</a>
     {% else %}

@@ -90,11 +90,16 @@ class CustomerMembership(APIView):
 
         membership  = request.data.get('membership')
         total_spent = request.data.get('total_spent')
+        increment_spent = request.data.get('increment_spent')
 
         if membership:
             customer.membership = membership
         if total_spent is not None:
             customer.total_spent = float(total_spent)
+        if increment_spent is not None:
+            customer.total_spent += float(increment_spent)
+            
+        if total_spent is not None or increment_spent is not None:
             customer.update_membership()   # auto-upgrade dựa trên chi tiêu
 
         customer.save()

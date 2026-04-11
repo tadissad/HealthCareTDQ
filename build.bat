@@ -74,6 +74,7 @@ docker-compose exec -T patient-service python manage.py makemigrations app
 docker-compose exec -T medical-catalog-service python manage.py makemigrations app
 docker-compose exec -T dispensing-service python manage.py makemigrations app
 docker-compose exec -T medical-review-service python manage.py makemigrations app
+docker-compose exec -T prescription-service python manage.py makemigrations app
 docker-compose exec -T api-gateway python manage.py makemigrations app
 
 echo.
@@ -83,6 +84,7 @@ docker-compose exec -T patient-service python manage.py migrate
 docker-compose exec -T medical-catalog-service python manage.py migrate
 docker-compose exec -T dispensing-service python manage.py migrate
 docker-compose exec -T medical-review-service python manage.py migrate
+docker-compose exec -T prescription-service python manage.py migrate
 docker-compose exec -T api-gateway python manage.py migrate
 echo [OK] Hoan tat khoi tao CSDL quy mo Microservices!
 

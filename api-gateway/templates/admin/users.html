@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %}
+{% block title %}Quản lý Khách hàng – Admin Portal{% endblock %}
+{% block active_usr %}active{% endblock %}
+{% block topbar_title %}Dữ liệu Khách hàng{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="page-title">👥 Danh sách Khách hàng</div>
+    <div class="page-sub">{{ users|length }} tài khoản đã đăng ký</div>
+  </div>
+</div>
+
+<div class="a-card">
+  <table class="a-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên đăng nhập</th>
+        <th>Vai trò</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td style="color:var(--text-sub);">#{{ u.id }}</td>
+        <td style="font-weight:600;">{{ u.username }}</td>
+        <td>
+          {% if u.role == 'admin' %}
+            <span class="a-badge a-badge-red">Admin</span>
+          {% else %}
+            <span class="a-badge a-badge-blue">{{ u.role|default:"khách hàng" }}</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="3" style="text-align:center; color:var(--text-sub); padding:3rem;">Chưa có tài khoản nào.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

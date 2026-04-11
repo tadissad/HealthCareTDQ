@@ -21,19 +21,19 @@
 
   /* Membership card */
   .membership-card {
-    aspect-ratio: 16/9; border-radius: var(--radius-card); padding: 1.5rem;
+    min-height: 120px; border-radius: var(--radius-card); padding: 1.25rem 1.5rem;
     display:flex; flex-direction:column; justify-content:space-between;
-    position:relative; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    position:relative; overflow:hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     margin-bottom:1.5rem;
   }
   .mc-platinum { background:linear-gradient(135deg, #C0C0C0 0%, #e8e8e8 50%, #ffffff 100%); }
   .mc-gold     { background:linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #FFA500 100%); }
   .mc-silver   { background:linear-gradient(135deg, #808080 0%, #C0C0C0 50%, #EEEEEE 100%); }
   .mc-bronze   { background:linear-gradient(135deg, #8B4513 0%, #CD853F 50%, #DEB887 100%); }
-  .mc-rank  { font-size:1.1rem; font-weight:800; color:rgba(0,0,0,0.5); letter-spacing:2px; text-transform:uppercase; text-shadow:0 1px 2px rgba(255,255,255,0.5); }
-  .mc-name  { font-size:1.3rem; font-weight:800; color:rgba(0,0,0,0.6); text-shadow:1px 1px 3px rgba(255,255,255,0.7); }
-  .mc-spent { font-size:0.8rem; color:rgba(0,0,0,0.45); font-weight:500; }
-  .mc-icon  { position:absolute; right:1.5rem; top:1.25rem; font-size:2.5rem; opacity:0.35; }
+  .mc-rank  { font-size:1rem; font-weight:800; color:rgba(0,0,0,0.5); letter-spacing:1px; text-transform:uppercase; text-shadow:0 1px 2px rgba(255,255,255,0.5); }
+  .mc-name  { font-size:1.15rem; font-weight:800; color:rgba(0,0,0,0.7); text-shadow:1px 1px 2px rgba(255,255,255,0.7); margin-top:0.5rem; }
+  .mc-spent { font-size:0.75rem; color:rgba(0,0,0,0.5); font-weight:500; }
+  .mc-icon  { position:absolute; right:1.5rem; top:1rem; font-size:2rem; opacity:0.35; }
 
   /* Profile info read-only */
   .info-field { padding:0.7rem 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
@@ -138,10 +138,14 @@
               <label class="form-label">Nhóm máu</label>
               <select name="blood_type" class="form-input form-select">
                 <option value="">-- Chọn --</option>
-                {% for bt in 'A,AB,B,O'|split:',' %}
-                <option value="{{ bt }}+" {% if profile.blood_type == bt|add:'+' %}selected{% endif %}>{{ bt }}+</option>
-                <option value="{{ bt }}-" {% if profile.blood_type == bt|add:'-' %}selected{% endif %}>{{ bt }}-</option>
-                {% endfor %}
+                <option value="A+" {% if profile.blood_type == 'A+' %}selected{% endif %}>A+</option>
+                <option value="A-" {% if profile.blood_type == 'A-' %}selected{% endif %}>A-</option>
+                <option value="B+" {% if profile.blood_type == 'B+' %}selected{% endif %}>B+</option>
+                <option value="B-" {% if profile.blood_type == 'B-' %}selected{% endif %}>B-</option>
+                <option value="AB+" {% if profile.blood_type == 'AB+' %}selected{% endif %}>AB+</option>
+                <option value="AB-" {% if profile.blood_type == 'AB-' %}selected{% endif %}>AB-</option>
+                <option value="O+" {% if profile.blood_type == 'O+' %}selected{% endif %}>O+</option>
+                <option value="O-" {% if profile.blood_type == 'O-' %}selected{% endif %}>O-</option>
               </select>
             </div>
             <div class="form-group">

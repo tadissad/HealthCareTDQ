@@ -2,11 +2,15 @@ from django.urls import path
 from app.views import (
     IndexView, LoginView, RegisterView, LogoutView,
     ProductDetailView, ReviewSubmitView,
-    CartView, CartAddView, CartRemoveView,
+    CartView, CartAddView, CartRemoveView, CartPatchView,
     CheckoutView, OrderHistoryView, OrderDetailView,
     AIChatView, AIRecommendView,
     ProfileView, ProfileSettingsView,
     HealthView,
+    AdminDashboardView, AdminProductListView, AdminProductCreateView,
+    AdminProductEditView, AdminProductDeleteView,
+    AdminOrderListView, AdminOrderUpdateView,
+    AdminUserListView,
 )
 
 urlpatterns = [
@@ -24,6 +28,7 @@ urlpatterns = [
     path('cart/',                      CartView.as_view(),       name='cart'),
     path('cart/add/',                  CartAddView.as_view(),    name='cart-add'),
     path('cart/remove/<int:item_id>/', CartRemoveView.as_view(), name='cart-remove'),
+    path('cart/patch/<int:item_id>/',  CartPatchView.as_view(),  name='cart-patch'),
     path('checkout/',                  CheckoutView.as_view(),   name='checkout'),
 
     # ── Orders ────────────────────────────────────────────
@@ -37,6 +42,16 @@ urlpatterns = [
     # ── Profile ───────────────────────────────────────────
     path('profile/',          ProfileView.as_view(),         name='profile'),
     path('profile/settings/', ProfileSettingsView.as_view(), name='profile-settings'),
+
+    # ── Admin Portal ──────────────────────────────────────
+    path('admin/dashboard/',                            AdminDashboardView.as_view(),    name='admin-dashboard'),
+    path('admin/products/',                             AdminProductListView.as_view(),  name='admin-products'),
+    path('admin/products/create/',                      AdminProductCreateView.as_view(), name='admin-product-create'),
+    path('admin/products/<int:product_id>/edit/',       AdminProductEditView.as_view(),  name='admin-product-edit'),
+    path('admin/products/<int:product_id>/delete/',     AdminProductDeleteView.as_view(), name='admin-product-delete'),
+    path('admin/orders/',                               AdminOrderListView.as_view(),    name='admin-orders'),
+    path('admin/orders/<int:order_id>/update/',         AdminOrderUpdateView.as_view(),  name='admin-order-update'),
+    path('admin/users/',                                AdminUserListView.as_view(),     name='admin-users'),
 
     # ── System Health ─────────────────────────────────────
     path('health/', HealthView.as_view(), name='health'),

@@ -1,0 +1,80 @@
+{% extends 'admin/base.html' %}
+{% block title %}Quản lý Đơn hàng – Admin Portal{% endblock %}
+{% block active_ord %}active{% endblock %}
+{% block topbar_title %}Kiểm soát Đơn hàng{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <div class="page-title">📦 Danh sách Đơn hàng</div>
+    <div class="page-sub">{{ orders|length }} đơn hàng trong hệ thống</div>
+  </div>
+</div>
+
+<div class="a-card">
+  <table class="a-table">
+    <thead>
+      <tr>
+        <th>Mã đơn</th>
+        <th>Khách hàng</th>
+        <th>Địa chỉ giao hàng</th>
+        <th>Thanh toán</th>
+        <th>Tổng tiền</th>
+        <th>Trạng thái</th>
+        <th>Cập nhật</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td style="font-weight:700;">#{{ o.id }}</td>
+        <td>
+          <div style="font-weight:600;">{{ o.customer_name }}</div>
+          <div style="font-size:0.78rem; color:var(--text-sub);">ID {{ o.customer_id }}</div>
+        </td>
+        <td style="font-size:0.82rem; max-width:180px; color:var(--text-sub);">
+          {{ o.shipping_address|default:"—"|truncatechars:50 }}
+        </td>
+        <td style="font-size:0.82rem;">{{ o.payment_method }}</td>
+        <td style="font-weight:700;">{{ o.total_amount }} VND</td>
+        <td>
+          {% if o.status == 'Pending' %}
+            <span class="a-badge a-badge-orange">⏳ Chờ xử lý</span>
+          {% elif o.status == 'Confirmed' %}
+            <span class="a-badge a-badge-blue">👍 Đã xác nhận</span>
+          {% elif o.status == 'Paid' %}
+            <span class="a-badge a-badge-green">✅ Đã thanh toán</span>
+          {% elif o.status == 'Shipping' %}
+            <span class="a-badge a-badge-blue">🚚 Đang giao</span>
+          {% elif o.status == 'Delivered' or o.status == 'Completed' %}
+            <span class="a-badge a-badge-green">✓ Hoàn thành</span>
+          {% elif o.status == 'Cancelled' %}
+            <span class="a-badge a-badge-red">✕ Đã hủy</span>
+          {% else %}
+            <span class="a-badge a-badge-gray">{{ o.status }}</span>
+          {% endif %}
+        </td>
+        <td>
+          <form method="POST" action="/admin/orders/{{ o.id }}/update/">
+            {% csrf_token %}
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <select name="status" class="a-input" style="width:auto; padding:0.35rem 0.6rem; font-size:0.8rem;">
+                <option value="Pending"   {% if o.status == 'Pending' %}selected{% endif %}>Chờ xử lý</option>
+                <option value="Confirmed" {% if o.status == 'Confirmed' %}selected{% endif %}>Xác nhận</option>
+                <option value="Paid"      {% if o.status == 'Paid' %}selected{% endif %}>Đã thanh toán</option>
+                <option value="Shipping"  {% if o.status == 'Shipping' %}selected{% endif %}>Đang giao</option>
+                <option value="Delivered" {% if o.status == 'Delivered' %}selected{% endif %}>Đã giao</option>
+                <option value="Cancelled" {% if o.status == 'Cancelled' %}selected{% endif %}>Hủy đơn</option>
+              </select>
+              <button type="submit" class="a-btn a-btn-outline" style="padding:0.35rem 0.7rem; font-size:0.8rem;">Lưu</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="7" style="text-align:center; color:var(--text-sub); padding:3rem;">Chưa có đơn hàng nào.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
