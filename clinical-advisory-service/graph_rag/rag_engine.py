@@ -33,7 +33,7 @@ NEO4J_URI           = os.getenv("NEO4J_URI",           "bolt://neo4j:7687")
 NEO4J_USER          = os.getenv("NEO4J_USER",          "neo4j")
 NEO4J_PASSWORD      = os.getenv("NEO4J_PASSWORD",      "health123")
 GEMINI_API_KEY      = os.getenv("GEMINI_API_KEY",      "")
-PRODUCT_SERVICE_URL = os.getenv("PRODUCT_SERVICE_URL", "http://product-service:8000")
+PRODUCT_SERVICE_URL = os.getenv("PHARMACY_SERVICE_URL", "http://pharmacy-service:8000")
 FAISS_INDEX_PATH    = os.getenv("FAISS_INDEX_PATH",    "/app/faiss_data")
 EMBEDDING_MODEL     = os.getenv("EMBEDDING_MODEL",     "paraphrase-multilingual-MiniLM-L12-v2")
 
@@ -56,18 +56,21 @@ except ImportError:
     NEO4J_AVAILABLE = False
 
 try:
-    import google.generativeai as genai
+    from google import genai as google_genai
+    from google.genai import types as gtypes
     if GEMINI_API_KEY:
-        genai.configure(api_key=GEMINI_API_KEY)
+        _genai_client = google_genai.Client(api_key=GEMINI_API_KEY)
         GEMINI_AVAILABLE = True
-        EMBEDDING_AVAILABLE = True  # Gemini embed có thể dùng
-        logger.info("[Gemini] API configured. Dùng text-embedding-004 cho FAISS.")
+        EMBEDDING_AVAILABLE = True
+        logger.info("[Gemini] google.genai client ready. Dung gemini-embedding-001.")
     else:
+        _genai_client = None
         GEMINI_AVAILABLE = False
-        logger.warning("[Gemini] Chưa có API key – FAISS embedding bị tắt.")
+        logger.warning("[Gemini] Chua co API key - fallback mode.")
 except ImportError:
+    _genai_client = None
     GEMINI_AVAILABLE = False
-    logger.warning("[Gemini] google-generativeai không tìm thấy. Dùng template fallback.")
+    logger.warning("[Gemini] google-genai not found. Template fallback.")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
