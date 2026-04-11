@@ -37,10 +37,10 @@
         <td><span class="a-badge a-badge-gray">{{ p.category }}</span></td>
         <td style="font-size:0.82rem; color:var(--text-sub);">{{ p.dosage_strength|default:"—" }}</td>
         <td>
-          {% if p.stock > 10 %}
-            <span class="a-badge a-badge-green">{{ p.stock }} {{ p.unit }}</span>
-          {% elif p.stock > 0 %}
-            <span class="a-badge a-badge-orange">Còn {{ p.stock }}</span>
+          {% if p.stock_quantity > 10 %}
+            <span class="a-badge a-badge-green">{{ p.stock_quantity }} {{ p.unit }}</span>
+          {% elif p.stock_quantity > 0 %}
+            <span class="a-badge a-badge-orange">Còn {{ p.stock_quantity }}</span>
           {% else %}
             <span class="a-badge a-badge-red">Hết hàng</span>
           {% endif %}
