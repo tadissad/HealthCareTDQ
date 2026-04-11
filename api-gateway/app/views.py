@@ -81,6 +81,11 @@ def _service_post(url: str, request=None, data=None, timeout=8):
         return {}, 503
 
 
+def _service_post_ai(url: str, request=None, data=None):
+    """Helper POST chuyên dụng cho AI services (timeout 60s vì Gemini API cần 10-20s)."""
+    return _service_post(url, request=request, data=data, timeout=60)
+
+
 def login_required(view_func):
     """Decorator: yêu cầu đăng nhập, redirect về /login/ nếu chưa."""
     @wraps(view_func)
@@ -546,7 +551,7 @@ class AIChatView(View):
         if not message:
             return JsonResponse({'error': 'Tin nhắn không được trống'}, status=400)
 
-        result, status_code = _service_post(
+        result, status_code = _service_post_ai(
             f"{CLINICAL_ADV_URL}/api/chat",
             request,
             data={

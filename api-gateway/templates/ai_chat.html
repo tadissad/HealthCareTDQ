@@ -186,11 +186,20 @@ async function sendMessage() {
   appendMsg('user', esc(msg));
   showThinking();
 
+  // AbortController để tự cancel sau 90s
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 90000);
+
   try {
     const fd = new FormData();
     fd.append('message', msg);
     fd.append('csrfmiddlewaretoken', getCookie('csrftoken'));
-    const res  = await fetch('/ai/chat/', {method:'POST', body:fd});
+    const res  = await fetch('/ai/chat/', {
+      method: 'POST',
+      body: fd,
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
     const data = await res.json();
     removeThinking();
 
@@ -204,12 +213,17 @@ async function sendMessage() {
         const disclaimer = parts.slice(1).join('---').trim().replace(/\n/g,'<br>');
         html += `<div class="disclaimer-block">⚠️ ${disclaimer}</div>`;
       }
-      const meta = `${data.mode==='gemini'?'✨ Gemini 1.5 Flash':'📋 Template'} · ${data.sources} nguồn`;
+      const meta = `${data.mode==='gemini'?'✨ Gemini Flash':'📋 Template'} · ${data.sources} nguồn`;
       appendMsg('bot', html, meta);
     }
   } catch(e) {
+    clearTimeout(timeoutId);
     removeThinking();
-    appendMsg('bot', '⚠️ Không thể kết nối AI service. Thử lại sau.');
+    if (e.name === 'AbortError') {
+      appendMsg('bot', '⏱️ AI cần thêm thời gian xử lý. Vui lòng thử lại câu hỏi.');
+    } else {
+      appendMsg('bot', '⚠️ Không thể kết nối AI service. Thử lại sau.');
+    }
   }
   inp.disabled=false; inp.focus();
 }
