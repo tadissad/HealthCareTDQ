@@ -62,7 +62,7 @@
       <div class="a-grid-2">
         <div class="a-form-group">
           <label class="a-label">Giá bán (VND) *</label>
-          <input class="a-input" type="number" name="price" min="0" step="100" required value="{{ product.price|default:0 }}">
+          <input class="a-input" type="number" name="price" min="0" step="1" required value="{{ product.price|floatformat:'0'|default:0 }}">
         </div>
         <div class="a-form-group">
           <label class="a-label">Số lượng tồn kho *</label>

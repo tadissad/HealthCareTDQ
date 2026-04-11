@@ -45,7 +45,7 @@
             <span class="a-badge a-badge-red">Hết hàng</span>
           {% endif %}
         </td>
-        <td style="font-weight:700;">{{ p.price }}</td>
+        <td style="font-weight:700;">{{ p.price|floatformat:"0" }}</td>
         <td>
           {% if p.requires_prescription %}
             <span class="a-badge a-badge-orange">Kê đơn</span>

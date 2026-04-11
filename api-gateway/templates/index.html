@@ -152,7 +152,7 @@
         {% if p.requires_prescription %}<span class="product-rx-badge">Kê đơn</span>{% endif %}
         <span class="badge badge-neutral" style="width:fit-content;">{{ p.category }}</span>
         <a href="/products/{{ p.id }}/" class="product-name">{{ p.name }}</a>
-        <div class="product-price">{{ p.price|default:"—" }} <span class="product-unit">VND</span></div>
+        <div class="product-price">{{ p.price|floatformat:"0"|default:"—" }} <span class="product-unit">VND</span></div>
         <div class="product-actions">
           <a href="/products/{{ p.id }}/" class="btn-text btn-text-primary" style="font-size:0.82rem;">Chi tiết</a>
           {% if account_id %}

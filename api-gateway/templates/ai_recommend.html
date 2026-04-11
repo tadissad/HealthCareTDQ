@@ -65,7 +65,7 @@
       <span class="badge badge-neutral">{{ p.category|default:"—" }}</span>
       <a href="/products/{{ p.id }}/" style="font-size:1rem; font-weight:700; color:var(--primary); text-decoration:none;">{{ p.name }}</a>
       <div style="font-size:0.8rem; color:var(--text-sub);">{{ p.generic_name|default:"" }}</div>
-      <div style="font-size:1.05rem; font-weight:800; color:var(--secondary);">{{ p.price }} VND</div>
+      <div style="font-size:1.05rem; font-weight:800; color:var(--secondary);">{{ p.price|floatformat:"0" }} VND</div>
 
       {# Score progress bars #}
       {% if p.score %}

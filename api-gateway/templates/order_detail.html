@@ -118,9 +118,9 @@
         {% for item in order.items %}
         <tr>
           <td>{{ item.name|default:"Sản phẩm" }}</td>
-          <td class="text-right">{{ item.price|default:"—" }} VND</td>
+          <td class="text-right">{{ item.price|floatformat:"0"|default:"—" }} VND</td>
           <td class="text-right">{{ item.quantity }}</td>
-          <td class="text-right" style="font-weight:600;">{{ item.subtotal|default:"—" }} VND</td>
+          <td class="text-right" style="font-weight:600;">{{ item.subtotal|floatformat:"0"|default:"—" }} VND</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -128,7 +128,7 @@
 
     <hr class="divider">
     <div style="text-align:right; font-size:1.2rem; font-weight:800; color:var(--primary);">
-      Tổng cộng: {{ order.total_amount }} VND
+      Tổng cộng: {{ order.total_amount|floatformat:"0" }} VND
     </div>
   </div>
   {% else %}

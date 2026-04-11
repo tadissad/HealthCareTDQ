@@ -180,7 +180,7 @@
     {# ── CỘT PHẢI: Sidebar Mua hàng (Sticky) ─────────── #}
     <div style="position:sticky; top:80px;">
       <div class="card">
-        <div style="font-size:1.8rem; font-weight:800; color:var(--secondary);">{{ product.price }} <span style="font-size:0.9rem; font-weight:400; color:var(--text-sub);">VND / {{ product.unit }}</span></div>
+        <div style="font-size:1.8rem; font-weight:800; color:var(--secondary);">{{ product.price|floatformat:"0" }} <span style="font-size:0.9rem; font-weight:400; color:var(--text-sub);">VND / {{ product.unit }}</span></div>
 
         {% if reviews_summary.avg %}
         <div class="stars" style="margin-top:0.4rem;">

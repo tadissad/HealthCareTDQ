@@ -78,7 +78,7 @@
         </div>
         <div>
           <div class="mc-name">{{ fullname|default:username }}</div>
-          <div class="mc-spent">Tổng chi tiêu: {{ profile.total_spent|default:"0" }} VND</div>
+          <div class="mc-spent">Tổng chi tiêu: {{ profile.total_spent|floatformat:"0"|default:"0" }} VND</div>
         </div>
       </div>
       {% endwith %}
@@ -182,7 +182,7 @@
               <td style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
                 <span style="font-size:0.78rem; color:var(--text-sub);">{{ o.status }}</span>
               </td>
-              <td style="padding:0.6rem 0; border-bottom:1px solid var(--border); text-align:right; font-weight:600; color:var(--primary);">{{ o.total_amount }} VND</td>
+              <td style="padding:0.6rem 0; border-bottom:1px solid var(--border); text-align:right; font-weight:600; color:var(--primary);">{{ o.total_amount|floatformat:"0" }} VND</td>
             </tr>
             {% endfor %}
           </tbody>

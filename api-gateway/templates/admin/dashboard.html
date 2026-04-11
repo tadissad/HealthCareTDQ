@@ -73,7 +73,7 @@
             <span class="a-badge a-badge-gray">{{ o.status }}</span>
           {% endif %}
         </td>
-        <td style="font-weight:600;">{{ o.total_amount }} VND</td>
+        <td style="font-weight:600;">{{ o.total_amount|floatformat:"0" }} VND</td>
         <td><a href="/admin/orders/" class="a-btn-link">Chi tiết</a></td>
       </tr>
       {% empty %}

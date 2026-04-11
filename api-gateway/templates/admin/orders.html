@@ -36,7 +36,7 @@
           {{ o.shipping_address|default:"—"|truncatechars:50 }}
         </td>
         <td style="font-size:0.82rem;">{{ o.payment_method }}</td>
-        <td style="font-weight:700;">{{ o.total_amount }} VND</td>
+        <td style="font-weight:700;">{{ o.total_amount|floatformat:"0" }} VND</td>
         <td>
           {% if o.status == 'Pending' %}
             <span class="a-badge a-badge-orange">⏳ Chờ xử lý</span>

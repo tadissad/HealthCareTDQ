@@ -30,7 +30,7 @@
         </div>
       </div>
       <div style="text-align:right; flex-shrink:0;">
-        <div style="font-size:1.05rem; font-weight:800; color:var(--primary);">{{ order.total_amount|default:"—" }} VND</div>
+        <div style="font-size:1.05rem; font-weight:800; color:var(--primary);">{{ order.total_amount|floatformat:"0"|default:"—" }} VND</div>
         <a href="/orders/{{ order.id }}/" style="font-size:0.82rem; color:var(--secondary); text-decoration:none; font-weight:600; display:block; margin-top:0.4rem;">
           Xem chi tiết →
         </a>
