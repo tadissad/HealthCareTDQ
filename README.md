@@ -55,22 +55,29 @@ cp .env.example .env
 ```
 Mở file `.env` vừa copy, dán mã `GEMINI_API_KEY` của bạn vào để "Mở khóa Trí Não" cho hệ thống AI. (Thiếu cái này AI sẽ bị căm, không trả lời được).
 
-### Bước 2: Build Và Khởi Động Tự Động
-Hệ thống đi kèm một "Kịch bản tự động thông minh" (Smart Script) giúp bạn bỏ qua mọi dòng lệnh Docker lằng nhằng hoặc rủi ro mạng. Bạn chỉ việc nhấn đúp thư mục tải về hoặc gõ lệnh duy nhất này ở Terminal:
+### Bước 2: Build Và Khởi Động Tự Động (One-Click Deploy)
+Hệ thống đi kèm một "Kịch bản tự động thông minh" (Smart Script) giúp bạn bỏ qua mọi dòng lệnh quản trị rủi ro mạng. Bạn hoàn toàn có thể khởi động toàn bộ hệ thống từ con số 0 chỉ bằng MỘT LỆNH DUY NHẤT ở Terminal:
 
 ```bat
 .\build.bat
 ```
-- Lần đầu tiên, nó sẽ tự động tạo một nền Base Image chia sẻ siêu nhẹ (~200MB) và kích hoạt bừng tỉnh 13 Containers.
-- **Cam kết:** Nhờ việc đập bỏ thiết kế Pytorch/SentenceTransformers cục bộ cũ, máy tính cá nhân của bạn sẽ KHÔNG bị Crash hay Tràn Bộ nhớ ảo (Lỗi OS Error 1455). Kịch bản diễn ra vô cùng mượt mà.
+Ngay khi chạy, tệp lệnh này sẽ làm thay bạn toàn bộ các công đoạn mệt mỏi:
+1. Tạo một nền Base Image chia sẻ siêu nhẹ (~200MB) cực kỳ tiết kiệm bộ nhớ máy.
+2. Kích hoạt bừng tỉnh 13 Containers của hệ thống y tế vi dịch vụ.
+3. Tự động xâm nhập vào 6 cụm máy chủ Django để tạo cấu trúc Bảng Cố Lõi (Migrate).
+4. Tự động nạp Dữ liệu Mẫu Thuốc và Kiến thức Bệnh học vào Trí Thông Minh Nhân Tạo (Seed AI).
 
-Nếu bạn tò mò, hãy kiểm tra trạng thái các container bằng lệnh:
+**Cam kết:** Nhờ đập bỏ thiết kế Pytorch/SentenceTransformers cục bộ cũ, máy tính cá nhân của bạn sẽ KHÔNG bị Crash hay Tràn Bộ nhớ ảo (Lỗi OS Error 1455)!
+
+Nếu bạn tò mò, hãy kiểm tra trạng thái các container đang xanh đèn bằng lệnh:
 ```bash
 docker-compose ps
 ```
 
-### Bước 3: Đổ Dữ Liệu Khởi Tạo (Seeding)
-Sau khi toàn bộ các web app backend đã chạy đèn xanh trên Docker Desktop, bạn hãy tiến hành "dạy học và nhập hàng" cho hệ thống. Script `seed_all.py` đã được kích hoạt chức năng **Idempotent** – Nghĩa là tuyệt đối an toàn, chạy 10 lần cũng không sinh ra rác trùng lập dữ liệu, có thể chạy trong lúc web đang phục vụ khách!
+### Bước 3: Đổ Dữ Liệu Nâng Cao (Tùy Chọn - Manual Seeding)
+Vì `build.bat` ở bước 2 đã tự động làm hết thay bạn, nên **bạn có thể BỎ QUA bước này** ở lần chạy đầu tiên.
+
+Tuy nhiên, nếu sau này bạn **tự biên tập lại** cuốn bách khoa y khoa `faq.txt`, hay thêm các loại thuốc mới vào `benhdaday.csv` để đối phó với giảng viên, bạn có thể gọi thủ công lệnh dạy học này:
 
 ```bash
 # Cài đặt thư viện vận chuyển trên máy chủ cá nhân của bạn
@@ -79,10 +86,9 @@ pip install requests neo4j faiss-cpu google-genai numpy
 # Chạy công nhân xếp dữ liệu
 python seed_all.py
 ```
+*(Script có tính chất Idempotent - Chạy vô biên không trùng dữ liệu).*
 
-*Cơ chế tự động: `seed_all.py` sẽ đọc nội dung sách y khoa từ file `benhdaday.csv` và `faq.txt`, vẽ nên mạng lưới sơ đồ bệnh học lên Graph DB Neo4j, sau đó gửi text cho AI Gemini nén giùm thành Toán học (Vector) đưa vào lưu trữ ở FAISS.*
-
-> **Mẹo Nhỏ (Sau khi Seed xong):** Hãy gõ lệnh `docker-compose restart clinical-advisory-service` để đánh thức AI tái nạp lại bộ nhớ kiến thức mới nhất mà bạn vừa nạp!
+> **Mẹo Nhỏ (Sau khi Seed tay xong):** Hãy gõ lệnh `docker-compose restart clinical-advisory-service` để đánh thức AI tái nạp lại bộ nhớ kiến thức mới nhất mà bạn vừa nạp!
 
 ### Bước 4: Trải Nghiệm Thực Tế Hệ Sinh Thái
 Mọi cấu hình đã xong, hãy truy cập vào trình duyệt: 👉 **http://localhost:8000** 
