@@ -3,5 +3,5 @@
 #   google-generativeai, fastapi, uvicorn, requests, pydantic, python-dotenv
 # Chi liet ke phan khac biet:
 
-# (Khong co dependency bo sung - tat ca da nam trong base image)
-# Giu file nay de pip install khong bac loi "file not found"
+# New Gemini SDK (thay the google-generativeai da deprecated)
+google-genai>=1.0.0
