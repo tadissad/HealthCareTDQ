@@ -278,40 +278,39 @@ STOMACH_PRODUCTS = [
 
 
 def seed_part_a():
-    """
-    Part A: Seed 10 sản phẩm y tế vào product-service qua REST API.
-    product-service phải đang chạy tại PRODUCT_SERVICE_URL.
-    """
     import requests as req
-
-    logger.info("=" * 60)
-    logger.info("PART A: Seeding 10 sản phẩm y tế vào product-service")
-    logger.info(f"Target: {PRODUCT_SERVICE_URL}/products/")
-    logger.info("=" * 60)
-
-    success_count = 0
-    fail_count    = 0
-
+    logger.info('=' * 60)
+    logger.info('PART A: Seeding pharmacy-service products (idempotent)')
+    logger.info('=' * 60)
+    existing_names = set()
+    try:
+        resp = req.get(PRODUCT_SERVICE_URL + '/products/', timeout=10)
+        if resp.status_code == 200:
+            data = resp.json()
+            items = data if isinstance(data, list) else data.get('results', [])
+            existing_names = {item.get('name') for item in items if item.get('name')}
+            logger.info('  [CHECK] %d products already in DB.' % len(existing_names))
+    except Exception as e:
+        logger.warning('  [CHECK] Could not fetch existing list: %s' % e)
+    success_count = skip_count = fail_count = 0
     for i, product in enumerate(STOMACH_PRODUCTS, 1):
+        if product['name'] in existing_names:
+            logger.info('  [SKIP] %s already exists' % product['name'])
+            skip_count += 1
+            continue
         try:
-            response = req.post(
-                f"{PRODUCT_SERVICE_URL}/products/",
-                json=product,
-                timeout=10,
-            )
+            response = req.post(PRODUCT_SERVICE_URL + '/products/', json=product, timeout=10)
             if response.status_code in (200, 201):
-                result = response.json()
-                logger.info(f"  ✅ [{i:02d}/10] ID={result.get('id')} – {product['name']} ({product['dosage_strength']})")
+                logger.info('  [OK] %s added' % product['name'])
                 success_count += 1
             else:
-                logger.warning(f"  ❌ [{i:02d}/10] {product['name']} – HTTP {response.status_code}: {response.text[:100]}")
+                logger.warning('  [FAIL] %s HTTP %s' % (product['name'], response.status_code))
                 fail_count += 1
         except Exception as e:
-            logger.error(f"  ❌ [{i:02d}/10] {product['name']} – Lỗi kết nối: {e}")
+            logger.error('  [ERROR] %s - %s' % (product['name'], e))
             fail_count += 1
-        time.sleep(0.1)  # Tránh overload
-
-    logger.info(f"\nPart A kết quả: {success_count} thành công / {fail_count} thất bại")
+        import time as _t; _t.sleep(0.1)
+    logger.info('Part A: %d created / %d skipped / %d failed' % (success_count, skip_count, fail_count))
     return success_count
 
 
