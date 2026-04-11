@@ -79,49 +79,41 @@ _faiss_chunks: List[str] = []           # Danh sách text chunks tương ứng v
 
 
 def _get_embedding(text: str) -> Optional[np.ndarray]:
-    """
-    Encode text thành vector 768-dim bằng Gemini text-embedding-004.
-    Không cần tải model về máy – gọi API trực tiếp.
-    Tốt hơn MiniLM: hiểu ngữ cảnh tiếng Việt, y khoa chuyên sâu.
-    """
-    if not EMBEDDING_AVAILABLE or not GEMINI_API_KEY:
+    """Encode text thanh vector 3072-dim bang Gemini gemini-embedding-001."""
+    if not EMBEDDING_AVAILABLE or not GEMINI_AVAILABLE or '_genai_client' not in globals() or _genai_client is None:
         return None
     try:
-        result = genai.embed_content(
-            model="models/text-embedding-004",
-            content=text,
-            task_type="RETRIEVAL_DOCUMENT",
+        result = _genai_client.models.embed_content(
+            model="gemini-embedding-001",
+            contents=text,
+            config=gtypes.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT"),
         )
-        emb = np.array(result["embedding"], dtype=np.float32)
-        # Normalize để dùng với IndexFlatIP (cosine similarity)
+        emb = np.array(result.embeddings[0].values, dtype=np.float32)
         norm = np.linalg.norm(emb)
         if norm > 0:
             emb = emb / norm
         return emb
     except Exception as e:
-        logger.error(f"[Embed] Gemini embedding lỗi: {e}")
+        logger.error(f"[Embed] Gemini embedding loi: {e}")
         return None
-
-
 def _get_query_embedding(text: str) -> Optional[np.ndarray]:
-    """Encode câu hỏi (query) với task_type RETRIEVAL_QUERY."""
-    if not EMBEDDING_AVAILABLE or not GEMINI_API_KEY:
+    """Encode cau hoi (query) voi task_type RETRIEVAL_QUERY."""
+    if not EMBEDDING_AVAILABLE or not GEMINI_AVAILABLE or '_genai_client' not in globals() or _genai_client is None:
         return None
     try:
-        result = genai.embed_content(
-            model="models/text-embedding-004",
-            content=text,
-            task_type="RETRIEVAL_QUERY",
+        result = _genai_client.models.embed_content(
+            model="gemini-embedding-001",
+            contents=text,
+            config=gtypes.EmbedContentConfig(task_type="RETRIEVAL_QUERY"),
         )
-        emb = np.array(result["embedding"], dtype=np.float32)
+        emb = np.array(result.embeddings[0].values, dtype=np.float32)
         norm = np.linalg.norm(emb)
         if norm > 0:
             emb = emb / norm
         return emb
     except Exception as e:
-        logger.error(f"[Embed] Gemini query embedding lỗi: {e}")
+        logger.error(f"[Embed] Gemini query embedding loi: {e}")
         return None
-
 
 def build_faiss_index(chunks: List[str]) -> bool:
     """
@@ -341,27 +333,19 @@ def fetch_all_products(limit: int = 10) -> List[Dict]:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def generate_with_gemini(prompt: str) -> Optional[str]:
-    """
-    Gọi Gemini 1.5 Flash API để sinh câu trả lời.
-
-    Args:
-        prompt: Prompt đã được xây dựng đầy đủ context
-
-    Returns:
-        Câu trả lời từ Gemini, hoặc None nếu lỗi
-    """
-    if not GEMINI_AVAILABLE or not GEMINI_API_KEY:
-        logger.warning("[Gemini] API key chưa cấu hình. Dùng template fallback.")
+    """Goi Gemini API de sinh cau tra loi."""
+    if not GEMINI_AVAILABLE or '_genai_client' not in globals() or _genai_client is None:
+        logger.warning("[Gemini] Chua cau hinh. Dung template fallback.")
         return None
-
     try:
-        model  = genai.GenerativeModel("gemini-1.5-flash")
-        result = model.generate_content(prompt)
-        return result.text
+        response = _genai_client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=prompt,
+        )
+        return response.text
     except Exception as e:
-        logger.error(f"[Gemini] Lỗi generate: {e}")
+        logger.error(f"[Gemini] Loi generate: {e}")
         return None
-
 
 def _template_response(query: str, products: List[Dict], intent: str) -> str:
     """Fallback khi không có Gemini API key – trả về response cấu trúc sẵn."""

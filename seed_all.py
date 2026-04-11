@@ -707,7 +707,8 @@ def seed_part_c():
         logger.warning("faiss-cpu chua cai. Se luu numpy fallback.")
         FAISS_AVAIL = False
 
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types as gtypes
 
     gemini_key = os.getenv("GEMINI_API_KEY", "")
     if not gemini_key:
@@ -725,8 +726,8 @@ def seed_part_c():
         logger.error("GEMINI_API_KEY chua duoc cau hinh. Khong the tao FAISS index.")
         return 0
 
-    genai.configure(api_key=gemini_key)
-    logger.info("[Gemini] API key ready. Su dung text-embedding-004.")
+    client = genai.Client(api_key=gemini_key)
+    logger.info("[Gemini] API key ready. Dung gemini-embedding-001.")
 
     paragraphs = MEDICAL_KNOWLEDGE_PARAGRAPHS.copy()
     paragraphs.extend(load_extra_faiss_chunks())
@@ -736,12 +737,12 @@ def seed_part_c():
     failed = 0
     for i, chunk in enumerate(paragraphs):
         try:
-            result = genai.embed_content(
-                model="models/text-embedding-004",
-                content=chunk,
-                task_type="RETRIEVAL_DOCUMENT",
+            result = client.models.embed_content(
+                model="gemini-embedding-001",
+                contents=chunk,
+                config=gtypes.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT"),
             )
-            emb = np.array(result["embedding"], dtype=np.float32)
+            emb = np.array(result.embeddings[0].values, dtype=np.float32)
             norm = np.linalg.norm(emb)
             if norm > 0:
                 emb = emb / norm
@@ -767,12 +768,12 @@ def seed_part_c():
         logger.info("FAISS index saved: %s/medical.index" % FAISS_OUTPUT_DIR)
 
         try:
-            test_result = genai.embed_content(
-                model="models/text-embedding-004",
-                content="Thuoc dieu tri dau da day o chua",
-                task_type="RETRIEVAL_QUERY",
+            test_result = client.models.embed_content(
+                model="gemini-embedding-001",
+                contents="Thuoc dieu tri dau da day o chua",
+                config=gtypes.EmbedContentConfig(task_type="RETRIEVAL_QUERY"),
             )
-            test_emb = np.array(test_result["embedding"], dtype=np.float32).reshape(1, -1)
+            test_emb = np.array(test_result.embeddings[0].values, dtype=np.float32).reshape(1, -1)
             distances, indices = index.search(test_emb, 2)
             for rank, (dist, idx) in enumerate(zip(distances[0], indices[0]), 1):
                 preview = paragraphs[idx][:80].replace(chr(10), " ")
