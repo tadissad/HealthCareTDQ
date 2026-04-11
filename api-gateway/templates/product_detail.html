@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name|default:"Sản phẩm" }} – Health-AI{% endblock %}
+
+{% block extra_css %}
+<style>
+  .product-detail-grid { display: grid; grid-template-columns: 1fr 310px; gap: 2rem; align-items: start; }
+  /* Underline Tabs */
+  .tab-nav { display:flex; border-bottom: 2px solid var(--border); margin-bottom: 1.25rem; gap: 0; }
+  .tab-btn {
+    padding: 0.65rem 1.25rem; background: none; border: none;
+    font-family: inherit; font-size: 0.9rem; font-weight: 500;
+    color: var(--text-sub); cursor: pointer;
+    border-bottom: 2.5px solid transparent; margin-bottom: -2px;
+    transition: var(--transition);
+  }
+  .tab-btn.active { color: var(--primary); font-weight: 700; border-bottom-color: var(--secondary); }
+  .tab-btn:hover { color: var(--primary); }
+  .tab-panel { display: none; font-size: 0.9rem; line-height: 1.75; color: var(--text); }
+  .tab-panel.active { display: block; }
+  /* Quantity */
+  .qty-wrap { display:flex; align-items:center; border: 1.5px solid var(--border-dark); border-radius: var(--radius-btn); width: fit-content; overflow:hidden; }
+  .qty-btn {
+    width: 36px; height: 36px; background: var(--bg);
+    border: none; font-size: 1.1rem; cursor: pointer;
+    color: var(--text); transition: var(--transition);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .qty-btn:hover { background: var(--border-dark); }
+  .qty-input {
+    width: 48px; height: 36px; text-align:center;
+    border: none; border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+    font-size:0.95rem; font-weight:600; color:var(--text); font-family:inherit;
+    outline: none;
+  }
+
+  /* Rx warning block */
+  .rx-warning {
+    background: rgba(229,57,53,0.07);
+    border: 1px solid rgba(229,57,53,0.20);
+    border-radius: var(--radius-btn);
+    padding: 0.85rem 1rem;
+    font-size: 0.875rem; color: var(--danger);
+    margin-bottom: 1rem;
+  }
+  /* Review form */
+  .review-form { background: var(--bg); border-radius: var(--radius-card); padding: 1.25rem; }
+  .star-select { display:flex; flex-direction:row-reverse; justify-content:flex-end; gap:4px; margin-bottom:0.75rem; }
+  .star-select input { display:none; }
+  .star-select label { font-size:1.5rem; color: var(--border-dark); cursor:pointer; transition:color 0.1s; }
+  .star-select input:checked ~ label,
+  .star-select label:hover,
+  .star-select label:hover ~ label { color: #F59E0B; }
+
+  @media(max-width: 768px) {
+    .product-detail-grid { grid-template-columns: 1fr; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div style="font-size:0.82rem; color:var(--text-sub); margin-bottom:1.25rem;">
+    <a href="/" style="color:var(--secondary); text-decoration:none;">Trang chủ</a>
+    <span style="margin:0 0.4rem;">›</span>
+    <span>{{ product.name|default:"Sản phẩm" }}</span>
+  </div>
+
+  {% if not product %}
+    <div class="alert alert-error">⚠️ Không tìm thấy sản phẩm này.</div>
+  {% else %}
+
+  <div class="product-detail-grid">
+    {# ── CỘT TRÁI: Thông tin ────────────────────────── #}
+    <div>
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+        <span class="badge badge-neutral">{{ product.category_display|default:product.category }}</span>
+        <span class="badge badge-neutral">{{ product.dosage_form_display|default:product.dosage_form }}</span>
+        {% if product.requires_prescription %}
+        <span class="badge badge-danger">⚕️ Kê đơn</span>
+        {% endif %}
+      </div>
+
+      <h1 style="font-size:1.75rem; font-weight:800; color:var(--primary); margin-bottom:0.3rem;">{{ product.name }}</h1>
+      <div style="color:var(--text-sub); font-size:0.9rem;">
+        Hoạt chất: <strong style="color:var(--text);">{{ product.generic_name|default:"N/A" }}</strong>
+        {% if product.dosage_strength %} · {{ product.dosage_strength }}{% endif %}
+      </div>
+      <div style="color:var(--text-sub); font-size:0.82rem; margin-top:0.3rem; margin-bottom:1.25rem;">
+        Hãng: {{ product.manufacturer|default:"N/A" }} &nbsp;|&nbsp; Xuất xứ: {{ product.origin_country|default:"N/A" }}
+      </div>
+
+      {# Cảnh báo kê đơn #}
+      {% if product.requires_prescription %}
+      <div class="rx-warning">
+        ⚠️ <strong>Lưu ý: Thuốc kê đơn</strong> — Cần có chỉ định của Bác sĩ trước khi sử dụng. Vui lòng cung cấp toa thuốc khi đặt hàng.
+      </div>
+      {% endif %}
+
+      {# Underline Tabs #}
+      <div class="card">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="showTab('tab-cong-dung', this)">Công dụng</button>
+          <button class="tab-btn" onclick="showTab('tab-huong-dan', this)">Hướng dẫn dùng</button>
+          <button class="tab-btn" onclick="showTab('tab-tdp', this)">Tác dụng phụ</button>
+          <button class="tab-btn" onclick="showTab('tab-ccdc', this)">Chống chỉ định</button>
+        </div>
+
+        <div id="tab-cong-dung" class="tab-panel active">
+          {{ product.description|default:"Đang cập nhật." }}
+        </div>
+        <div id="tab-huong-dan" class="tab-panel">
+          {{ product.usage_instruction|default:"Đang cập nhật. Vui lòng tham khảo hướng dẫn trên bao bì." }}
+        </div>
+        <div id="tab-tdp" class="tab-panel">
+          {% if product.side_effects %}
+          <p>{{ product.side_effects }}</p>
+          {% else %}
+          <p style="color:var(--text-sub);">Không có thông tin. Tham khảo tờ hướng dẫn sử dụng.</p>
+          {% endif %}
+        </div>
+        <div id="tab-ccdc" class="tab-panel">
+          {% if product.contraindications %}
+          <p style="color:var(--danger);">{{ product.contraindications }}</p>
+          {% else %}
+          <p style="color:var(--text-sub);">Không có CCĐ đặc biệt. Tham khảo bác sĩ nếu có bệnh nền.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      {# Đánh giá #}
+      <div style="margin-top:1.5rem;">
+        <div class="section-title">Đánh giá từ người dùng</div>
+        {% if reviews %}
+          {% for r in reviews %}
+          <div style="border-bottom:1px solid var(--border); padding:1rem 0;">
+            <div class="stars" style="margin-bottom:0.4rem;">
+              {% for i in "12345" %}{% if forloop.counter <= r.rating %}★{% else %}☆{% endif %}{% endfor %}
+              {% if r.treatment_effect %}<span style="font-size:0.77rem; color:var(--text-sub); margin-left:0.5rem;">Hiệu quả: {{ r.treatment_effect }}/5</span>{% endif %}
+            </div>
+            <p style="font-size:0.875rem; color:var(--text);">{{ r.comment }}</p>
+            <div style="font-size:0.75rem; color:var(--text-sub); margin-top:0.4rem;">{{ r.created_at|default:"" }}</div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <p style="color:var(--text-sub); font-size:0.875rem;">Chưa có đánh giá nào. Hãy là người đầu tiên!</p>
+        {% endif %}
+
+        {# Form viết đánh giá – chỉ khi đã đăng nhập #}
+        {% if account_id %}
+        <div style="margin-top:1.25rem;">
+          <div style="font-weight:600; margin-bottom:0.75rem; font-size:0.9rem;">✏️ Viết đánh giá của bạn</div>
+          <div class="review-form">
+            <form method="POST" action="/products/{{ product.id }}/review/">
+              {% csrf_token %}
+              <div class="star-select">
+                {% for i in "54321" %}
+                <input type="radio" name="rating" id="star{{ i }}" value="{{ i }}" {% if forloop.first %}required{% endif %}>
+                <label for="star{{ i }}">★</label>
+                {% endfor %}
+              </div>
+              <div class="form-group" style="margin-bottom:0.75rem;">
+                <label class="form-label" style="font-size:0.82rem;">Hiệu quả điều trị (1–5)</label>
+                <input type="number" name="treatment_effect" class="form-input" min="1" max="5" placeholder="5">
+              </div>
+              <div class="form-group" style="margin-bottom:0.75rem;">
+                <textarea name="comment" class="form-input form-textarea" placeholder="Chia sẻ trải nghiệm sử dụng sản phẩm..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Gửi đánh giá</button>
+            </form>
+          </div>
+        </div>
+        {% else %}
+        <div style="margin-top:1rem; font-size:0.875rem; color:var(--text-sub);">
+          <a href="/login/?next=/products/{{ product.id }}/" style="color:var(--secondary);">Đăng nhập</a> để viết đánh giá.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {# ── CỘT PHẢI: Sidebar Mua hàng (Sticky) ─────────── #}
+    <div style="position:sticky; top:80px;">
+      <div class="card">
+        <div style="font-size:1.8rem; font-weight:800; color:var(--secondary);">{{ product.price }} <span style="font-size:0.9rem; font-weight:400; color:var(--text-sub);">VND / {{ product.unit }}</span></div>
+
+        {% if reviews_summary.avg %}
+        <div class="stars" style="margin-top:0.4rem;">
+          {% for i in "12345" %}{% if forloop.counter <= reviews_summary.avg|floatformat:"0"|add:"0" %}★{% else %}☆{% endif %}{% endfor %}
+          <span style="font-size:0.8rem; color:var(--text-sub);">({{ reviews_summary.count }} đánh giá)</span>
+        </div>
+        {% endif %}
+
+        <hr class="divider">
+
+        <div style="font-size:0.875rem; color:{% if product.stock_quantity > 0 %}var(--secondary){% else %}var(--danger){% endif %}; margin-bottom:1rem; font-weight:600;">
+          {% if product.stock_quantity > 0 %}✅ Còn hàng · {{ product.stock_quantity }} {{ product.unit }}{% else %}❌ Hết hàng{% endif %}
+        </div>
+
+        {% if account_id and product.stock_quantity > 0 %}
+        <form method="POST" action="/cart/add/">
+          {% csrf_token %}
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <input type="hidden" name="next" value="/products/{{ product.id }}/">
+          <div style="margin-bottom:1rem;">
+            <label class="form-label">Số lượng</label>
+            <div class="qty-wrap">
+              <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+              <input type="number" name="quantity" id="qty-input" class="qty-input" value="1" min="1" max="{{ product.stock_quantity }}">
+              <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full btn-lg">🛒 Thêm vào giỏ hàng</button>
+        </form>
+        {% elif not account_id %}
+        <a href="/login/?next=/products/{{ product.id }}/" class="btn btn-primary btn-full btn-lg">🔐 Đăng nhập để mua</a>
+        {% else %}
+        <button class="btn btn-full" disabled style="background:var(--bg);color:var(--text-sub);cursor:not-allowed;">Hết hàng</button>
+        {% endif %}
+
+        {% if product.requires_prescription %}
+        <div style="margin-top:1rem; padding:0.75rem; background:rgba(229,57,53,0.07); border-radius:var(--radius-btn); font-size:0.8rem; color:var(--danger);">
+          ⚕️ Thuốc kê đơn — Cần toa bác sĩ.
+        </div>
+        {% endif %}
+      </div>
+
+      {# Symptoms tags nếu có #}
+      {% if product.symptom_tags %}
+      <div class="card" style="margin-top:1rem;">
+        <div style="font-size:0.8rem; font-weight:600; color:var(--text-sub); margin-bottom:0.6rem;">Dùng khi có triệu chứng:</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+          {% for tag in product.symptom_tags %}
+          <span class="badge badge-highlight" style="font-size:0.75rem;">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function changeQty(delta) {
+  const inp = document.getElementById('qty-input');
+  const max = parseInt(inp.max) || 999;
+  inp.value = Math.max(1, Math.min(max, parseInt(inp.value || 1) + delta));
+}
+</script>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Đăng ký – Health-AI{% endblock %}
+
+{% block extra_css %}
+<style>
+  .register-wrap { min-height: calc(100vh - 64px); display:flex; align-items:center; justify-content:center; padding:2rem 1rem; }
+  .register-card { background:var(--white); border-radius:var(--radius-card); box-shadow:var(--shadow-hover); padding:2.25rem 2.5rem; width:100%; max-width:520px; }
+  .register-title { font-size:1.5rem; font-weight:800; color:var(--primary); margin-bottom:0.25rem; }
+  .register-sub   { font-size:0.875rem; color:var(--text-sub); margin-bottom:1.75rem; }
+  .form-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:0 1rem; }
+  .pw-hint { font-size:0.78rem; color:var(--text-sub); margin-top:0.3rem; transition:color 0.2s; }
+  .pw-hint.valid { color:var(--highlight); font-weight:500; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="register-wrap">
+  <div class="register-card">
+    <div class="register-title">Tạo tài khoản</div>
+    <div class="register-sub">Tham gia Health-AI — Nhà thuốc điện tử cho mọi nhà</div>
+
+    {% if error %}
+      <div class="alert alert-error">⚠️ {{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/register/">
+      {% csrf_token %}
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label" for="reg-fullname">Họ tên đầy đủ *</label>
+          <input id="reg-fullname" type="text" name="fullname" class="form-input" placeholder="Nguyễn Văn An" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-phone">Số điện thoại</label>
+          <input id="reg-phone" type="tel" name="phone" class="form-input" placeholder="0901 234 567">
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label" for="reg-username">Tên đăng nhập *</label>
+          <input id="reg-username" type="text" name="username" class="form-input" placeholder="nguyenvana" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email</label>
+          <input id="reg-email" type="email" name="email" class="form-input" placeholder="email@example.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="reg-password">Mật khẩu *</label>
+        <input id="reg-password" type="password" name="password" class="form-input"
+          placeholder="Tối thiểu 6 ký tự" required autocomplete="new-password"
+          oninput="checkPw(this.value)">
+        <div id="pw-hint" class="pw-hint">Tối thiểu 6 ký tự</div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top:0.5rem;">
+        Đăng ký và bắt đầu
+      </button>
+    </form>
+
+    <div style="text-align:center; margin-top:1.25rem; font-size:0.875rem; color:var(--text-sub);">
+      Đã có tài khoản?
+      <a href="/login/" style="color:var(--secondary); font-weight:600; text-decoration:underline;">Đăng nhập</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function checkPw(val) {
+  const hint = document.getElementById('pw-hint');
+  if (val.length >= 6) {
+    hint.textContent = '✓ Mật khẩu hợp lệ';
+    hint.classList.add('valid');
+  } else {
+    hint.textContent = 'Tối thiểu 6 ký tự';
+    hint.classList.remove('valid');
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block title %}Hồ sơ – Health-AI{% endblock %}
+
+{% block extra_css %}
+<style>
+  .profile-layout { display:grid; grid-template-columns:220px 1fr; gap:1.5rem; align-items:start; }
+  /* Sidebar */
+  .profile-sidebar { background:var(--white); border-radius:var(--radius-card); box-shadow:var(--shadow-card); overflow:hidden; position:sticky; top:80px; }
+  .sidebar-user { padding:1.5rem; text-align:center; border-bottom:1px solid var(--border); }
+  .sidebar-avatar { width:64px; height:64px; border-radius:50%; background:var(--primary); color:white; font-size:1.5rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem; }
+  .sidebar-name { font-weight:700; color:var(--primary); font-size:0.95rem; }
+  .sidebar-role { font-size:0.75rem; color:var(--text-sub); margin-top:2px; }
+  .sidebar-nav { padding:0.75rem 0; }
+  .sidebar-link {
+    display:flex; align-items:center; gap:0.65rem; padding:0.65rem 1.25rem;
+    text-decoration:none; font-size:0.875rem; font-weight:500; color:var(--text-sub);
+    transition:var(--transition);
+  }
+  .sidebar-link:hover { color:var(--primary); background:rgba(31,111,95,0.05); }
+  .sidebar-link.active { color:var(--primary); font-weight:700; background:rgba(31,111,95,0.08); border-right:3px solid var(--primary); }
+
+  /* Membership card */
+  .membership-card {
+    aspect-ratio: 16/9; border-radius: var(--radius-card); padding: 1.5rem;
+    display:flex; flex-direction:column; justify-content:space-between;
+    position:relative; overflow:hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    margin-bottom:1.5rem;
+  }
+  .mc-platinum { background:linear-gradient(135deg, #C0C0C0 0%, #e8e8e8 50%, #ffffff 100%); }
+  .mc-gold     { background:linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #FFA500 100%); }
+  .mc-silver   { background:linear-gradient(135deg, #808080 0%, #C0C0C0 50%, #EEEEEE 100%); }
+  .mc-bronze   { background:linear-gradient(135deg, #8B4513 0%, #CD853F 50%, #DEB887 100%); }
+  .mc-rank  { font-size:1.1rem; font-weight:800; color:rgba(0,0,0,0.5); letter-spacing:2px; text-transform:uppercase; text-shadow:0 1px 2px rgba(255,255,255,0.5); }
+  .mc-name  { font-size:1.3rem; font-weight:800; color:rgba(0,0,0,0.6); text-shadow:1px 1px 3px rgba(255,255,255,0.7); }
+  .mc-spent { font-size:0.8rem; color:rgba(0,0,0,0.45); font-weight:500; }
+  .mc-icon  { position:absolute; right:1.5rem; top:1.25rem; font-size:2.5rem; opacity:0.35; }
+
+  /* Profile info read-only */
+  .info-field { padding:0.7rem 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:1rem; }
+  .info-field:last-child { border-bottom:none; }
+  .info-key  { font-size:0.8rem; color:var(--text-sub); width:150px; flex-shrink:0; }
+  .info-val  { font-size:0.9rem; font-weight:500; color:var(--text); }
+
+  /* Settings form */
+  .settings-section { display:none; }
+  .settings-section.active { display:block; }
+
+  @media(max-width:768px) { .profile-layout { grid-template-columns:1fr; } .profile-sidebar { position:static; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="profile-layout">
+    {# ── SIDEBAR ─────────────────────────────── #}
+    <div class="profile-sidebar">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar">{{ username|first|upper }}</div>
+        <div class="sidebar-name">{{ fullname|default:username }}</div>
+        <div class="sidebar-role">Khách hàng</div>
+      </div>
+      <div class="sidebar-nav">
+        <a href="#" class="sidebar-link active" onclick="showSection('section-profile', this)">👤 Hồ sơ cá nhân</a>
+        <a href="/orders/" class="sidebar-link">📋 Lịch sử đơn hàng</a>
+        <a href="#" class="sidebar-link" onclick="showSection('section-settings', this)">⚙️ Cài đặt</a>
+      </div>
+    </div>
+
+    {# ── MAIN CONTENT ──────────────────────────── #}
+    <div>
+      {# Membership Card #}
+      {% if profile %}
+      {% with m=profile.membership %}
+      <div class="membership-card {% if m == 'Platinum' %}mc-platinum{% elif m == 'Gold' %}mc-gold{% elif m == 'Silver' %}mc-silver{% else %}mc-bronze{% endif %}">
+        <span class="mc-icon">{% if m == 'Platinum' %}💎{% elif m == 'Gold' %}🏅{% elif m == 'Silver' %}🥈{% else %}🥉{% endif %}</span>
+        <div>
+          <div class="mc-rank">{{ m|default:"Đồng" }}</div>
+        </div>
+        <div>
+          <div class="mc-name">{{ fullname|default:username }}</div>
+          <div class="mc-spent">Tổng chi tiêu: {{ profile.total_spent|default:"0" }} VND</div>
+        </div>
+      </div>
+      {% endwith %}
+      {% endif %}
+
+      {# Section: Hồ sơ #}
+      <div id="section-profile" class="card settings-section active">
+        <div class="section-title">👤 Thông tin cá nhân</div>
+        <div>
+          <div class="info-field"><span class="info-key">Tên đăng nhập</span><span class="info-val">{{ username }}</span></div>
+          <div class="info-field"><span class="info-key">Họ tên</span><span class="info-val">{{ fullname|default:"—" }}</span></div>
+          <div class="info-field"><span class="info-key">Điện thoại</span><span class="info-val">{{ profile.phone|default:"—" }}</span></div>
+          <div class="info-field"><span class="info-key">Email</span><span class="info-val">{{ profile.email|default:"—" }}</span></div>
+          <div class="info-field"><span class="info-key">Địa chỉ</span><span class="info-val">{{ profile.address|default:"—" }}</span></div>
+          {% if profile %}
+          <div class="info-field"><span class="info-key">Nhóm máu</span><span class="info-val">{{ profile.blood_type|default:"Chưa cập nhật" }}</span></div>
+          <div class="info-field"><span class="info-key">Mã BHYT</span><span class="info-val">{{ profile.insurance_code|default:"—" }}</span></div>
+          {% endif %}
+        </div>
+        <div style="margin-top:1rem;">
+          <button onclick="showSection('section-settings', null)" class="btn btn-outline btn-sm">✏️ Chỉnh sửa thông tin</button>
+        </div>
+      </div>
+
+      {# Section: Cài đặt #}
+      <div id="section-settings" class="card settings-section">
+        <div class="section-title">⚙️ Cài đặt thông tin</div>
+        {% if settings_error %}
+          <div class="alert alert-error">{{ settings_error }}</div>
+        {% endif %}
+        {% if settings_success %}
+          <div class="alert alert-success">{{ settings_success }}</div>
+        {% endif %}
+        <form method="POST" action="/profile/settings/">
+          {% csrf_token %}
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 1rem;">
+            <div class="form-group">
+              <label class="form-label">Họ tên</label>
+              <input type="text" name="fullname" class="form-input" value="{{ fullname|default:'' }}" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại</label>
+              <input type="tel" name="phone" class="form-input" value="{{ profile.phone|default:'' }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" value="{{ profile.email|default:'' }}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Địa chỉ</label>
+            <input type="text" name="address" class="form-input" value="{{ profile.address|default:'' }}" placeholder="Số nhà, đường, quận...">
+          </div>
+          {% if profile %}
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0 1rem;">
+            <div class="form-group">
+              <label class="form-label">Nhóm máu</label>
+              <select name="blood_type" class="form-input form-select">
+                <option value="">-- Chọn --</option>
+                {% for bt in 'A,AB,B,O'|split:',' %}
+                <option value="{{ bt }}+" {% if profile.blood_type == bt|add:'+' %}selected{% endif %}>{{ bt }}+</option>
+                <option value="{{ bt }}-" {% if profile.blood_type == bt|add:'-' %}selected{% endif %}>{{ bt }}-</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mã thẻ BHYT</label>
+              <input type="text" name="insurance_code" class="form-input" value="{{ profile.insurance_code|default:'' }}" placeholder="HS4...">
+            </div>
+          </div>
+          {% endif %}
+          <div style="display:flex; gap:0.75rem; margin-top:0.5rem;">
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <button type="button" onclick="showSection('section-profile', null)" class="btn btn-outline">Hủy</button>
+          </div>
+        </form>
+      </div>
+
+      {# Recent orders #}
+      {% if orders %}
+      <div class="card" style="margin-top:1.25rem;">
+        <div class="section-title">Đơn hàng gần đây</div>
+        <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left; color:var(--text-sub); font-size:0.78rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border);">Mã đơn</th>
+              <th style="text-align:left; color:var(--text-sub); font-size:0.78rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border);">Trạng thái</th>
+              <th style="text-align:right; color:var(--text-sub); font-size:0.78rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border);">Tổng tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for o in orders|slice:":5" %}
+            <tr>
+              <td style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                <a href="/orders/{{ o.id }}/" style="color:var(--secondary); text-decoration:none; font-weight:600;">#{{ o.id }}</a>
+              </td>
+              <td style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                <span style="font-size:0.78rem; color:var(--text-sub);">{{ o.status }}</span>
+              </td>
+              <td style="padding:0.6rem 0; border-bottom:1px solid var(--border); text-align:right; font-weight:600; color:var(--primary);">{{ o.total_amount }} VND</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="/orders/" style="font-size:0.82rem; color:var(--secondary); text-decoration:none; font-weight:600; display:block; margin-top:0.85rem;">
+          Xem tất cả đơn hàng →
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+function showSection(id, clickedLink) {
+  document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (clickedLink) {
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    clickedLink.classList.add('active');
+  }
+}
+// Auto-activate settings section if there's a settings message
+{% if settings_error or settings_success %}
+window.addEventListener('DOMContentLoaded', () => showSection('section-settings', null));
+{% endif %}
+</script>
+{% endblock %}

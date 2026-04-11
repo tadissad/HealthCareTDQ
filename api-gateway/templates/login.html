@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block title %}Đăng nhập – Health-AI{% endblock %}
+{% block nav %}{% endblock %}{# Ẩn nav trên trang login #}
+
+{% block extra_css %}
+<style>
+  body { background: var(--bg); }
+  .login-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
+  }
+  /* Nửa trái – Brand */
+  .login-brand {
+    background: linear-gradient(160deg, #1F6F5F 0%, #2FA084 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 3rem; color: white; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .login-brand::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .brand-logo { font-size: 3.5rem; font-weight: 800; letter-spacing: -1px; position: relative; }
+  .brand-tagline { font-size: 1.05rem; opacity: 0.85; margin-top: 0.5rem; position: relative; max-width: 300px; }
+  .brand-features { margin-top: 2.5rem; text-align: left; position: relative; }
+  .brand-feature {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.5rem 0; font-size: 0.9rem; opacity: 0.9;
+  }
+  .brand-feature-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* Nửa phải – Form */
+  .login-form-side {
+    background: var(--white);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 3rem 3.5rem;
+  }
+  .login-form-box { width: 100%; max-width: 380px; }
+  .login-title { font-size: 1.65rem; font-weight: 800; color: var(--primary); margin-bottom: 0.35rem; }
+  .login-subtitle { font-size: 0.875rem; color: var(--text-sub); margin-bottom: 2rem; }
+
+  /* Floating label */
+  .float-group { position: relative; margin-bottom: 1.25rem; }
+  .float-input {
+    width: 100%; padding: 1.35rem 0.9rem 0.55rem;
+    border: 1.5px solid var(--border-dark);
+    border-radius: var(--radius-btn);
+    font-size: 0.925rem; font-family: inherit;
+    color: var(--text); background: var(--white);
+    transition: border-color 0.2s; outline: none;
+  }
+  .float-input:focus { border-color: var(--secondary); }
+  .float-input.has-error { border-color: var(--danger); }
+  .float-label {
+    position: absolute; left: 0.9rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem; color: var(--text-sub);
+    pointer-events: none; transition: all 0.2s;
+  }
+  .float-input:focus ~ .float-label,
+  .float-input:not(:placeholder-shown) ~ .float-label {
+    top: 0.55rem; transform: none; font-size: 0.72rem;
+    color: var(--secondary); font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .login-wrap { grid-template-columns: 1fr; }
+    .login-brand { display: none; }
+    .login-form-side { padding: 2rem 1.5rem; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-wrap">
+  <!-- Nửa trái – Brand -->
+  <div class="login-brand">
+    <div class="brand-logo">💊 Health-AI</div>
+    <div class="brand-tagline">Nhà thuốc điện tử thông minh — Chăm sóc sức khỏe toàn diện</div>
+    <div class="brand-features">
+      <div class="brand-feature"><span class="brand-feature-icon">🤖</span> AI Tư vấn y tế (GraphRAG + Gemini)</div>
+      <div class="brand-feature"><span class="brand-feature-icon">⭐</span> Gợi ý cá nhân hóa (GNN + SPD Manifold)</div>
+      <div class="brand-feature"><span class="brand-feature-icon">🏥</span> Hỗ trợ Bảo hiểm Y tế (BHYT)</div>
+      <div class="brand-feature"><span class="brand-feature-icon">🔐</span> Bảo mật JWT — An toàn dữ liệu</div>
+    </div>
+  </div>
+
+  <!-- Nửa phải – Form -->
+  <div class="login-form-side">
+    <div class="login-form-box">
+      <div class="login-title">Chào mừng trở lại</div>
+      <div class="login-subtitle">Đăng nhập để tiếp tục mua sắm và nhận tư vấn AI</div>
+
+      {% if error %}
+        <div class="alert alert-error">⚠️ {{ error }}</div>
+      {% endif %}
+
+      <form method="POST" action="/login/">
+        {% csrf_token %}
+        <div class="float-group">
+          <input id="username" type="text" name="username" class="float-input {% if error %}has-error{% endif %}"
+            placeholder=" " autocomplete="username" required>
+          <label class="float-label" for="username">Tên đăng nhập</label>
+        </div>
+        <div class="float-group">
+          <input id="password" type="password" name="password" class="float-input {% if error %}has-error{% endif %}"
+            placeholder=" " autocomplete="current-password" required>
+          <label class="float-label" for="password">Mật khẩu</label>
+          {% if error %}<div class="form-error">{{ error }}</div>{% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top:0.5rem;">
+          Đăng nhập
+        </button>
+      </form>
+
+      <div style="text-align:center; margin-top:1.5rem; font-size:0.875rem; color:var(--text-sub);">
+        Chưa có tài khoản?
+        <a href="/register/" style="color:var(--secondary); font-weight:600; text-decoration:underline;">Đăng ký ngay</a>
+      </div>
+
+      <div style="margin-top:2rem; padding:1rem; background:var(--bg); border-radius:var(--radius-btn); font-size:0.8rem; color:var(--text-sub);">
+        💡 <strong>Demo:</strong> Tạo tài khoản mới để trải nghiệm đầy đủ hệ thống.
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

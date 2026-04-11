@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% block title %}Nhà Thuốc Điện Tử Health-AI{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1F6F5F 0%, #2FA084 100%);
+    border-radius: var(--radius-card);
+    padding: 3rem 2.5rem;
+    margin-bottom: 2.5rem;
+    color: white;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; position: relative; }
+  .hero p  { font-size: 1rem; opacity: 0.9; max-width: 580px; margin: 0 auto 1.75rem; position: relative; }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; position: relative; flex-wrap: wrap; }
+  .btn-hero-cta {
+    background: var(--highlight); color: #1a4a3a; font-weight: 700;
+    padding: 0.7rem 1.75rem; border-radius: var(--radius-btn);
+    text-decoration: none; font-size: 0.95rem; border: none; cursor: pointer;
+    transition: var(--transition); display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .btn-hero-cta:hover { background: #5ab882; }
+  .btn-hero-ghost {
+    background: rgba(255,255,255,0.15); color: white;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    padding: 0.7rem 1.75rem; border-radius: var(--radius-btn);
+    text-decoration: none; font-size: 0.95rem;
+    transition: var(--transition); display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .btn-hero-ghost:hover { background: rgba(255,255,255,0.25); }
+
+  /* AI RECOMMENDATIONS */
+  .ai-section {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
+  }
+  .ai-section-head {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .ai-section-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+  .ai-chip {
+    font-size: 0.72rem; font-weight: 600; padding: 3px 9px;
+    background: rgba(111,207,151,0.2); color: #1a7a4a;
+    border-radius: 999px;
+  }
+
+  /* SEARCH */
+  .search-box {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1.75rem;
+  }
+  .search-row { display: flex; gap: 0.75rem; margin-bottom: 0.85rem; }
+  .search-input {
+    flex: 1; padding: 0.65rem 1rem;
+    border: 1.5px solid var(--border-dark);
+    border-radius: var(--radius-btn); font-size: 0.9rem;
+    font-family: inherit; color: var(--text);
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { outline: none; border-color: var(--secondary); }
+  .search-btn { background: var(--primary); color: white; border: none; padding: 0.65rem 1.25rem; border-radius: var(--radius-btn); cursor: pointer; font-weight: 600; font-size: 0.875rem; transition: var(--transition); }
+  .search-btn:hover { background: #175f51; }
+  .filter-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .filter-pill {
+    padding: 4px 14px; border-radius: 999px;
+    background: var(--bg); border: 1.5px solid var(--border-dark);
+    font-size: 0.8rem; font-weight: 500; color: var(--text-sub);
+    cursor: pointer; text-decoration: none;
+    transition: var(--transition); white-space: nowrap;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    border-color: var(--secondary); color: var(--secondary);
+    background: rgba(47,160,132,0.08);
+  }
+  .filter-pill.active { font-weight: 600; }
+
+  /* PRODUCT GRID */
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.25rem; }
+  .product-card {
+    background: var(--white); border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card); padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    transition: var(--transition); position: relative;
+    border: 1px solid transparent;
+  }
+  .product-card:hover { box-shadow: var(--shadow-hover); border-color: var(--highlight); transform: translateY(-2px); }
+  .product-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .product-rx-badge {
+    position: absolute; top: 0.85rem; right: 0.85rem;
+    font-size: 0.68rem; font-weight: 700; padding: 2px 7px;
+    background: rgba(229,57,53,0.10); color: var(--danger);
+    border-radius: 3px; border: 1px solid rgba(229,57,53,0.25);
+  }
+  .product-name {
+    font-size: 0.975rem; font-weight: 700;
+    color: var(--primary); margin-top: 0.2rem;
+    text-decoration: none; display: block;
+  }
+  .product-name:hover { color: var(--secondary); }
+  .product-generic { font-size: 0.8rem; color: var(--text-sub); }
+  .product-strength { font-size: 0.78rem; color: var(--warning); font-weight: 500; }
+  .product-desc { font-size: 0.8rem; color: var(--text-sub); line-height: 1.5; flex: 1; }
+  .product-price { font-size: 1.1rem; font-weight: 800; color: var(--secondary); }
+  .product-unit  { font-size: 0.75rem; color: var(--text-sub); margin-left: 0.25rem; }
+  .product-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 0.25rem; border-top: 1px solid var(--border); padding-top: 0.75rem; }
+  .stock-label { font-size: 0.75rem; color: var(--text-sub); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  {# ── HERO (Chưa đăng nhập) ───────────────────────────────────── #}
+  {% if not account_id %}
+  <div class="hero">
+    <h1>💊 Nhà Thuốc Điện Tử Thông Minh</h1>
+    <p>Hệ thống tư vấn y tế AI với GraphRAG + GNN Recommendation — Cung cấp thông tin dược phẩm chính xác, an toàn.</p>
+    <div class="hero-actions">
+      <a href="/register/" class="btn-hero-cta">🚀 Đăng ký miễn phí</a>
+      <a href="/ai/chat/" class="btn-hero-ghost">🤖 Thử AI Tư Vấn</a>
+    </div>
+  </div>
+  {% endif %}
+
+  {# ── AI RECOMMENDATIONS (Đã đăng nhập) ──────────────────────── #}
+  {% if recommendations and account_id %}
+  <div class="ai-section">
+    <div class="ai-section-head">
+      <div class="ai-section-title">⭐ AI Gợi ý cho bạn</div>
+      <span class="ai-chip">GNN + SPD Manifold</span>
+      <a href="/ai/recommend/" style="margin-left:auto; font-size:0.82rem; color:var(--secondary); text-decoration:none;">Xem tất cả →</a>
+    </div>
+    <div class="product-grid" style="grid-template-columns: repeat(4, 1fr);">
+      {% for p in recommendations %}
+      <div class="product-card">
+        {% if p.requires_prescription %}<span class="product-rx-badge">Kê đơn</span>{% endif %}
+        <span class="badge badge-neutral" style="width:fit-content;">{{ p.category }}</span>
+        <a href="/products/{{ p.id }}/" class="product-name">{{ p.name }}</a>
+        <div class="product-price">{{ p.price|default:"—" }} <span class="product-unit">VND</span></div>
+        <div class="product-actions">
+          <a href="/products/{{ p.id }}/" class="btn-text btn-text-primary" style="font-size:0.82rem;">Chi tiết</a>
+          {% if account_id %}
+          <form method="POST" action="/cart/add/" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ p.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="next" value="/">
+            <button type="submit" class="btn-text btn-text-secondary" style="font-size:0.82rem;">Thêm giỏ</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {# ── SEARCH & FILTER ────────────────────────────────────────── #}
+  <div class="search-box">
+    <form method="GET" action="/">
+      <div class="search-row">
+        <input type="text" name="q" class="search-input"
+          placeholder="🔍 Tìm kiếm thuốc, hoạt chất, triệu chứng..." value="{{ search_q }}">
+        <button type="submit" class="search-btn">Tìm kiếm</button>
+        {% if search_q or search_category %}
+          <a href="/" class="btn btn-sm" style="background:var(--bg);color:var(--text-sub);border:1.5px solid var(--border-dark);">Xóa lọc</a>
+        {% endif %}
+      </div>
+      <div class="filter-pills">
+        <a href="/?{% if search_q %}q={{ search_q }}&{% endif %}" class="filter-pill {% if not search_category %}active{% endif %}">Tất cả</a>
+        {% for val, label in filter_categories %}
+        <a href="/?{% if search_q %}q={{ search_q }}&{% endif %}category={{ val }}"
+           class="filter-pill {% if search_category == val %}active{% endif %}">{{ label }}</a>
+        {% endfor %}
+      </div>
+    </form>
+  </div>
+
+  {# ── PRODUCT LIST ─────────────────────────────────────────── #}
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+    <div class="section-title" style="margin-bottom:0;">🏥 Sản phẩm y tế</div>
+    <div style="font-size:0.82rem; color:var(--text-sub);">{{ products|length }} sản phẩm</div>
+  </div>
+
+  {% if products %}
+  <div class="product-grid">
+    {% for p in products %}
+    <div class="product-card">
+      {% if p.requires_prescription %}<span class="product-rx-badge">Kê đơn</span>{% endif %}
+
+      <div class="product-card-top">
+        <span class="badge badge-neutral">{{ p.category_display|default:p.category }}</span>
+      </div>
+
+      <a href="/products/{{ p.id }}/" class="product-name">{{ p.name }}</a>
+      {% if p.dosage_strength %}<div class="product-strength">{{ p.dosage_strength }}</div>{% endif %}
+      <div class="product-generic">{{ p.generic_name|default:"" }}</div>
+
+      <div class="product-desc">{{ p.description|truncatechars:90 }}</div>
+
+      {% if p.avg_rating %}
+      <div class="stars">
+        {% for i in "12345" %}{% if forloop.counter <= p.avg_rating|floatformat:"0"|add:"0" %}★{% else %}☆{% endif %}{% endfor %}
+        <span style="color:var(--text-sub);font-size:0.78rem;">({{ p.review_count }})</span>
+      </div>
+      {% endif %}
+
+      <div style="display:flex; align-items:baseline; gap:0.25rem;">
+        <span class="product-price">{{ p.price }}</span>
+        <span class="product-unit">VND / {{ p.unit }}</span>
+      </div>
+
+      <div class="product-actions">
+        <a href="/products/{{ p.id }}/" style="font-size:0.83rem; color:var(--text); text-decoration:none;">Chi tiết</a>
+        {% if account_id %}
+        <form method="POST" action="/cart/add/" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="product_id" value="{{ p.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="next" value="/">
+          <button type="submit" class="btn-text btn-text-secondary" style="font-size:0.83rem;">Thêm giỏ</button>
+        </form>
+        {% else %}
+        <a href="/login/" style="font-size:0.83rem; color:var(--secondary); font-weight:600; text-decoration:none;">Đăng nhập để mua</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div style="text-align:center; padding:4rem 2rem; background:var(--white); border-radius:var(--radius-card); box-shadow:var(--shadow-card);">
+    <div style="font-size:3rem; margin-bottom:1rem;">🔍</div>
+    <h2 style="color:var(--primary); margin-bottom:0.5rem;">Không tìm thấy sản phẩm</h2>
+    <p style="color:var(--text-sub);">Thử từ khóa khác hoặc xóa bộ lọc.</p>
+    <a href="/" class="btn btn-primary mt-2">Xem tất cả sản phẩm</a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Health-Micro-AI | Nhà Thuốc Điện Tử{% endblock %}</title>
+  <meta name="description" content="Hệ thống nhà thuốc điện tử thông minh với AI tư vấn y tế và gợi ý sản phẩm cá nhân hóa.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       DESIGN SYSTEM – Health-Micro-AI
+       ═══════════════════════════════════════════════════════ */
+    :root {
+      --primary:      #1F6F5F;
+      --secondary:    #2FA084;
+      --highlight:    #6FCF97;
+      --bg:           #EEEEEE;
+      --white:        #FFFFFF;
+      --danger:       #E53935;
+      --warning:      #F57C00;
+      --text:         #333333;
+      --text-sub:     #757575;
+      --border:       #EEEEEE;
+      --border-dark:  #D0D0D0;
+      --bg-light:     #F8F9FA;
+      --radius-card:  8px;
+      --radius-btn:   4px;
+      --shadow-card:  0 2px 8px rgba(0,0,0,0.05);
+      --shadow-hover: 0 6px 20px rgba(0,0,0,0.10);
+      --transition:   all 0.2s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAVIGATION ────────────────────────────────────────── */
+    .nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 200;
+      padding: 0 2rem;
+      display: flex; align-items: center; gap: 2rem;
+      height: 64px;
+    }
+    .nav-brand {
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--primary); text-decoration: none;
+      letter-spacing: -0.5px; flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--secondary); }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; flex: 1; }
+    .nav-links a {
+      color: var(--text-sub); text-decoration: none;
+      padding: 0.4rem 0.75rem; border-radius: var(--radius-btn);
+      font-size: 0.875rem; font-weight: 500;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--primary); background: rgba(31,111,95,0.06); }
+    .nav-links a.active { color: var(--primary); font-weight: 600; }
+    .nav-actions { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; flex-shrink: 0; }
+    .nav-cart-link {
+      display: flex; align-items: center; gap: 0.4rem;
+      color: var(--text-sub); text-decoration: none;
+      padding: 0.4rem 0.75rem; font-size: 0.875rem;
+      font-weight: 500; border-radius: var(--radius-btn);
+      transition: var(--transition); position: relative;
+    }
+    .nav-cart-link:hover { color: var(--primary); }
+    .cart-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--danger); color: white;
+      font-size: 0.65rem; font-weight: 700;
+      min-width: 18px; height: 18px;
+      border-radius: 999px; padding: 0 4px;
+      margin-left: 2px;
+    }
+
+    /* ── BUTTONS ───────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+      padding: 0.55rem 1.25rem;
+      border: none; border-radius: var(--radius-btn);
+      font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: var(--transition); white-space: nowrap;
+      font-family: inherit;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #175f51; }
+    .btn-secondary { background: var(--secondary); color: white; }
+    .btn-secondary:hover { background: #27896f; }
+    .btn-outline {
+      background: transparent; color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: #c62828; }
+    .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+    .btn-lg { padding: 0.75rem 1.75rem; font-size: 1rem; }
+    .btn-full { width: 100%; }
+
+    /* Text-link button (styled button that looks like a link) */
+    .btn-text {
+      background: none; border: none; padding: 0;
+      font-family: inherit; font-size: inherit;
+      cursor: pointer; text-decoration: none;
+      transition: var(--transition);
+    }
+    .btn-text-primary { color: var(--primary); }
+    .btn-text-secondary { color: var(--secondary); font-weight: 600; }
+    .btn-text-danger { color: var(--danger); }
+    .btn-text:hover { opacity: 0.75; }
+
+    /* ── CARDS ─────────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 1.5rem;
+    }
+    .card-hover:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ── LAYOUT ────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .container-sm { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── BADGES ────────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 600;
+    }
+    .badge-primary { background: rgba(31,111,95,0.12); color: var(--primary); }
+    .badge-highlight { background: rgba(111,207,151,0.20); color: #1a7a4a; }
+    .badge-danger { background: rgba(229,57,53,0.10); color: var(--danger); }
+    .badge-warning { background: rgba(245,124,0,0.12); color: var(--warning); }
+    .badge-neutral { background: var(--bg); color: var(--text-sub); }
+    .badge-success { background: rgba(111,207,151,0.20); color: #1a7a4a; }
+
+    /* ── FORMS ─────────────────────────────────────────────── */
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+    .form-input {
+      width: 100%; padding: 0.65rem 0.9rem;
+      border: 1.5px solid var(--border-dark);
+      border-radius: var(--radius-btn); background: var(--white);
+      font-size: 0.9rem; color: var(--text); font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { outline: none; border-color: var(--secondary); }
+    .form-input.error { border-color: var(--danger); }
+    .form-input-hint { font-size: 0.78rem; color: var(--text-sub); margin-top: 0.3rem; }
+    .form-input-hint.valid { color: var(--highlight); }
+    .form-error { font-size: 0.78rem; color: var(--danger); margin-top: 0.3rem; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23757575' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; padding-right: 2rem; }
+    .form-textarea { resize: vertical; min-height: 90px; }
+
+    /* ── SECTION HEADINGS ──────────────────────────────────── */
+    .section-title {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--primary); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .page-title { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem; }
+
+    /* ── DIVIDER ───────────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+    /* ── ALERTS ────────────────────────────────────────────── */
+    .alert { padding: 0.85rem 1rem; border-radius: var(--radius-btn); font-size: 0.875rem; margin-bottom: 1rem; }
+    .alert-error { background: rgba(229,57,53,0.08); border: 1px solid rgba(229,57,53,0.25); color: var(--danger); }
+    .alert-success { background: rgba(111,207,151,0.15); border: 1px solid rgba(111,207,151,0.4); color: #1a7a4a; }
+    .alert-warning { background: rgba(245,124,0,0.08); border: 1px solid rgba(245,124,0,0.25); color: var(--warning); }
+
+    /* ── STARS ─────────────────────────────────────────────── */
+    .stars { color: #F59E0B; font-size: 0.85rem; }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    .footer {
+      background: var(--white); border-top: 1px solid var(--border);
+      padding: 2rem; text-align: center;
+      color: var(--text-sub); font-size: 0.825rem; margin-top: 4rem;
+    }
+    .footer a { color: var(--secondary); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── UTILITIES ─────────────────────────────────────────── */
+    .text-primary  { color: var(--primary); }
+    .text-secondary{ color: var(--secondary); }
+    .text-danger   { color: var(--danger); }
+    .text-sub      { color: var(--text-sub); }
+    .text-center   { text-align: center; }
+    .font-bold     { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .mt-1 { margin-top: 0.5rem; }
+    .mt-2 { margin-top: 1rem; }
+    .mt-3 { margin-top: 1.5rem; }
+    .d-flex { display: flex; }
+    .align-center { align-items: center; }
+    .gap-1 { gap: 0.5rem; }
+    .gap-2 { gap: 1rem; }
+    .flex-1 { flex: 1; }
+
+    /* ── RESPONSIVE NAV ────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 1rem; gap: 1rem; }
+      .nav-links { display: none; }
+      .nav-actions { gap: 0.25rem; }
+    }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+{% block nav %}
+<nav class="nav">
+  <a href="/" class="nav-brand">💊 Health<span>-AI</span></a>
+  <div class="nav-links">
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">Trang chủ</a>
+    {% if account_id %}
+      <a href="/ai/chat/" class="{% if '/ai/chat' in request.path %}active{% endif %}">🤖 Tư vấn AI</a>
+      <a href="/ai/recommend/">⭐ Gợi ý</a>
+      <a href="/orders/" class="{% if '/orders' in request.path %}active{% endif %}">Đơn hàng</a>
+    {% endif %}
+  </div>
+  <div class="nav-actions">
+    {% if account_id %}
+      <a href="/cart/" class="nav-cart-link">
+        🛒 Giỏ hàng
+        {% if cart_count > 0 %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}
+      </a>
+      <a href="/profile/" class="btn btn-outline btn-sm">👤 {{ username }}</a>
+      <a href="/logout/" class="btn btn-sm" style="background:var(--bg);color:var(--text-sub);">Đăng xuất</a>
+    {% else %}
+      <a href="/login/" class="btn btn-outline btn-sm">Đăng nhập</a>
+      <a href="/register/" class="btn btn-primary btn-sm">Đăng ký</a>
+    {% endif %}
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+<footer class="footer">
+  <p style="font-weight:600; color:var(--primary); margin-bottom:0.4rem;">⚕️ Health-Micro-AI – Nhà Thuốc Điện Tử</p>
+  <p>⚠️ Thông tin chỉ mang tính tham khảo. Vui lòng tham khảo bác sĩ trước khi sử dụng thuốc.</p>
+  <p style="margin-top:0.5rem;">
+    <a href="/health/">System Health</a> &nbsp;|&nbsp;
+    <a href="http://localhost:8011/docs" target="_blank">Recommender API</a> &nbsp;|&nbsp;
+    <a href="http://localhost:8013/docs" target="_blank">AI Chat API</a> &nbsp;|&nbsp;
+    <a href="http://localhost:7474" target="_blank">Neo4j Browser</a>
+  </p>
+</footer>
+
+</body>
+</html>
