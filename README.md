@@ -1,41 +1,42 @@
 # Health-Micro-AI: Nền Tảng Y Tế Điện Tử Tích Hợp AI
 
-Dự án **Health-Micro-AI** là một hệ thống e-commerce nhà thuốc điện tử dựa trên kiến trúc **Microservices** (10 services riêng biệt), kết hợp sức mạnh của Trí tuệ Nhân tạo (AI) trong việc **tư vấn y tế (GraphRAG)** và **gợi ý cá nhân hóa (GNN & SPD Manifold)**.
+Dự án **Health-Micro-AI** là một hệ thống e-commerce nhà thiết bị và sản phẩm y tế điện tử dựa trên kiến trúc **Microservices** (10 services riêng biệt), kết hợp sức mạnh của Trí tuệ Nhân tạo (AI) trong việc **tư vấn y tế (GraphRAG)** và **gợi ý cá nhân hóa (GNN & SPD Manifold)**. 
+
+Đặc biệt, hệ thống đã được tối ưu hóa kiến trúc Cloud-Native, **gỡ bỏ hoàn toàn gánh nặng xử lý AI cục bộ (Local Model)** nặng hàng GB để trở nên cực kỳ nhẹ bén, phù hợp với mọi cấu hình Laptop cá nhân.
 
 ---
 
 ## 🌟 Tính Năng Nổi Bật
 
-1. **Kiến Trúc Microservices**: 10 services hoạt động độc lập (Django & FastAPI), điều phối thông qua một API Gateway trung tâm. Cơ sở dữ liệu riêng biệt cho từng service.
-2. **AI Tư Vấn Sức Khỏe (GraphRAG)**: 
-   - Sử dụng **Neo4j** (Knowledge Graph) để biểu diễn mối quan hệ `Symptom - Disease - Product`.
-   - Sử dụng **FAISS** (Vector Store) lưu trữ chuyên môn dạng text (FAQ, Cẩm nang ICD-10).
-   - Tích hợp **Gemini 1.5 Flash** tổng hợp câu trả lời an toàn cho y tế.
+1. **Kiến Trúc Microservices Nhẹ Bén**: 10 services hoạt động độc lập (Django & FastAPI), điều phối thông qua một API Gateway trung tâm. CSDL tách biệt hoàn toàn.
+2. **AI Tư Vấn Sức Khỏe (GraphRAG Cloud-Native)**: 
+   - Thiết kế dựa trên **Neo4j** (Knowledge Graph) để biểu diễn rễ bệnh lý `Symptom - Disease - Product`.
+   - Lưu trữ chuyên môn dạng text bằng **FAISS** (Vector Store) tối ưu tốc độ truy xuất.
+   - Tích hợp **Gemini 2.0 Flash / Flash-Lite API** để phân tích tài liệu và tổng hợp câu trả lời chuẩn xác. Máy tính của bạn không tốn RAM để vắt sức chạy Mô hình ngôn ngữ lớn (LLM)!
 3. **AI Gợi Ý Sản Phẩm (Recommendation)**:
-   - Sử dụng Graph Neural Networks (GraphSAGE) kết hợp không gian SPD Manifold (Covariance Matrix) để khai phá hành vi người dùng, đưa ra gợi ý với độ chuẩn xác cao.
-4. **Trải Nghiệm UI/UX Chuẩn Y Tế**:
+   - Thuật toán Graph Neural Networks (GraphSAGE) kết hợp không gian SPD Manifold (Covariance Matrix) khai phá hành vi người tiêu dùng, gợi ý bám sát thực tế.
+4. **Trải Nghiệm UI/UX Hệ Sinh Thái Y Tế**:
    - Giao diện thiết kế theo Design System chuyên dụng (Light Theme, #1F6F5F Primary).
-   - Tích hợp thanh toán **Bảo Hiểm Y Tế (BHYT)** tự động giảm trừ chi phí (80%).
-   - Tracking các nhãn cảnh báo **"Thuốc Kê Đơn"**, Timeline theo dõi quá trình giao hàng chi tiết.
+   - Tích hợp thanh toán **Bảo Hiểm Y Tế (BHYT)** tự động giảm trừ chi phí (được hỗ trợ tới 80%).
 
 ---
 
-## 🏗️ Cấu Trúc Hệ Thống
+## 🏗️ Cấu Trúc Hệ Thống Khuyên Dùng
 
 ```text
 health-micro-ai/
 ├── api-gateway/                   # Django (Cổng giao tiếp UI & Internal Proxy)
 ├── auth-service/                  # FastAPI (Quản lý User, cấp phát JWT)
-├── patient-service/               # Django (Quản lý thông tin bệnh nhân, BHYT)
-├── pharmacy-service/              # Django (Quản lý nhà thuốc, sản phẩm y tế)
-├── medical-catalog-service/       # Django (Danh mục chuyên môn: ICD-10, ATC)
-├── prescription-service/          # FastAPI (Quản lý đơn thuốc tạm thời / basket)
-├── dispensing-service/            # Django (Tạo phiếu xuất thuốc & thanh toán)
-├── medical-review-service/        # FastAPI (Đánh giá chất lượng phác đồ / thuốc)
-├── clinical-advisory-service/     # FastAPI (Chatbot GraphRAG: Neo4j + FAISS)
+├── patient-service/               # Django (Quản lý thông tin bệnh nhân, Thẻ BHYT)
+├── pharmacy-service/              # Django (Quản lý nhà thuốc, sản phẩm y tế gốc)
+├── medical-catalog-service/       # Django (Kiểm tra Phác đồ chuyên môn: ICD-10, ATC)
+├── prescription-service/          # FastAPI (Quản lý đơn thuốc tạm thời / Giỏ hàng)
+├── dispensing-service/            # Django (Tạo phiếu xuất thuốc & Thanh toán hóa đơn)
+├── medical-review-service/        # FastAPI (Đánh giá chất lượng trải nghiệm / Review)
+├── clinical-advisory-service/     # FastAPI (Chatbot AI GraphRAG: Neo4j + FAISS + Gemini)
 ├── treatment-recommender-service/ # FastAPI (GNN + SPD Manifold Recommendation)
-├── docker-compose.yml             # Cấu hình container cho Services, Postgres, Neo4j, Redis
-└── seed_all.py                    # Script tạo dữ liệu mẫu và nạp tri thức y khoa AI
+├── docker-compose.yml             # Cấu hình container cho 10 Services, Postgres, Neo4j
+└── seed_all.py                    # Script quét tài liệu & Bơm dữ liệu mẫu tự động (Idempotent)
 ```
 
 ---
@@ -43,66 +44,66 @@ health-micro-ai/
 ## 🚀 Hướng Dẫn Cài Đặt Và Chạy Hệ Thống
 
 ### Yêu cầu tiên quyết
-- **Docker** và **Docker Compose**.
-- Khởi tạo Python virtual environment (tuỳ chọn nếu chạy file seed).
-- API Key của **Gemini** (Google AI Studio).
+- Cài đặt **Docker** và **Docker Compose**.
+- Đã đăng ký API Key của **Gemini** (Lấy miễn phí tại Google AI Studio).
+- Máy tính có cài đặt Python (Nếu muốn chạy script nạp dữ liệu ở môi trường ngoài máy chủ).
 
-### Bước 1: Khởi Tạo Môi Trường Tùy Chỉnh (Environment variables)
+### Bước 1: Khởi Tạo Môi Trường Tùy Chỉnh
 Copy file `.env.example` thành `.env` ở thư mục gốc:
 ```bash
 cp .env.example .env
 ```
-Mở file `.env` vừa copy, cấu hình `GEMINI_API_KEY` của bạn để Chatbot AI hoạt động.
+Mở file `.env` vừa copy, dán mã `GEMINI_API_KEY` của bạn vào để "Mở khóa Trí Não" cho hệ thống AI. (Thiếu cái này AI sẽ bị căm, không trả lời được).
 
-### Bước 2: Build Và Chạy Hệ Thống Bằng Script Thông Minh
-Hệ thống áp dụng kiến trúc **Shared AI Base Image** (tích hợp sẵn PyTorch, FAISS, Transformers) cho các AI microservices để tối ưu bộ nhớ cài đặt và thời gian chờ. Đừng dùng lệnh docker-compose thuần, hãy sử dụng script:
+### Bước 2: Build Và Khởi Động Tự Động
+Hệ thống đi kèm một "Kịch bản tự động thông minh" (Smart Script) giúp bạn bỏ qua mọi dòng lệnh Docker lằng nhằng hoặc rủi ro mạng. Bạn chỉ việc nhấn đúp thư mục tải về hoặc gõ lệnh duy nhất này ở Terminal:
 
-**Trong lần khởi động đầu tiên (Tải thư viện nặng ~800MB 1 lần duy nhất):**
 ```bat
-build.bat
+.\build.bat
 ```
-*(Cửa ải đầu tiên này sẽ mất tầm 15-40 phút tùy băng thông mạng)*
+- Lần đầu tiên, nó sẽ tự động tạo một nền Base Image chia sẻ siêu nhẹ (~200MB) và kích hoạt bừng tỉnh 13 Containers.
+- **Cam kết:** Nhờ việc đập bỏ thiết kế Pytorch/SentenceTransformers cục bộ cũ, máy tính cá nhân của bạn sẽ KHÔNG bị Crash hay Tràn Bộ nhớ ảo (Lỗi OS Error 1455). Kịch bản diễn ra vô cùng mượt mà.
 
-**Mọi lần chạy tiếp theo (Khởi động cực kỳ nhanh, bỏ qua build base AI):**
-```bat
-build.bat fast
-```
-
-Kiểm tra trạng thái các container:
+Nếu bạn tò mò, hãy kiểm tra trạng thái các container bằng lệnh:
 ```bash
 docker-compose ps
 ```
 
 ### Bước 3: Đổ Dữ Liệu Khởi Tạo (Seeding)
-Sau khi toàn bộ các container báo trạng thái `UP` và webapp backend đã chạy (port 8000), bạn hãy chạy script seed để khởi tạo dữ liệu mẫu. (Lưu ý: Bạn cần cài đặt thư viện gốc trên máy `requests neo4j faiss-cpu sentence-transformers` nếu chạy ở máy host).
+Sau khi toàn bộ các web app backend đã chạy đèn xanh trên Docker Desktop, bạn hãy tiến hành "dạy học và nhập hàng" cho hệ thống. Script `seed_all.py` đã được kích hoạt chức năng **Idempotent** – Nghĩa là tuyệt đối an toàn, chạy 10 lần cũng không sinh ra rác trùng lập dữ liệu, có thể chạy trong lúc web đang phục vụ khách!
 
 ```bash
-# Cài đặt thư viện trên môi trường venv của máy host (nếu có)
-pip install requests neo4j faiss-cpu sentence-transformers numpy
+# Cài đặt thư viện vận chuyển trên máy chủ cá nhân của bạn
+pip install requests neo4j faiss-cpu google-genai numpy
 
-# Chạy seed toàn bộ dữ liệu
+# Chạy công nhân xếp dữ liệu
 python seed_all.py
 ```
 
-*File `seed_all.py` tự động đọc thêm tri thức từ `benhdaday.csv` và `faq.txt`, giúp tạo ra Graph trên Neo4j và embeddings trên FAISS.*
+*Cơ chế tự động: `seed_all.py` sẽ đọc nội dung sách y khoa từ file `benhdaday.csv` và `faq.txt`, vẽ nên mạng lưới sơ đồ bệnh học lên Graph DB Neo4j, sau đó gửi text cho AI Gemini nén giùm thành Toán học (Vector) đưa vào lưu trữ ở FAISS.*
 
-### Bước 4: Trải Nghiệm Website
-Truy cập vào trình duyệt:
-👉 **http://localhost:8000** 
+> **Mẹo Nhỏ (Sau khi Seed xong):** Hãy gõ lệnh `docker-compose restart clinical-advisory-service` để đánh thức AI tái nạp lại bộ nhớ kiến thức mới nhất mà bạn vừa nạp!
 
-Dữ liệu User có sẵn (mật khẩu mặc định có thể tuỳ ý tạo trong lúc đăng ký, hoặc tạo Account mới trên Website):
-- Tạo tài khoản mới, sau đó đăng nhập và mua một số sản phẩm để AI Recommender trên trang chủ bắt đầu "học bám theo" hành vi mua sắm của bạn.
-- Nhấp chọn Thử AI Chat, đặt các câu hỏi xoay quanh bệnh dạ dày, hệ thống sẽ kết xuất file `faq.txt` và `benhdaday.csv`.
+### Bước 4: Trải Nghiệm Thực Tế Hệ Sinh Thái
+Mọi cấu hình đã xong, hãy truy cập vào trình duyệt: 👉 **http://localhost:8000** 
+
+- Khởi tạo 1 tài khoản mới theo ý thích. Trải nghiệm UI mua sắm, chọn mua vào Giỏ hàng và tiến hành **Thanh Toán (Checkout)** hóa đơn bảo hiểm y tế.
+- Tương tác với tính năng "Gợi Ý Dành Riêng Cho Bạn" trên trang chủ, theo sát hành vi nhấp chuột của bạn.
+- Nhấp chọn icon **Thử AI Chat**, gõ câu *"Tôi bị đau dạ dày, hãy cho tôi lời khuyên và danh mục thuốc chống viêm"*. Bot sẽ ngay lập tức đối chiếu chéo các CSDL với nhau để trả lời bạn bằng văn phong của một chuyên gia y khoa, kèm bằng chứng dẫn xuất từ chính cửa hàng của bạn!
 
 ---
 
 ## 🛠️ Xử Lý Lỗi Thường Gặp (Troubleshooting)
 
-1. **Lỗi `Cannot connect to Neo4j` khi đang seed:**
-   Neo4j boot khá lâu nên đoạn script seed có thể kết nối trượt. Hãy đợi khoảng 30s sau khi `docker-compose up` rồi mới thực thi python script.
-2. **Lỗi `Memory Error` khi compile torch-geometric:**
-   Hạ thấp số threads của Docker Desktop, hoặc cấp thêm RAM trên setting UI của ứng dụng Docker (nên cấp trên 4GB RAM cho project này).
-3. **Chatbot luôn báo "Không thể kết nối dịch vụ AI":**
-   Kiểm tra container `clinical-advisory-service` qua command `docker-compose logs -f clinical-advisory-service`. Hãy chắc chắn rằng bạn cấu hình thẻ biến `GEMINI_API_KEY` đúng!
+1. **Lỗi `Cannot connect to Neo4j` khi đang gõ lệnh seed:**
+   Môi trường máy tính của bạn có thể boot hệ quản trị Graph Neo4j hơi tốn thời gian (khoảng 20-30 giây). Khắc phục: chờ cho 13 Container ở trạng thái Healthy hoàn toàn rồi mới hãy gõ lệnh `python seed_all.py`.
+   
+2. **Chatbot luôn báo "Không thể kết nối dịch vụ AI" hoặc bị đơ Template:**
+   Nguyên nhân là thư mục Vector `faiss_seed_output/medical.index` chưa được lưu hoặc đọc đúng cách, HOẶC bạn quên mất nhập Key vào file `.env`. 
+   Khắc phục: Dán Key vào biến `GEMINI_API_KEY` và gõ lệnh khởi động lại Service Cố Vấn: `docker-compose restart clinical-advisory-service`.
 
-Chúc bạn thành công với Health-Micro-AI System!
+3. **Log bào lỗi `429 Too Many Requests` (Hết lượt gọi API của Google):**
+   Đừng lo lắng! AI của Health-Micro có thiết lập **Trình chống nghẽn (Model Fallback Chain)** tự động trượt qua nhiều bậc não nhỏ khác nhau của Google nếu model `gemini-2.0-flash` ưu tiên cạn kiệt. Nếu xui rủi tất cả model đều bị sập do bạn quá lạm dụng gói Free, chỉ việc lấy email Mới đăng ký thêm 1 API Key vứt vào File Env là nó lại chạy phà phà!
+
+---
+*Phát triển và hoàn thiện dành riêng cho Hệ thống Y tế.*
