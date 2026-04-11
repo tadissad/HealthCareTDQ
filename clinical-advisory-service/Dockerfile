@@ -1,12 +1,19 @@
-FROM python:3.11-slim
+# ============================================================
+# clinical-advisory-service/Dockerfile
+# Kế thừa từ health-ai-base (PyTorch, FAISS, Transformers đã cài sẵn)
+# Chỉ cần COPY code, mkdir FAISS dir và chạy.
+# ============================================================
+
+FROM health-ai-base:latest
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y gcc g++ build-essential && rm -rf /var/lib/apt/lists/*
-
+# Chỉ copy requirements để pip install PHẦN KHÁC BIỆT
+# (tất cả AI libs đã có trong base ─ pip sẽ skip chúng ngay lập tức)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy toàn bộ source code
 COPY . .
 
 # Tạo thư mục lưu FAISS index

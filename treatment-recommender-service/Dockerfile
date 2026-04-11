@@ -1,23 +1,18 @@
-FROM python:3.11-slim
+# ============================================================
+# treatment-recommender-service/Dockerfile
+# Kế thừa từ health-ai-base (PyTorch, torch-geometric, scipy đã cài sẵn)
+# ============================================================
+
+FROM health-ai-base:latest
 
 WORKDIR /app
 
-# Cài đặt dependencies hệ thống cần thiết cho PyTorch Geometric
-RUN apt-get update && apt-get install -y \
-    gcc g++ build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
+# Chỉ copy requirements để pip install PHẦN KHÁC BIỆT
+# (tất cả AI libs đã có trong base ─ pip sẽ skip chúng ngay lập tức)
 COPY requirements.txt .
-
-# 1. Cài PyTorch CPU trước (không cần CUDA)
-RUN pip install --no-cache-dir torch==2.2.0 --index-url https://download.pytorch.org/whl/cpu
-
-# 2. Cài torch-geometric và các extensions
-RUN pip install --no-cache-dir torch-geometric
-
-# 3. Cài phần còn lại
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy toàn bộ source code
 COPY . .
 
 EXPOSE 8000

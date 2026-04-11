@@ -54,12 +54,19 @@ cp .env.example .env
 ```
 Mở file `.env` vừa copy, cấu hình `GEMINI_API_KEY` của bạn để Chatbot AI hoạt động.
 
-### Bước 2: Build Và Chạy Hệ Thống Với Docker
-Giao việc thiết lập network, databases (Postgres, Neo4j, Redis), và services cho Docker Compose:
-```bash
-docker-compose up --build -d
+### Bước 2: Build Và Chạy Hệ Thống Bằng Script Thông Minh
+Hệ thống áp dụng kiến trúc **Shared AI Base Image** (tích hợp sẵn PyTorch, FAISS, Transformers) cho các AI microservices để tối ưu bộ nhớ cài đặt và thời gian chờ. Đừng dùng lệnh docker-compose thuần, hãy sử dụng script:
+
+**Trong lần khởi động đầu tiên (Tải thư viện nặng ~800MB 1 lần duy nhất):**
+```bat
+build.bat
 ```
-Quá trình build lần đầu tiên sẽ mất thời gian một vài phút do cần phải cài đặt các thư viện AI đặc thù (`torch-geometric`, `sentence-transformers`, `faiss-cpu`...).
+*(Cửa ải đầu tiên này sẽ mất tầm 15-40 phút tùy băng thông mạng)*
+
+**Mọi lần chạy tiếp theo (Khởi động cực kỳ nhanh, bỏ qua build base AI):**
+```bat
+build.bat fast
+```
 
 Kiểm tra trạng thái các container:
 ```bash
