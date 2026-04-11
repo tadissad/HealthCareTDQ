@@ -336,13 +336,13 @@ def fetch_all_products(limit: int = 10) -> List[Dict]:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def generate_with_gemini(prompt: str) -> Optional[str]:
-    """Goi Gemini API de sinh cau tra loi."""
+    """Goi Gemini 2.0 Flash API de sinh cau tra loi."""
     if not GEMINI_AVAILABLE or '_genai_client' not in globals() or _genai_client is None:
         logger.warning("[Gemini] Chua cau hinh. Dung template fallback.")
         return None
     try:
         response = _genai_client.models.generate_content(
-            model="gemini-1.5-flash",
+            model="gemini-2.0-flash",
             contents=prompt,
         )
         return response.text
