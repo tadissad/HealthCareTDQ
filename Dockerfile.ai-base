@@ -1,19 +1,18 @@
 # ============================================================
-# Dockerfile.ai-base – Health-Micro-AI
-# Base image dùng chung cho hai AI services:
-#   clinical-advisory-service
-#   treatment-recommender-service
+# Dockerfile.ai-base – Health-Micro-AI (Optimized)
 #
-# Build thủ công (chạy 1 lần duy nhất):
+# Stack: Gemini Embedding API (thay SentenceTransformer local)
+#   → Không cần PyTorch (~530MB)
+#   → Không cần sentence-transformers (~200MB + model tải về)
+#   → Image giảm từ ~1.3GB → ~200MB
+#
+# Build (1 lần):
 #   docker build -f Dockerfile.ai-base -t health-ai-base:latest .
-#
-# Sau đó build toàn hệ thống như bình thường:
-#   docker-compose up --build -d
 # ============================================================
 
 FROM python:3.11-slim
 
-# ── Cài system packages ────────────────────────────────────────────────────────
+# ── System packages ───────────────────────────────────────────────────────────
 RUN apt-get update && apt-get install -y --no-install-recommends \
         gcc g++ build-essential \
         curl \
@@ -21,36 +20,27 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /base
 
-# ── Bước 1: Cài PyTorch CPU-only (file lớn nhất ~530MB) ───────────────────────
-# Dùng mirror PyTorch chính thức (CPU wheel → nhẹ nhất, không cần CUDA)
-RUN pip install --no-cache-dir \
-    torch==2.2.0 \
-    --index-url https://download.pytorch.org/whl/cpu
+# ── Bước 1: numpy (phiên bản ổn định, không xung đột) ───────────────────────
+RUN pip install --no-cache-dir "numpy>=1.26.0,<2.0.0"
 
-# ── Bước 2: Cài torch-geometric và extensions ─────────────────────────────────
-RUN pip install --no-cache-dir \
-    torch-geometric
+# ── Bước 2: faiss-cpu (vector search, nhẹ, không cần torch) ──────────────────
+RUN pip install --no-cache-dir "faiss-cpu>=1.8.0"
 
-# ── Bước 3: Cài sentence-transformers + faiss-cpu (embedding & vector search) ─
+# ── Bước 3: scipy + neo4j ────────────────────────────────────────────────────
 RUN pip install --no-cache-dir \
-    sentence-transformers>=2.6.0 \
-    faiss-cpu>=1.8.0
+    "scipy>=1.12.0" \
+    "neo4j>=5.14.0"
 
-# ── Bước 4: Cài các thư viện AI dùng chung còn lại ───────────────────────────
+# ── Bước 4: Gemini SDK (dùng để generate + embed) ────────────────────────────
+RUN pip install --no-cache-dir "google-generativeai>=0.7.0"
+
+# ── Bước 5: FastAPI stack ────────────────────────────────────────────────────
 RUN pip install --no-cache-dir \
-    numpy>=1.26.0 \
-    scipy>=1.12.0 \
-    neo4j>=5.14.0 \
-    google-generativeai>=0.7.0
+    "fastapi>=0.110.0" \
+    "uvicorn[standard]>=0.29.0" \
+    "requests>=2.31.0" \
+    "pydantic>=2.6.0" \
+    "python-dotenv>=1.0.0"
 
-# ── Layer cuối: FastAPI common stack ─────────────────────────────────────────
-RUN pip install --no-cache-dir \
-    fastapi>=0.110.0 \
-    uvicorn[standard]>=0.29.0 \
-    requests>=2.31.0 \
-    pydantic>=2.6.0 \
-    python-dotenv>=1.0.0
-
-# Label để dễ nhận dạng
 LABEL maintainer="health-micro-ai" \
-      description="Shared AI base image: PyTorch + Transformers + FAISS + GNN"
+      description="Lightweight AI base: Gemini Embedding + FAISS (no PyTorch)"

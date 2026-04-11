@@ -1,8 +1,7 @@
 # clinical-advisory-service/requirements.txt
-# ⚠️  Các thư viện AI lớn (torch, faiss-cpu, sentence-transformers,
-#     neo4j, numpy, fastapi, uvicorn, pydantic, requests, python-dotenv)
-#     ĐÃ được cài trong health-ai-base image.
-#     Chỉ liệt kê phần khác biệt so với base ở đây:
+# Base image (health-ai-base) da co: faiss-cpu, numpy, scipy, neo4j,
+#   google-generativeai, fastapi, uvicorn, requests, pydantic, python-dotenv
+# Chi liet ke phan khac biet:
 
-# LLM (google-gen-ai cũng đã có ở base, nhưng giữ lại để pin version rõ ràng)
-google-generativeai>=0.7.0
+# (Khong co dependency bo sung - tat ca da nam trong base image)
+# Giu file nay de pip install khong bac loi "file not found"

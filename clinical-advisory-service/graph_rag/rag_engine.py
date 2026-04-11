@@ -8,7 +8,7 @@ GraphRAG Pipeline: kết hợp 3 nguồn tri thức:
        (User)-[:SEARCHED {weight}]->(Symptom)
 
   2. FAISS Vector Store – Tài liệu y khoa phi cấu trúc:
-       Encoding bằng SentenceTransformer (paraphrase-multilingual-MiniLM-L12-v2)
+       Encoding bằng Gemini text-embedding-004 API (768-dim, tiếng Việt tốt)
        Tìm kiếm top-K chunks tương đồng ngữ nghĩa với câu hỏi
 
   3. product-service – Thông tin sản phẩm thực tế:
@@ -45,15 +45,9 @@ except ImportError:
     FAISS_AVAILABLE = False
     logger.warning("[FAISS] faiss-cpu không tìm thấy. Vector search sẽ bị bỏ qua.")
 
-try:
-    from sentence_transformers import SentenceTransformer
-    _embed_model = SentenceTransformer(EMBEDDING_MODEL)
-    EMBEDDING_AVAILABLE = True
-    logger.info(f"[Embed] SentenceTransformer loaded: {EMBEDDING_MODEL}")
-except Exception as e:
-    EMBEDDING_AVAILABLE = False
-    _embed_model = None
-    logger.warning(f"[Embed] Không load được model: {e}")
+# NOTE: Không dùng SentenceTransformer local nữa.
+# Dùng Gemini text-embedding-004 API – nhẹ hơn ~1.2GB, chất lượng tốt hơn.
+EMBEDDING_AVAILABLE = False  # Sẽ set True sau khi verify Gemini key
 
 try:
     from neo4j import GraphDatabase
@@ -65,7 +59,12 @@ try:
     import google.generativeai as genai
     if GEMINI_API_KEY:
         genai.configure(api_key=GEMINI_API_KEY)
-    GEMINI_AVAILABLE = True
+        GEMINI_AVAILABLE = True
+        EMBEDDING_AVAILABLE = True  # Gemini embed có thể dùng
+        logger.info("[Gemini] API configured. Dùng text-embedding-004 cho FAISS.")
+    else:
+        GEMINI_AVAILABLE = False
+        logger.warning("[Gemini] Chưa có API key – FAISS embedding bị tắt.")
 except ImportError:
     GEMINI_AVAILABLE = False
     logger.warning("[Gemini] google-generativeai không tìm thấy. Dùng template fallback.")
@@ -80,14 +79,47 @@ _faiss_chunks: List[str] = []           # Danh sách text chunks tương ứng v
 
 
 def _get_embedding(text: str) -> Optional[np.ndarray]:
-    """Encode text thành vector 384-dim bằng SentenceTransformer."""
-    if not EMBEDDING_AVAILABLE or _embed_model is None:
+    """
+    Encode text thành vector 768-dim bằng Gemini text-embedding-004.
+    Không cần tải model về máy – gọi API trực tiếp.
+    Tốt hơn MiniLM: hiểu ngữ cảnh tiếng Việt, y khoa chuyên sâu.
+    """
+    if not EMBEDDING_AVAILABLE or not GEMINI_API_KEY:
         return None
     try:
-        emb = _embed_model.encode([text], normalize_embeddings=True)
-        return emb[0].astype(np.float32)
+        result = genai.embed_content(
+            model="models/text-embedding-004",
+            content=text,
+            task_type="RETRIEVAL_DOCUMENT",
+        )
+        emb = np.array(result["embedding"], dtype=np.float32)
+        # Normalize để dùng với IndexFlatIP (cosine similarity)
+        norm = np.linalg.norm(emb)
+        if norm > 0:
+            emb = emb / norm
+        return emb
     except Exception as e:
-        logger.error(f"[Embed] Lỗi encode: {e}")
+        logger.error(f"[Embed] Gemini embedding lỗi: {e}")
+        return None
+
+
+def _get_query_embedding(text: str) -> Optional[np.ndarray]:
+    """Encode câu hỏi (query) với task_type RETRIEVAL_QUERY."""
+    if not EMBEDDING_AVAILABLE or not GEMINI_API_KEY:
+        return None
+    try:
+        result = genai.embed_content(
+            model="models/text-embedding-004",
+            content=text,
+            task_type="RETRIEVAL_QUERY",
+        )
+        emb = np.array(result["embedding"], dtype=np.float32)
+        norm = np.linalg.norm(emb)
+        if norm > 0:
+            emb = emb / norm
+        return emb
+    except Exception as e:
+        logger.error(f"[Embed] Gemini query embedding lỗi: {e}")
         return None
 
 
@@ -189,7 +221,7 @@ def faiss_search(query: str, top_k: int = 3) -> List[str]:
         logger.warning("[FAISS] Fallback: trả về chunks không filter.")
         return _faiss_chunks[:top_k]
 
-    query_emb = _get_embedding(query)
+    query_emb = _get_query_embedding(query)
     if query_emb is None:
         return _faiss_chunks[:top_k]
 

@@ -688,86 +688,106 @@ def load_extra_faiss_chunks():
 
 def seed_part_c():
     """
-    Part C: Encode 32 đoạn văn y tế bằng SentenceTransformer và lưu vào FAISS index.
-    Nguồn dữ liệu:
-      - 5 đoạn kiến thức nền gốc
-      - 7 đoạn từ benhdaday.csv (ICD-10 descriptions)
-      - 8 đoạn từ faq.txt (chế độ ăn, dấu hiệu nguy hiểm, hướng dẫn thuốc)
-    Tổng: 32 chunks, dim=384 (paraphrase-multilingual-MiniLM-L12-v2)
+    Part C: Encode doan van y te bang Gemini text-embedding-004 vao FAISS.
+    Khong can SentenceTransformer hay PyTorch.
     """
     logger.info("=" * 60)
-    logger.info("PART C: Seeding FAISS Vector Store")
-    logger.info(f"Model: paraphrase-multilingual-MiniLM-L12-v2")
-    logger.info(f"Output: {FAISS_OUTPUT_DIR}/")
+    logger.info("PART C: Seeding FAISS Vector Store (Gemini text-embedding-004)")
+    logger.info("Model: google/text-embedding-004 (768-dim, API-based)")
+    logger.info("Output: %s/" % FAISS_OUTPUT_DIR)
     logger.info("=" * 60)
 
-    try:
-        import numpy as np
-        from sentence_transformers import SentenceTransformer
-    except ImportError:
-        logger.error("Lỗi: Thiếu thư viện. Chạy: pip install sentence-transformers numpy")
-        return 0
+    import numpy as np
+    import time as _time
 
     try:
         import faiss
-        FAISS_AVAILABLE = True
+        FAISS_AVAIL = True
     except ImportError:
-        logger.warning("Cảnh báo: faiss-cpu chưa cài. Sẽ lưu embeddings dạng numpy.")
-        FAISS_AVAILABLE = False
+        logger.warning("faiss-cpu chua cai. Se luu numpy fallback.")
+        FAISS_AVAIL = False
 
-    try:
-        logger.info("🔄 Đang tải SentenceTransformer model...")
-        model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
-        logger.info("✅ Model tải xong!")
-    except Exception as e:
-        logger.error(f"❌ Không tải được model: {e}")
+    import google.generativeai as genai
+
+    gemini_key = os.getenv("GEMINI_API_KEY", "")
+    if not gemini_key:
+        try:
+            with open(".env", encoding="utf-8") as ef:
+                for line in ef:
+                    line = line.strip()
+                    if line.startswith("GEMINI_API_KEY="):
+                        gemini_key = line.split("=", 1)[1].strip()
+                        break
+        except Exception:
+            pass
+
+    if not gemini_key:
+        logger.error("GEMINI_API_KEY chua duoc cau hinh. Khong the tao FAISS index.")
         return 0
 
-    # Load extra data from CSV and TXT
+    genai.configure(api_key=gemini_key)
+    logger.info("[Gemini] API key ready. Su dung text-embedding-004.")
+
     paragraphs = MEDICAL_KNOWLEDGE_PARAGRAPHS.copy()
     paragraphs.extend(load_extra_faiss_chunks())
+    logger.info("Tong so chunks: %d" % len(paragraphs))
 
-    # Encode all paragraphs
-    logger.info(f"🔄 Encoding {len(paragraphs)} đoạn văn y tế...")
-    embeddings = model.encode(
-        paragraphs,
-        normalize_embeddings=True,
-        show_progress_bar=True,
-    )
-    embeddings = embeddings.astype("float32")
-    logger.info(f"✅ Encoding xong! Shape: {embeddings.shape} (dim={embeddings.shape[1]})")
+    embeddings = []
+    failed = 0
+    for i, chunk in enumerate(paragraphs):
+        try:
+            result = genai.embed_content(
+                model="models/text-embedding-004",
+                content=chunk,
+                task_type="RETRIEVAL_DOCUMENT",
+            )
+            emb = np.array(result["embedding"], dtype=np.float32)
+            norm = np.linalg.norm(emb)
+            if norm > 0:
+                emb = emb / norm
+            embeddings.append(emb)
+            if (i + 1) % 5 == 0:
+                logger.info("  [%d/%d] encoded..." % (i + 1, len(paragraphs)))
+            _time.sleep(0.05)
+        except Exception as e:
+            logger.warning("  [%d] Error: %s" % (i, e))
+            failed += 1
+            embeddings.append(np.zeros(768, dtype=np.float32))
 
-    # Tạo output directory
+    embeddings_matrix = np.vstack(embeddings).astype("float32")
+    logger.info("Encoding xong! Shape: %s dim=%d" % (str(embeddings_matrix.shape), embeddings_matrix.shape[1]))
+
     os.makedirs(FAISS_OUTPUT_DIR, exist_ok=True)
 
-    if FAISS_AVAILABLE:
-        # Tạo FAISS index (IndexFlatIP = cosine similarity với normalized vectors)
-        dim   = embeddings.shape[1]
+    if FAISS_AVAIL:
+        dim   = embeddings_matrix.shape[1]
         index = faiss.IndexFlatIP(dim)
-        index.add(embeddings)
+        index.add(embeddings_matrix)
         faiss.write_index(index, os.path.join(FAISS_OUTPUT_DIR, "medical.index"))
-        logger.info(f"✅ FAISS index đã lưu: {FAISS_OUTPUT_DIR}/medical.index")
-    else:
-        # Fallback: lưu numpy array
-        np.save(os.path.join(FAISS_OUTPUT_DIR, "medical_embeddings.npy"), embeddings)
-        logger.info(f"✅ Embeddings numpy đã lưu: {FAISS_OUTPUT_DIR}/medical_embeddings.npy")
+        logger.info("FAISS index saved: %s/medical.index" % FAISS_OUTPUT_DIR)
 
-    # Lưu text chunks
+        try:
+            test_result = genai.embed_content(
+                model="models/text-embedding-004",
+                content="Thuoc dieu tri dau da day o chua",
+                task_type="RETRIEVAL_QUERY",
+            )
+            test_emb = np.array(test_result["embedding"], dtype=np.float32).reshape(1, -1)
+            distances, indices = index.search(test_emb, 2)
+            for rank, (dist, idx) in enumerate(zip(distances[0], indices[0]), 1):
+                preview = paragraphs[idx][:80].replace(chr(10), " ")
+                logger.info("  #%d (score=%.3f): %s..." % (rank, dist, preview))
+        except Exception as e:
+            logger.warning("Test search error: %s" % e)
+    else:
+        np.save(os.path.join(FAISS_OUTPUT_DIR, "medical_embeddings.npy"), embeddings_matrix)
+
     chunks_path = os.path.join(FAISS_OUTPUT_DIR, "chunks.json")
     with open(chunks_path, "w", encoding="utf-8") as f:
-        json.dump(paragraphs, f, ensure_ascii=False, indent=2)
-    logger.info(f"✅ Text chunks đã lưu: {chunks_path}")
-
-    # Test search
-    logger.info("\n🔍 Test semantic search: 'Thuốc điều trị đau dạ dày ợ chua'")
-    test_emb = model.encode(["Thuốc điều trị đau dạ dày ợ chua"], normalize_embeddings=True)
-    if FAISS_AVAILABLE:
-        distances, indices = index.search(test_emb.astype("float32"), 2)
-        for rank, (dist, idx) in enumerate(zip(distances[0], indices[0]), 1):
-            chunk_preview = paragraphs[idx][:80].replace('\n', ' ')
-            logger.info(f"  #{rank} (score={dist:.3f}): {chunk_preview}...")
-
-    logger.info(f"\nPart C kết quả: {len(paragraphs)} đoạn văn đã được encode và lưu")
+        import json as _json
+        _json.dump(paragraphs, f, ensure_ascii=False, indent=2)
+    logger.info("Chunks saved: %s" % chunks_path)
+    logger.info("Part C: %d chunks encoded (%d failed)" % (len(paragraphs), failed))
     return len(paragraphs)
 
 
