@@ -232,6 +232,8 @@ services:
       MEDICAL_REVIEW_SERVICE_URL:    "http://medical-review-service:8000"
       CLINICAL_ADVISORY_SERVICE_URL: "http://clinical-advisory-service:8000"
       TREATMENT_REC_SERVICE_URL:     "http://treatment-recommender-service:8000"
+    volumes:
+      - ./api-gateway/db.sqlite3:/app/db.sqlite3
     depends_on:
       - auth-service
       - pharmacy-service
