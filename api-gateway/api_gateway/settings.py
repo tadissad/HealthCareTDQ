@@ -22,6 +22,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'app.middleware.RestrictStaffToPortalMiddleware',
 ]
 
 ROOT_URLCONF = 'api_gateway.urls'

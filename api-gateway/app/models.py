@@ -10,6 +10,7 @@ class Account(models.Model):
     ROLE_CHOICES = [
         ('customer', 'Khách hàng'),
         ('manager',  'Quản lý nhà thuốc'),
+        ('staff',    'Nhân viên (sản phẩm)'),
         ('admin',    'Quản trị viên'),
     ]
 

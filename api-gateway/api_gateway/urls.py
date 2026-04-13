@@ -11,6 +11,8 @@ from app.views import (
     AdminProductEditView, AdminProductDeleteView,
     AdminOrderListView, AdminOrderUpdateView,
     AdminUserListView,
+    StaffProductListView, StaffProductCreateView,
+    StaffProductEditView, StaffProductDeleteView,
 )
 
 urlpatterns = [
@@ -52,6 +54,12 @@ urlpatterns = [
     path('admin/orders/',                               AdminOrderListView.as_view(),    name='admin-orders'),
     path('admin/orders/<int:order_id>/update/',         AdminOrderUpdateView.as_view(),  name='admin-order-update'),
     path('admin/users/',                                AdminUserListView.as_view(),     name='admin-users'),
+
+    # ── Staff Portal (chỉ sản phẩm) ───────────────────────
+    path('staff/products/',                             StaffProductListView.as_view(),   name='staff-products'),
+    path('staff/products/create/',                      StaffProductCreateView.as_view(), name='staff-product-create'),
+    path('staff/products/<int:product_id>/edit/',       StaffProductEditView.as_view(),   name='staff-product-edit'),
+    path('staff/products/<int:product_id>/delete/',     StaffProductDeleteView.as_view(), name='staff-product-delete'),
 
     # ── System Health ─────────────────────────────────────
     path('health/', HealthView.as_view(), name='health'),

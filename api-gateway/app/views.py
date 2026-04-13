@@ -186,6 +186,11 @@ class IndexView(View):
 class LoginView(View):
     def get(self, request):
         if request.session.get('account_id'):
+            role = request.session.get('role')
+            if role == 'admin':
+                return redirect('/admin/dashboard/')
+            if role == 'staff':
+                return redirect('/staff/products/')
             return redirect('/')
         return render(request, 'login.html')
 
@@ -221,6 +226,8 @@ class LoginView(View):
         logger.info(f"[GW] Đăng nhập thành công: {username} (role={account.role})")
         if account.role == 'admin':
             return redirect('/admin/dashboard/')
+        if account.role == 'staff':
+            return redirect('/staff/products/')
         next_url = request.GET.get('next', '/')
         return redirect(next_url)
 
@@ -772,8 +779,30 @@ def admin_required(view_func):
     @wraps(view_func)
     def _wrapped(self, request, *args, **kwargs):
         req = request if hasattr(request, 'session') else self
-        if req.session.get('role') != 'admin':
+        if not req.session.get('account_id'):
+            return redirect('/login/?next=' + req.path)
+        role = req.session.get('role')
+        if role != 'admin':
+            if role == 'staff':
+                messages.warning(req, 'Tài khoản nhân viên chỉ quản lý sản phẩm.')
+                return redirect('/staff/products/')
             messages.error(req, 'Bạn không có quyền truy cập trang quản trị.')
+            return redirect('/')
+        return view_func(self, request, *args, **kwargs)
+    return _wrapped
+
+
+def staff_required(view_func):
+    """Chỉ role staff; admin/customer bị đẩy về khu vực tương ứng."""
+    @wraps(view_func)
+    def _wrapped(self, request, *args, **kwargs):
+        if not request.session.get('account_id'):
+            return redirect('/login/?next=' + request.path)
+        role = request.session.get('role')
+        if role != 'staff':
+            if role == 'admin':
+                return redirect('/admin/dashboard/')
+            messages.error(request, 'Bạn không có quyền truy cập cổng nhân viên.')
             return redirect('/')
         return view_func(self, request, *args, **kwargs)
     return _wrapped
@@ -782,7 +811,7 @@ def admin_required(view_func):
 class AdminDashboardView(View):
     @admin_required
     def get(self, request):
-        users_count   = Account.objects.exclude(role='admin').count()
+        users_count   = Account.objects.exclude(role__in=('admin', 'staff')).count()
         products_data = _service_get(f'{PHARMACY_URL}/products/', request) or []
         orders_data   = _service_get(f'{DISPENSING_URL}/orders/', request) or []
         pending_orders = [o for o in orders_data if o.get('status') == 'Pending'] if isinstance(orders_data, list) else []
@@ -903,5 +932,103 @@ class AdminOrderUpdateView(View):
 class AdminUserListView(View):
     @admin_required
     def get(self, request):
-        users = list(Account.objects.exclude(role='admin').values('id', 'username', 'role'))
+        users = list(Account.objects.exclude(role__in=('admin', 'staff')).values('id', 'username', 'role'))
         return render(request, 'admin/users.html', {'users': users, 'username': 'Admin'})
+
+
+# ------------------------------------------------------------------------------
+# STAFF PORTAL – chỉ CRUD sản phẩm (pharmacy-service)
+# ------------------------------------------------------------------------------
+
+class StaffProductListView(View):
+    @staff_required
+    def get(self, request):
+        products = _service_get(f'{PHARMACY_URL}/products/', request) or []
+        return render(request, 'staff/products.html', {
+            'products': products if isinstance(products, list) else [],
+            'username': request.session.get('username', 'Staff'),
+        })
+
+
+class StaffProductCreateView(View):
+    @staff_required
+    def get(self, request):
+        return render(request, 'staff/product_form.html', {
+            'product': None,
+            'username': request.session.get('username', 'Staff'),
+        })
+
+    @staff_required
+    def post(self, request):
+        data = {
+            'name': request.POST.get('name', ''),
+            'generic_name': request.POST.get('generic_name', ''),
+            'category': request.POST.get('category', 'other'),
+            'price': request.POST.get('price', 0),
+            'stock_quantity': request.POST.get('stock_quantity', 0),
+            'unit': request.POST.get('unit', 'vien'),
+            'dosage_strength': request.POST.get('dosage_strength', ''),
+            'description': request.POST.get('description', ''),
+            'requires_prescription': request.POST.get('requires_prescription') == 'on',
+            'manufacturer': request.POST.get('manufacturer', ''),
+        }
+        result, status_code = _service_post(f'{PHARMACY_URL}/products/', request, data=data)
+        if status_code in (200, 201):
+            messages.success(request, 'Đã thêm sản phẩm.')
+            return redirect('/staff/products/')
+        messages.error(request, 'Không thể thêm sản phẩm.')
+        return redirect('/staff/products/create/')
+
+
+class StaffProductEditView(View):
+    @staff_required
+    def get(self, request, product_id):
+        product = _service_get(f'{PHARMACY_URL}/products/{product_id}/', request) or {}
+        return render(request, 'staff/product_form.html', {
+            'product': product,
+            'username': request.session.get('username', 'Staff'),
+        })
+
+    @staff_required
+    def post(self, request, product_id):
+        data = {
+            'name': request.POST.get('name', ''),
+            'generic_name': request.POST.get('generic_name', ''),
+            'category': request.POST.get('category', 'other'),
+            'price': request.POST.get('price', 0),
+            'stock_quantity': request.POST.get('stock_quantity', 0),
+            'unit': request.POST.get('unit', 'vien'),
+            'dosage_strength': request.POST.get('dosage_strength', ''),
+            'description': request.POST.get('description', ''),
+            'requires_prescription': request.POST.get('requires_prescription') == 'on',
+            'manufacturer': request.POST.get('manufacturer', ''),
+        }
+        try:
+            r = requests.put(
+                f'{PHARMACY_URL}/products/{product_id}/',
+                json=data,
+                headers=_internal_headers(request),
+                timeout=8,
+            )
+            if r.ok:
+                messages.success(request, 'Đã cập nhật sản phẩm.')
+                return redirect('/staff/products/')
+            messages.error(request, 'Không thể cập nhật sản phẩm.')
+        except Exception as e:
+            messages.error(request, f'Lỗi kết nối: {e}')
+        return redirect(f'/staff/products/{product_id}/edit/')
+
+
+class StaffProductDeleteView(View):
+    @staff_required
+    def post(self, request, product_id):
+        try:
+            requests.delete(
+                f'{PHARMACY_URL}/products/{product_id}/',
+                headers=_internal_headers(request),
+                timeout=5,
+            )
+            messages.success(request, 'Đã xóa sản phẩm.')
+        except Exception as e:
+            messages.error(request, f'Lỗi xóa: {e}')
+        return redirect('/staff/products/')

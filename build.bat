@@ -86,6 +86,8 @@ docker-compose exec -T dispensing-service python manage.py migrate
 docker-compose exec -T medical-review-service python manage.py migrate
 docker-compose exec -T prescription-service python manage.py migrate
 docker-compose exec -T api-gateway python manage.py migrate
+docker-compose exec -T api-gateway python manage.py ensure_admin
+docker-compose exec -T api-gateway python manage.py ensure_staff
 echo [OK] Hoan tat khoi tao CSDL quy mo Microservices!
 
 echo.
