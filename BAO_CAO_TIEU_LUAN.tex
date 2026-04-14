@@ -378,6 +378,43 @@ EVENT BUS (RabbitMQ)
     \item \textbf{Testing:} pytest, unittest.
 \end{itemize}
 
+\subsection{Dữ Liệu Khởi Tạo Thực Tế (Seed Data)}
+
+Để chứng minh tính thực tiễn và khả năng đáp ứng của hệ thống, cơ sở dữ liệu đã được khởi tạo sẵn \textbf{10 mặt hàng y tế} mang tính đại diện cao (bao gồm cả thuốc kê đơn và thuốc không kê đơn - OTC), tập trung vào nhóm bệnh tiêu hóa và kháng sinh. Danh sách 10 mặt hàng đang được kinh doanh và quản lý trên hệ thống E-commerce bao gồm:
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|c|X|l|l|l|}
+        \hline
+        \textbf{STT} & \textbf{Tên Sản Phẩm} & \textbf{Hoạt Chất} & \textbf{Danh Mục} & \textbf{Trạng Thái} \\
+        \hline
+        1 & Phosphalugel 20\% gel & Aluminum Phosphate & Tiêu hóa (Antacid) & OTC \\
+        \hline
+        2 & Nexium 20mg & Esomeprazole & Tiêu hóa (PPI) & Kê đơn \\
+        \hline
+        3 & Omeprazole 20mg & Omeprazole & Tiêu hóa (PPI) & Kê đơn \\
+        \hline
+        4 & Ranitidine 150mg & Ranitidine HCl & Tiêu hóa (H2 Blocker) & Kê đơn \\
+        \hline
+        5 & Amoxicillin 500mg & Amoxicillin & Kháng sinh & Kê đơn \\
+        \hline
+        6 & Metronidazole 500mg & Metronidazole & Kháng sinh & Kê đơn \\
+        \hline
+        7 & Smecta 3g & Diosmectite & Tiêu hóa (Mucosal) & OTC \\
+        \hline
+        8 & Domperidone 10mg & Domperidone & Tiêu hóa (Antiemetic) & OTC \\
+        \hline
+        9 & Lacidofil (Probiotic) & Lactobacillus rhamnosus & Men vi sinh & OTC \\
+        \hline
+        10 & Duspatalin 200mg & Mebeverine HCl & Tiêu hóa (Chống co thắt) & OTC \\
+        \hline
+    \end{tabularx}
+    \caption{Danh sách 10 mặt hàng y tế được quản lý trong hệ thống}
+    \label{tab:10products}
+\end{table}
+
+Các mặt hàng này được liên kết trực tiếp với AI Context (GraphRAG) để chatbot có thể đưa ra tư vấn và trỏ thẳng người dùng đến \textit{Trang Chi tiết Sản phẩm} nhằm bỏ vào giỏ hàng.
+
 % ══════════════════════════════════════════════════════════════════════════════
 % CHƯƠNG 3: THIẾT KỾ CHI TIẾT
 % ══════════════════════════════════════════════════════════════════════════════
@@ -897,12 +934,11 @@ sử dụng bất kỳ sản phẩm nào."
     \end{verbatim}
 \end{enumerate}
 
-\textbf{Ưu điểm:}
+\textbf{Ưu điểm và Sự Tích Hợp E-Commerce Xuyên Suốt:}
 \begin{itemize}
-    \item \textbf{Grounded} – Câu trả lời dựa trên knowledge đã được verify.
-    \item \textbf{Relevant} – Gợi ý sản phẩm phù hợp có sẵn trong kho.
-    \item \textbf{Safe} – Có disclaimer, tránh misconduct.
-    \item \textbf{Personalized} – Có thể sử dụng user profile để cá nhân hóa.
+    \item \textbf{Grounded và Safe} – Câu trả lời dựa trên knowledge y khoa đã được xác thực, kèm theo disclaimer để đảm bảo an toàn.
+    \item \textbf{Tích Hợp E-Commerce Chặt Chẽ} – Không giống như các chatbot thông thường chỉ trả lời chữ, AI của hệ thống nhận diện insight và \textbf{gắn trực tiếp Data Sản Phẩm thực tế} (như Omeprazole 20mg, giá 35.000 VND).
+    \item \textbf{Từ Tư Vấn Đến Chốt Đơn (Conversion)} – Các gợi ý thuốc được AI sinh ra dưới dạng Link hoặc Card sản phẩm. Bệnh nhân có thể ngay lập tức click vào "Thêm vào giỏ hàng" (Add to Cart) để chuyển đổi từ người đi hỏi thành khách mua hàng. Đây là lõi sức mạnh của \textit{E-Commerce AI Integration}.
 \end{itemize}
 
 \subsubsection{Recommender-AI Service: Collaborative Filtering}
