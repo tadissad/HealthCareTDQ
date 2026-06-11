@@ -1,0 +1,288 @@
+@startuml ClassDiagram_Actual_HealthMicroAI
+' Bản thực tế — Không phân package, toàn bộ 18 class đều có kết nối
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 70
+skinparam classAttributeIconSize 0
+skinparam defaultTextAlignment left
+skinparam class {
+    BackgroundColor White
+    BorderColor #555555
+    ArrowColor #333333
+    HeaderBackgroundColor #DDEEFF
+}
+hide empty members
+
+' ==========================================
+' auth-service
+' ==========================================
+class UserModel {
+    +user_id : String <<PK>>
+    +email : String
+    +password_hash : String
+    +is_active : boolean
+    +is_locked : boolean
+    +failed_login_attempts : int
+    +last_login_at : Date
+    +locked_until : Date
+    +created_at : Date
+    +updated_at : Date
+}
+
+class UserRoleModel {
+    +id : int <<PK>>
+    +role : String
+    +assigned_at : Date
+    +assigned_by : String
+}
+
+class RoleModel {
+    +id : int <<PK>>
+    +name : String
+    +description : String
+    +created_at : Date
+}
+
+class RolePermissionModel {
+    +id : int <<PK>>
+    +granted_at : Date
+}
+
+class PermissionModel {
+    +id : int <<PK>>
+    +resource : String
+    +action : String
+    +description : String
+}
+
+class TokenModel {
+    +id : int <<PK>>
+    +token_hash : String
+    +token_type : String
+    +expires_at : Date
+    +revoked_at : Date
+    +created_at : Date
+}
+
+class AuthLogModel {
+    +id : int <<PK>>
+    +event_type : String
+    +email : String
+    +ip_address : String
+    +details : JSON
+    +occurred_at : Date
+}
+
+' ==========================================
+' patient-service
+' ==========================================
+class PatientModel {
+    +patient_id : String <<PK>>
+    +account_id : String
+    +full_name : String
+    +email : String
+    +phone : String
+    +date_of_birth : Date
+    +gender : String
+    +blood_type : String
+    +street : String
+    +ward : String
+    +district : String
+    +province : String
+    +postal_code : String
+    +insurance_code : String
+    +insurance_discount_rate : float
+    +insurance_valid_until : Date
+    +created_at : Date
+    +updated_at : Date
+}
+
+class MedicalRecordModel {
+    +record_id : String <<PK>>
+    +visit_date : Date
+    +diagnosis : String
+    +notes : String
+    +created_at : Date
+}
+
+' ==========================================
+' pharmacy-service
+' ==========================================
+class ProductModel {
+    +product_id : String <<PK>>
+    +sku : String
+    +generic_name : String
+    +trade_name : String
+    +category : String
+    +description : String
+    +dosage_form : String
+    +dosage_strength : String
+    +atc_code : String
+    +icd_codes : JSON
+    +manufacturer_name : String
+    +manufacturer_country : String
+    +requires_prescription : boolean
+    +price_amount : Decimal
+    +price_currency : String
+    +total_quantity_value : long
+    +total_quantity_unit : String
+    +min_stock_level_value : long
+    +reorder_point_value : long
+    +active : boolean
+    +created_at : Date
+    +updated_at : Date
+}
+
+class BatchModel {
+    +batch_id : String <<PK>>
+    +batch_number : String
+    +received_date : Date
+    +quantity_value : long
+    +quantity_unit : String
+    +expiry_date : Date
+    +created_at : Date
+    +updated_at : Date
+}
+
+class InventoryLocationModel {
+    +location_id : String <<PK>>
+    +warehouse : String
+    +shelf : String
+    +row : String
+    +column : String
+    +created_at : Date
+    +updated_at : Date
+}
+
+' ==========================================
+' medical-catalog-service
+' ==========================================
+class MedicalCategory {
+    +id : int <<PK>>
+    +name : String
+    +code : String
+    +description : String
+    +icon : String
+    +is_active : boolean
+    +created_at : Date
+}
+
+class SubCategory {
+    +id : int <<PK>>
+    +name : String
+    +code : String
+    +description : String
+    +product_ids : JSON
+    +is_active : boolean
+    +created_at : Date
+}
+
+' ==========================================
+' prescription-service (cart-service)
+' ==========================================
+class CartItem {
+    +id : int <<PK>>
+    +customer_id : int
+    +product_id : int
+    +quantity : int
+    +added_at : Date
+    +updated_at : Date
+}
+
+' ==========================================
+' dispensing-service
+' ==========================================
+class OrderModel {
+    +order_id : String <<PK>>
+    +customer_id : String
+    +status : String
+    +total_amount : Decimal
+    +currency : String
+    +discount_amount : Decimal
+    +payment_method : String
+    +payment_status : String
+    +transaction_id : String
+    +reference_number : String
+    +shipping_street : String
+    +shipping_city : String
+    +shipping_district : String
+    +shipping_postal_code : String
+    +shipping_country : String
+    +has_prescription : boolean
+    +prescription_id : String
+    +prescriber_name : String
+    +prescription_date : Date
+    +prescription_valid_until : Date
+    +order_date : Date
+    +confirmed_date : Date
+    +dispensed_date : Date
+    +notes : String
+    +created_at : Date
+    +updated_at : Date
+}
+
+class OrderItemModel {
+    +order_item_id : String <<PK>>
+    +product_id : String
+    +sku : String
+    +product_name : String
+    +quantity_ordered : long
+    +quantity_dispensed : long
+    +quantity_unit : String
+    +unit_price : Decimal
+    +line_total : Decimal
+    +currency : String
+    +created_at : Date
+    +updated_at : Date
+}
+
+' ==========================================
+' medical-review-service
+' ==========================================
+class Review {
+    +id : int <<PK>>
+    +product_id : int
+    +customer_id : int
+    +rating : int
+    +comment : String
+    +effectiveness : int
+    +side_effect_experience : String
+    +created_at : Date
+}
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+' --- auth-service (FK thực sự - CASCADE) ---
+UserModel *-- "N" TokenModel          : Composition
+UserModel *-- "N" UserRoleModel       : Composition
+UserModel o-- "N" AuthLogModel        : Aggregation
+UserRoleModel --> RoleModel           : Association
+RoleModel *-- "N" RolePermissionModel : Composition
+RolePermissionModel --> PermissionModel : Association
+
+' --- patient-service (FK thực sự - CASCADE) ---
+PatientModel *-- "N" MedicalRecordModel : Composition
+
+' --- pharmacy-service (FK thực sự - CASCADE) ---
+ProductModel *-- "N" BatchModel             : Composition
+ProductModel *-- "N" InventoryLocationModel : Composition
+
+' --- medical-catalog-service (FK thực sự - CASCADE) ---
+MedicalCategory *-- "N" SubCategory : Composition
+
+' --- dispensing-service (FK thực sự - CASCADE) ---
+OrderModel *-- "N" OrderItemModel : Composition
+
+' --- Cross-service soft references (bằng ID) ---
+PatientModel --> UserModel    : Association
+CartItem --> PatientModel     : Association
+CartItem --> ProductModel     : Association
+OrderModel --> PatientModel   : Association
+OrderItemModel --> ProductModel : Association
+Review --> ProductModel       : Association
+Review --> PatientModel       : Association
+SubCategory --> ProductModel  : Association
+
+@enduml
