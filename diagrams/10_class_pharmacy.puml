@@ -1,0 +1,105 @@
+@startuml class_pharmacy
+' ============================================================
+' Class Diagram: Pharmacy Service + Medical Catalog Service
+' ============================================================
+skinparam classBackgroundColor #AEE2F0
+skinparam classBorderColor #1565C0
+skinparam classHeaderBackgroundColor #1B5E20
+skinparam classHeaderFontColor #FFFFFF
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
+skinparam ArrowColor #1B5E20
+skinparam ArrowThickness 1.5
+skinparam shadowing false
+skinparam linetype ortho
+
+' ============================================================
+' PHARMACY SERVICE — Django, PostgreSQL: pharmacy_db
+' ============================================================
+package"pharmacy-service :8002 (Django · pharmacy_db)"#E8F5E9 {
+
+  class Product {
+    <<ORM Persistable · Aggregate Root>>
+    -ID : String (UUID)
+    -sku : String
+    -generic_name : String
+    -trade_name : String
+    -category : String
+    -dosage_form : String
+    -dosage_strength : String
+    -atc_code : String
+    -requires_prescription : bool
+    -price_amount : Decimal
+    -price_currency : String
+    -total_quantity : int
+    -min_stock_level : int
+    -reorder_point : int
+    -active : bool
+    -created_at : DateTime
+    -updated_at : DateTime
+  }
+
+  class Manufacturer {
+    <<ORM Persistable>>
+    -ID : int
+    -product_id : String
+    -name : String
+    -country : String
+    -registration_code : String
+  }
+
+  class Batch {
+    <<ORM Persistable>>
+    -ID : String
+    -product_id : String
+    -batch_number : String
+    -quantity : int
+    -quantity_unit : String
+    -expiry_date : Date
+    -received_date : Date
+  }
+
+  class InventoryLocation {
+    <<ORM Persistable>>
+    -ID : String
+    -product_id : String
+    -warehouse : String
+    -shelf : String
+    -row : String
+    -column : String
+  }
+}
+
+' ============================================================
+' MEDICAL CATALOG SERVICE — Django, PostgreSQL: medical_catalog_db
+' ============================================================
+package"medical-catalog-service :8003 (Django · medical_catalog_db)"#E0F2F1 {
+
+  class CatalogProduct {
+    <<ORM Persistable>>
+    -ID : String
+    -code : String
+    -name : String
+    -category : String
+    -price : Decimal
+    -description : String
+    -stock_quantity : int
+    -is_active : bool
+    -created_at : DateTime
+    -updated_at : DateTime
+  }
+
+  class IcdCategory {
+    <<ORM Persistable>>
+    -ID : int
+    -name : String
+    -slug : String (unique)
+    -description : String
+    -parent_id : int
+  }
+}
+
+' ============================================================
+' RELATIONSHIPS
+' ============================================================
+Product *-- Manufacturer :"1 manufacturer"Product *--"0..*"Batch :"batches"Product *--"0..*"InventoryLocation :"locations"CatalogProduct ..> Product :"synced from\npharmacy-service"IcdCategory *-- IcdCategory :"parent (self-ref)"@enduml

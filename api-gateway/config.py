@@ -37,8 +37,8 @@ SERVICE_REGISTRY = {
         'timeout': 30,
         'retries': 2,
     },
-    'clinical-advisory-service': {
-        'url': 'http://clinical-advisory-service:8005',
+    'ai-service': {
+        'url': 'http://ai-service:8000',
         'prefix': '/api/consultations',
         'timeout': 30,
         'retries': 2,

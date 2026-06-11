@@ -1,0 +1,60 @@
+@startuml ai_architecture
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam defaultTextAlignment center
+skinparam componentStyle rectangle
+
+package "Client Requests" {
+  [Chat Query\n'Tôi bị đau đầu...'] as C_CHAT
+  [Recommend Query\nGET /api/recommend/] as C_REC
+}
+
+node "API Gateway\n(:8000)" as GW #E0E0E0
+
+package "AI Service (:8010)" #F8F9FA {
+  package "GraphRAG Chat Pipeline" #FFFFFF {
+    [Intent Classifier\n(Regex)] as INTENT #FFF3E0
+    [Graph Search\n(Neo4j)] as NEO_Q
+    [Vector Search\n(FAISS)] as FAISS_Q
+    [LLM Generator\n(Gemini 1.5)] as LLM #FFE0B2
+    [Chat Response] as OUT_CHAT
+    
+    INTENT -down-> NEO_Q
+    INTENT -down-> FAISS_Q
+    NEO_Q -down-> LLM
+    FAISS_Q -down-> LLM
+    LLM -down-> OUT_CHAT
+  }
+
+  package "Hybrid Recommender Pipeline" #FFFFFF {
+    [User Embedding\n(SPD Covariance)] as U_EMB
+    [Product Embedding\n(GraphSAGE)] as P_EMB
+    [Hybrid Model\n(GNN + SPD-AIRM)] as HYBRID #E1BEE7
+    [Recommend Response] as OUT_REC
+    
+    U_EMB -down-> HYBRID
+    P_EMB -down-> HYBRID
+    HYBRID -down-> OUT_REC
+  }
+}
+
+package "Data Layer" #F4FBF4 {
+  database "FAISS DB\n(Vector Index)" as FAISS #B2DFDB
+  database "Neo4j DB\n(Knowledge Graph)" as NEO #B3E5FC
+  database "Pharmacy DB\n(Products)" as PHAR #C8E6C9
+}
+
+' Flow Connections
+C_CHAT -down-> GW
+C_REC -down-> GW
+
+GW -down-> INTENT
+GW -down-> U_EMB
+GW -down-> P_EMB
+
+FAISS_Q -down-> FAISS : Query
+NEO_Q -down-> NEO : Query
+U_EMB -down-> NEO : Fetch Graph
+P_EMB -down-> PHAR : Fetch Info
+@enduml

@@ -1,0 +1,7 @@
+# ai-service/requirements.txt
+# Base image (health-ai-base) da co: faiss-cpu, numpy, scipy, neo4j,
+#   google-generativeai, fastapi, uvicorn, requests, pydantic, python-dotenv
+# Chi liet ke phan khac biet:
+
+# New Gemini SDK (thay the google-generativeai da deprecated)
+google-genai>=1.0.0

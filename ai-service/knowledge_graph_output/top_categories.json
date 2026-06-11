@@ -1,0 +1,42 @@
+[
+  {
+    "category": "ulcer_hp_support",
+    "event_count": 1742
+  },
+  {
+    "category": "elderly_weak_digestion",
+    "event_count": 1568
+  },
+  {
+    "category": "consultation_package",
+    "event_count": 1559
+  },
+  {
+    "category": "reflux_heartburn",
+    "event_count": 1546
+  },
+  {
+    "category": "test_kit_home",
+    "event_count": 1522
+  },
+  {
+    "category": "probiotic_digestion",
+    "event_count": 1503
+  },
+  {
+    "category": "stomach_nutrition",
+    "event_count": 1473
+  },
+  {
+    "category": "equipment_device",
+    "event_count": 1389
+  },
+  {
+    "category": "herbal_extract",
+    "event_count": 1372
+  },
+  {
+    "category": "vitamin_mineral",
+    "event_count": 1317
+  }
+]

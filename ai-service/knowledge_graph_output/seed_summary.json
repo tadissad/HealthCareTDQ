@@ -1,0 +1,11 @@
+{
+  "dataset": "data_user500.csv",
+  "neo4j_uri": null,
+  "users": 500,
+  "products": 100,
+  "categories": 10,
+  "action_events": 14991,
+  "sessions": 3202,
+  "purchase_events": 1822,
+  "review_events": 972
+}

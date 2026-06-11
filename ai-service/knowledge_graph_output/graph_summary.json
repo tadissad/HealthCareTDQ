@@ -1,0 +1,61 @@
+{
+  "overview": [
+    {
+      "users": 500,
+      "products": 100,
+      "categories": 10,
+      "events": 14991
+    }
+  ],
+  "top_categories": [
+    {
+      "category": "ulcer_hp_support",
+      "event_count": 1742
+    },
+    {
+      "category": "elderly_weak_digestion",
+      "event_count": 1568
+    },
+    {
+      "category": "consultation_package",
+      "event_count": 1559
+    },
+    {
+      "category": "reflux_heartburn",
+      "event_count": 1546
+    },
+    {
+      "category": "test_kit_home",
+      "event_count": 1522
+    }
+  ],
+  "top_products": [
+    {
+      "product_id": "P028",
+      "category": "consultation_package",
+      "purchase_count": 30
+    },
+    {
+      "product_id": "P009",
+      "category": "elderly_weak_digestion",
+      "purchase_count": 29
+    },
+    {
+      "product_id": "P031",
+      "category": "ulcer_hp_support",
+      "purchase_count": 28
+    },
+    {
+      "product_id": "P060",
+      "category": "vitamin_mineral",
+      "purchase_count": 27
+    },
+    {
+      "product_id": "P035",
+      "category": "stomach_nutrition",
+      "purchase_count": 26
+    }
+  ],
+  "user_journey_rows": 20,
+  "co_purchase_rows": 20
+}

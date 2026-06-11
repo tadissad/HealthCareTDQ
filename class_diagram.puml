@@ -1,0 +1,390 @@
+@startuml Health-Micro-AI Class Diagram
+
+' ============================================================
+' STYLE - Phong cách VP chuẩn
+' ============================================================
+skinparam classBackgroundColor #AEE2F0
+skinparam classBorderColor #2C7DA0
+skinparam classHeaderBackgroundColor #5BA3C2
+skinparam classHeaderFontColor #FFFFFF
+skinparam classFontColor #000000
+skinparam classFontSize 11
+skinparam classAttributeFontSize 10
+skinparam ArrowColor #2C7DA0
+skinparam ArrowFontSize 9
+skinparam ArrowFontColor #1A1A1A
+skinparam Padding 4
+skinparam linetype ortho
+hide circle
+hide methods
+
+' ============================================================
+' ACCOUNT (api-gateway – SQLite)
+' ============================================================
+class Account {
+  <<ORM Persistable>>
+  -ID : int
+  -username : String
+  -password : String
+  -fullname : String
+  -phone : String
+  -email : String
+  -role : String
+  -is_active : bool
+  -created_at : DateTime
+  -updated_at : DateTime
+}
+
+' ============================================================
+' AUTH SERVICE
+' ============================================================
+class User {
+  <<ORM Persistable>>
+  -ID : String
+  -email : String
+  -credential_hash : String
+  -is_active : bool
+  -is_locked : bool
+  -failed_login_attempts : int
+  -last_login_at : DateTime
+  -created_at : DateTime
+}
+
+class Role {
+  <<ORM Persistable>>
+  -ID : int
+  -user_id : String
+  -name : String
+}
+
+class Permission {
+  <<ORM Persistable>>
+  -ID : int
+  -role_id : int
+  -resource : String
+  -action : String
+}
+
+class TokenBundle {
+  <<ORM Persistable>>
+  -ID : String
+  -user_id : String
+  -access_token : String
+  -refresh_token : String
+  -expires_in : int
+  -issued_at : DateTime
+  -expires_at : DateTime
+}
+
+' ============================================================
+' PATIENT SERVICE (patient_db)
+' ============================================================
+class Patient {
+  <<ORM Persistable>>
+  -ID : String
+  -account_id : String
+  -full_name : String
+  -email : String
+  -phone : String
+  -date_of_birth : DateTime
+  -gender : String
+  -blood_type : String
+  -created_at : DateTime
+  -updated_at : DateTime
+}
+
+class PatientAddress {
+  <<ORM Persistable>>
+  -ID : int
+  -patient_id : String
+  -street : String
+  -ward : String
+  -district : String
+  -province : String
+  -postal_code : String
+}
+
+class InsuranceInfo {
+  <<ORM Persistable>>
+  -ID : int
+  -patient_id : String
+  -code : String
+  -discount_rate : float
+  -valid_until : DateTime
+}
+
+class MedicalRecord {
+  <<ORM Persistable>>
+  -ID : String
+  -patient_id : String
+  -visit_date : DateTime
+  -diagnosis : String
+  -notes : String
+  -created_at : DateTime
+}
+
+' ============================================================
+' PHARMACY SERVICE (pharmacy_db)
+' ============================================================
+class Product {
+  <<ORM Persistable>>
+  -ID : String
+  -sku : String
+  -generic_name : String
+  -trade_name : String
+  -category : String
+  -dosage_form : String
+  -dosage_strength : String
+  -atc_code : String
+  -requires_prescription : bool
+  -price_amount : Decimal
+  -price_currency : String
+  -total_quantity : int
+  -min_stock_level : int
+  -reorder_point : int
+  -active : bool
+  -created_at : DateTime
+  -updated_at : DateTime
+}
+
+class Manufacturer {
+  <<ORM Persistable>>
+  -ID : int
+  -product_id : String
+  -name : String
+  -country : String
+  -registration_code : String
+}
+
+class Batch {
+  <<ORM Persistable>>
+  -ID : String
+  -product_id : String
+  -batch_number : String
+  -quantity : int
+  -quantity_unit : String
+  -expiry_date : DateTime
+  -received_date : DateTime
+}
+
+class InventoryLocation {
+  <<ORM Persistable>>
+  -ID : String
+  -product_id : String
+  -warehouse : String
+  -shelf : String
+  -row : String
+  -column : String
+}
+
+' ============================================================
+' MEDICAL CATALOG SERVICE (medical_catalog_db)
+' ============================================================
+class CatalogProduct {
+  <<ORM Persistable>>
+  -ID : String
+  -code : String
+  -name : String
+  -category : String
+  -price : Decimal
+  -description : String
+  -stock_quantity : int
+  -is_active : bool
+  -created_at : DateTime
+  -updated_at : DateTime
+}
+
+' ============================================================
+' PRESCRIPTION SERVICE (prescription_db)
+' ============================================================
+class Prescription {
+  <<ORM Persistable>>
+  -ID : String
+  -customer_id : String
+  -prescription_status : String
+  -cart_status : String
+  -subtotal : Decimal
+  -total_amount : Decimal
+  -currency : String
+  -issued_date : DateTime
+  -valid_until : DateTime
+  -max_refills : int
+  -created_at : DateTime
+  -fulfilled_date : DateTime
+  -notes : String
+}
+
+class PrescriberInfo {
+  <<ORM Persistable>>
+  -ID : int
+  -prescription_id : String
+  -name : String
+  -license_number : String
+  -specialty : String
+  -hospital : String
+}
+
+class Diagnosis {
+  <<ORM Persistable>>
+  -ID : int
+  -prescription_id : String
+  -icd10_code : String
+  -condition_name : String
+  -notes : String
+}
+
+class PrescriptionItem {
+  <<ORM Persistable>>
+  -ID : int
+  -prescription_id : String
+  -product_id : String
+  -sku : String
+  -product_name : String
+  -quantity : int
+  -unit_price : Decimal
+  -currency : String
+  -requires_prescription : bool
+  -frequency : String
+  -duration : String
+  -dosage : String
+  -fulfill_quantity : int
+}
+
+' ============================================================
+' DISPENSING SERVICE (dispensing_db)
+' ============================================================
+class Order {
+  <<ORM Persistable>>
+  -ID : String
+  -customer_id : String
+  -prescription_id : String
+  -status : String
+  -subtotal : Decimal
+  -discount_amount : Decimal
+  -total_amount : Decimal
+  -currency : String
+  -order_date : DateTime
+  -confirmed_date : DateTime
+  -dispensed_date : DateTime
+  -notes : String
+}
+
+class OrderItem {
+  <<ORM Persistable>>
+  -ID : String
+  -order_id : String
+  -product_id : String
+  -sku : String
+  -product_name : String
+  -qty_ordered : int
+  -qty_dispensed : int
+  -qty_unit : String
+  -unit_price : Decimal
+  -line_total : Decimal
+  -currency : String
+}
+
+class Payment {
+  <<ORM Persistable>>
+  -ID : int
+  -order_id : String
+  -method : String
+  -status : String
+  -transaction_id : String
+  -reference_number : String
+  -paid_at : DateTime
+}
+
+class ShippingInfo {
+  <<ORM Persistable>>
+  -ID : int
+  -order_id : String
+  -street : String
+  -city : String
+  -district : String
+  -postal_code : String
+  -country : String
+  -notes : String
+}
+
+' ============================================================
+' MEDICAL REVIEW SERVICE (medical_review_db)
+' ============================================================
+class Review {
+  <<ORM Persistable>>
+  -ID : String
+  -product_id : String
+  -user_id : String
+  -rating : int
+  -title : String
+  -content : String
+  -upvotes : int
+  -downvotes : int
+  -is_verified_purchase : bool
+  -created_at : DateTime
+}
+
+class AverageRating {
+  <<ORM Persistable>>
+  -ID : int
+  -product_id : String
+  -average_rating : float
+  -total_reviews : int
+  -updated_at : DateTime
+}
+
+' ===========================================================
+' RELATIONSHIPS - chi duong mui ten, khong label
+' "--"  : association (quan he 2 chieu)
+' "*--" : composition (cha chua con)
+' "-->" : directed association (tham chieu 1 chieu)
+' "..>" : dependency (sync)
+' ===========================================================
+
+' --- AUTH ---
+Account -- User
+User *-- Role
+Role *-- Permission
+User -- TokenBundle
+
+' --- ACCOUNT <-> PATIENT ---
+Account -- Patient
+
+' --- PATIENT ---
+Patient *-- PatientAddress
+Patient *-- InsuranceInfo
+Patient *-- MedicalRecord
+
+' --- PATIENT -> PRESCRIPTION ---
+Patient -- Prescription
+
+' --- PRESCRIPTION ---
+Prescription *-- PrescriberInfo
+Prescription *-- Diagnosis
+Prescription *-- PrescriptionItem
+PrescriptionItem --> Product
+
+' --- PATIENT -> ORDER ---
+Patient -- Order
+
+' --- ORDER ---
+Order *-- OrderItem
+Order *-- Payment
+Order *-- ShippingInfo
+Order --> Prescription
+OrderItem --> Product
+
+' --- PRODUCT ---
+Product *-- Manufacturer
+Product *-- Batch
+Product *-- InventoryLocation
+
+' --- REVIEW ---
+Review --> Product
+AverageRating --> Product
+AverageRating ..> Review
+
+' --- CATALOG ---
+CatalogProduct ..> Product
+
+@enduml

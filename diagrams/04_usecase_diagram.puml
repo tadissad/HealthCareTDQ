@@ -1,0 +1,92 @@
+@startuml usecase_diagram
+' ============================================================
+' Use Case Diagram — Health-Micro-AI
+' ============================================================
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+skinparam usecase {
+  BackgroundColor #E8F5E9
+  BorderColor #1B5E20
+  ArrowColor #1B5E20
+}
+skinparam actor {
+  BackgroundColor #FFFFFF
+  BorderColor #1B5E20
+}
+
+actor "Admin" as ADM
+actor "Staff" as STF
+actor "Customer\n(Bệnh nhân)" as CUS
+
+rectangle "Health-Micro-AI System" {
+  
+  package "auth-service" {
+    usecase "Đăng nhập" as UC1
+    usecase "Đăng ký" as UC2
+    usecase "Làm mới token" as UC3
+  }
+
+  package "pharmacy-service" {
+    usecase "Xem danh mục thuốc" as UC4
+    usecase "Thêm sản phẩm" as UC5
+    usecase "Sửa sản phẩm" as UC6
+    usecase "Quản lý tồn kho" as UC7
+  }
+
+  package "prescription-service" {
+    usecase "Thêm vào đơn tạm" as UC8
+    usecase "Xóa khỏi đơn tạm" as UC9
+    usecase "Xem đơn tạm" as UC10
+  }
+
+  package "dispensing-service" {
+    usecase "Thanh toán / Tạo đơn" as UC11
+    usecase "Cập nhật trạng thái đơn" as UC12
+    usecase "Xem lịch sử đơn hàng" as UC13
+  }
+
+  package "ai-service" {
+    usecase "Chat tư vấn y tế" as UC14
+    usecase "Xem gợi ý sản phẩm" as UC15
+  }
+
+  package "medical-review-service" {
+    usecase "Đánh giá sản phẩm" as UC16
+    usecase "Xem đánh giá" as UC17
+  }
+
+  package "patient-service" {
+    usecase "Xem / Cập nhật hồ sơ" as UC18
+    usecase "Quản lý thông tin BHYT" as UC19
+  }
+}
+
+ADM --> UC1
+ADM --> UC5
+ADM --> UC6
+ADM --> UC7
+ADM --> UC12
+
+STF --> UC1
+STF --> UC4
+STF --> UC7
+STF --> UC12
+
+CUS --> UC1
+CUS --> UC2
+CUS --> UC4
+CUS --> UC8
+CUS --> UC9
+CUS --> UC10
+CUS --> UC11
+CUS --> UC13
+CUS --> UC14
+CUS --> UC15
+CUS --> UC16
+CUS --> UC17
+CUS --> UC18
+CUS --> UC19
+
+@enduml

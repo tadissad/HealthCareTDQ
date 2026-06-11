@@ -4,8 +4,9 @@ seed_all.py – health-micro-ai
 Script khởi tạo toàn bộ môi trường dữ liệu cho hệ thống Healthcare E-commerce.
 
 Sử dụng:
-  python seed_all.py              # Chạy cả 3 phần
+  python seed_all.py              # Chạy cả 4 phần
   python seed_all.py --part A    # Chỉ seed PostgreSQL (Django sản phẩm)
+  python seed_all.py --part D    # Chỉ seed Medical Catalog (10 categories)
   python seed_all.py --part B    # Chỉ seed Neo4j (Knowledge Graph)
   python seed_all.py --part C    # Chỉ seed FAISS (Vector Store)
 
@@ -39,6 +40,18 @@ NEO4J_PASSWORD      = os.getenv("NEO4J_PASSWORD",      "health123")
 FAISS_OUTPUT_DIR    = os.getenv("FAISS_OUTPUT_DIR",    "./faiss_seed_output")
 
 
+def _resolve_source_path(file_name: str) -> str:
+    candidates = [
+        file_name,
+        os.path.join("ai-service", "kb", "sources", file_name.replace(".csv", ".seed.csv").replace(".txt", ".seed.txt")),
+        os.path.join("ai-service", "kb", "sources", file_name.replace(".json", ".seed.json")),
+    ]
+    for path in candidates:
+        if os.path.exists(path):
+            return path
+    return file_name
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # PART A – DJANGO PRODUCT SERVICE (PostgreSQL)
 # 10 sản phẩm y tế về bệnh dạ dày
@@ -48,7 +61,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Phosphalugel",
         "generic_name":     "Aluminum Phosphate",
-        "category":         "antacid",
+        "category":         "ulcer_hp_support",
         "dosage_form":      "gel",
         "dosage_strength":  "20% gel",
         "manufacturer":     "Mayoly Spindler (Pháp)",
@@ -70,7 +83,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Nexium 20mg",
         "generic_name":     "Esomeprazole Magnesium",
-        "category":         "ppi",
+        "category":         "reflux_heartburn",
         "dosage_form":      "capsule",
         "dosage_strength":  "20mg",
         "manufacturer":     "AstraZeneca",
@@ -92,7 +105,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Omeprazole 20mg",
         "generic_name":     "Omeprazole",
-        "category":         "ppi",
+        "category":         "reflux_heartburn",
         "dosage_form":      "capsule",
         "dosage_strength":  "20mg",
         "manufacturer":     "Stada Vietnam",
@@ -114,7 +127,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Ranitidine 150mg",
         "generic_name":     "Ranitidine HCl",
-        "category":         "h2_blocker",
+        "category":         "reflux_heartburn",
         "dosage_form":      "tablet",
         "dosage_strength":  "150mg",
         "manufacturer":     "Pymepharco",
@@ -136,7 +149,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Amoxicillin 500mg",
         "generic_name":     "Amoxicillin Trihydrate",
-        "category":         "antibiotic",
+        "category":         "ulcer_hp_support",
         "dosage_form":      "capsule",
         "dosage_strength":  "500mg",
         "manufacturer":     "Mekophar",
@@ -159,7 +172,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Metronidazole 500mg",
         "generic_name":     "Metronidazole",
-        "category":         "antibiotic",
+        "category":         "ulcer_hp_support",
         "dosage_form":      "tablet",
         "dosage_strength":  "500mg",
         "manufacturer":     "Dược phẩm TW1",
@@ -182,7 +195,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Smecta 3g",
         "generic_name":     "Diosmectite",
-        "category":         "mucosal",
+        "category":         "elderly_weak_digestion",
         "dosage_form":      "sachet",
         "dosage_strength":  "3g/gói",
         "manufacturer":     "Ipsen (Pháp)",
@@ -205,7 +218,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Domperidone 10mg",
         "generic_name":     "Domperidone Maleate",
-        "category":         "antiemetic",
+        "category":         "elderly_weak_digestion",
         "dosage_form":      "tablet",
         "dosage_strength":  "10mg",
         "manufacturer":     "DHG Pharma",
@@ -228,7 +241,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Lacidofil (Probiotic)",
         "generic_name":     "Lactobacillus rhamnosus + L. helveticus",
-        "category":         "probiotic",
+        "category":         "probiotic_digestion",
         "dosage_form":      "capsule",
         "dosage_strength":  "2×10⁹ CFU/viên",
         "manufacturer":     "Allergon AB (Thụy Điển)",
@@ -254,7 +267,7 @@ STOMACH_PRODUCTS = [
     {
         "name":             "Duspatalin 200mg",
         "generic_name":     "Mebeverine HCl",
-        "category":         "antispasmodic",
+        "category":         "elderly_weak_digestion",
         "dosage_form":      "capsule",
         "dosage_strength":  "200mg",
         "manufacturer":     "Abbott Healthcare (Hà Lan)",
@@ -503,8 +516,9 @@ def load_extra_cypher():
     statements = []
     try:
         import csv
-        if os.path.exists("benhdaday.csv"):
-            with open("benhdaday.csv", "r", encoding="utf-8") as f:
+        benhdaday_path = _resolve_source_path("benhdaday.csv")
+        if os.path.exists(benhdaday_path):
+            with open(benhdaday_path, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     disease = row.get('Tên Bệnh', '').strip().replace("'", "")
@@ -659,8 +673,9 @@ def load_extra_faiss_chunks():
     # Read benhdaday.csv
     try:
         import csv
-        if os.path.exists("benhdaday.csv"):
-            with open("benhdaday.csv", "r", encoding="utf-8") as f:
+        benhdaday_path = _resolve_source_path("benhdaday.csv")
+        if os.path.exists(benhdaday_path):
+            with open(benhdaday_path, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     chunk = f"Bệnh: {row.get('Tên Bệnh', '')} (ICD-10: {row.get('Mã số ICD-10', '')}). Triệu chứng: {row.get('Triệu chứng điển hình', '')}. Nguyên nhân: {row.get('Nguyên nhân chính', '')}. Chẩn đoán: {row.get('Phương pháp chẩn đoán', '')}."
@@ -670,8 +685,9 @@ def load_extra_faiss_chunks():
         
     # Read faq.txt
     try:
-        if os.path.exists("faq.txt"):
-            with open("faq.txt", "r", encoding="utf-8") as f:
+        faq_path = _resolve_source_path("faq.txt")
+        if os.path.exists(faq_path):
+            with open(faq_path, "r", encoding="utf-8") as f:
                 content = f.read()
                 parts = content.split("Câu ")
                 for p in parts[1:]:
@@ -796,19 +812,176 @@ def seed_part_c():
 # MAIN ENTRYPOINT
 # ══════════════════════════════════════════════════════════════════════════════
 
+def seed_part_d():
+    """
+    Part D: Seed 10 categories vào medical-catalog-service
+    Khởi tạo danh mục thuốc cấp cao và phân nhóm
+    """
+    import django
+    
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'catalog_service.settings')
+    django.setup()
+    
+    from app.models import MedicalCategory, SubCategory
+    
+    CATEGORIES = [
+        {
+            'name': 'Hỗ trợ Điều trị Viêm loét & HP',
+            'code': 'ulcer_hp_support',
+            'icon': '🩹',
+            'description': 'Các sản phẩm hỗ trợ điều trị viêm loét dạ dày, tá tràng và nhiễm Helicobacter pylori',
+            'subcategories': [
+                {'name': 'Kháng sinh diệt H. pylori', 'code': 'antibiotics_hp', 'description': 'Amoxicillin, Metronidazole, Clarithromycin trong phác đồ diệt H. pylori', 'product_ids': [5, 6]},
+                {'name': 'Bảo vệ niêm mạc & Chống acid', 'code': 'mucosal_protection', 'description': 'Phosphalugel, Smecta - bảo vệ trực tiếp niêm mạc dạ dày', 'product_ids': [1, 7]},
+            ]
+        },
+        {
+            'name': 'Giảm Trào ngược & Ợ chua',
+            'code': 'reflux_heartburn',
+            'icon': '🔥',
+            'description': 'Các sản phẩm điều trị trào ngược dạ dày thực quản (GERD) và ợ chua',
+            'subcategories': [
+                {'name': 'Ức chế bơm proton (PPI)', 'code': 'ppi', 'description': 'Nexium (Esomeprazole), Omeprazole - giảm tiết acid đến 90%', 'product_ids': [2, 3]},
+                {'name': 'Ức chế thụ thể H2', 'code': 'h2_blocker', 'description': 'Ranitidine - giảm tiết acid từ tế bào thành dạ dày', 'product_ids': [4]},
+            ]
+        },
+        {
+            'name': 'Men vi sinh & Hỗ trợ Tiêu hóa',
+            'code': 'probiotic_digestion',
+            'icon': '🦠',
+            'description': 'Probiotics y tế hỗ trợ hệ vi sinh vật đường ruột, cân bằng tiêu hóa',
+            'subcategories': [
+                {'name': 'Probiotics chứng chỉ y tế', 'code': 'medical_probiotics', 'description': 'Lacidofil, Culturelle - Lactobacillus & Bifidobacterium sống', 'product_ids': [9]},
+                {'name': 'Hỗ trợ sau kháng sinh', 'code': 'post_antibiotic', 'description': 'Phục hồi hệ vi sinh vật sau điều trị kháng sinh', 'product_ids': [9]},
+            ]
+        },
+        {
+            'name': 'Tinh chất Nghệ & Thảo dược',
+            'code': 'herbal_extract',
+            'icon': '🌿',
+            'description': 'Chiết xuất từ thảo dược tự nhiên: Nghệ vàng, gừng, hoa cúc, cam thảo',
+            'subcategories': [
+                {'name': 'Tinh chất Nghệ vàng', 'code': 'turmeric_extract', 'description': 'Curcumin - chống viêm, hỗ trợ tiêu hóa tự nhiên', 'product_ids': []},
+                {'name': 'Thảo dược kết hợp', 'code': 'herbal_blend', 'description': 'Hỗn hợp gừng, hoa cúc, cam thảo - giảm thổn không, hỗ trợ tiêu hóa', 'product_ids': []},
+            ]
+        },
+        {
+            'name': 'Thực phẩm & Dinh dưỡng Dạ dày',
+            'code': 'stomach_nutrition',
+            'icon': '🥗',
+            'description': 'Sữa chuyên biệt, bột dinh dưỡng, thực phẩm chức năng cho dạ dày',
+            'subcategories': [
+                {'name': 'Sữa & Bột dinh dưỡng', 'code': 'nutrition_powder', 'description': 'Sữa chuyên biệt cho bệnh nhân dạ dày, bột mầm lúa mạch, cơm cháy', 'product_ids': []},
+                {'name': 'Thực phẩm hỗ trợ tiêu hóa', 'code': 'digestive_food', 'description': 'Cơm lỏng, cháo ăn được, khoai lang luộc - dễ tiêu hóa', 'product_ids': []},
+            ]
+        },
+        {
+            'name': 'Dụng cụ & Thiết bị Hỗ trợ',
+            'code': 'equipment_device',
+            'icon': '⚙️',
+            'description': 'Các thiết bị hỗ trợ điều trị: cốc nước ấm, máy nén, đệm hạt',
+            'subcategories': [
+                {'name': 'Thiết bị sưởi ấm', 'code': 'heating_device', 'description': 'Túi nước ấm, đệm sưởi - giảm đau co thắt', 'product_ids': []},
+                {'name': 'Dụng cụ hỗ trợ uống thuốc', 'code': 'medication_device', 'description': 'Tách uống thuốc, dụng cụ nghiền hỗ trợ uống liều chiều', 'product_ids': []},
+            ]
+        },
+        {
+            'name': 'Bộ xét nghiệm & Kiểm tra tại nhà',
+            'code': 'test_kit_home',
+            'icon': '🧪',
+            'description': 'Bộ test H. pylori tại nhà, test men gan, test máu độc lập',
+            'subcategories': [
+                {'name': 'Test H. pylori tại nhà', 'code': 'hp_test_home', 'description': 'Bộ test hơi thở H. pylori, test chất kéo dài (Urea Breath Test)', 'product_ids': []},
+                {'name': 'Kit xét nghiệm máu & nước tiểu', 'code': 'blood_urine_test', 'description': 'Test men gan, test các chỉ số máu - kiểm tra sức khỏe cơ bản', 'product_ids': []},
+            ]
+        },
+        {
+            'name': 'Gói khám & Tư vấn Bác sĩ',
+            'code': 'consultation_package',
+            'icon': '👨‍⚕️',
+            'description': 'Gói tư vấn trực tuyến, gói khám sức khỏe, gói follow-up',
+            'subcategories': [
+                {'name': 'Tư vấn trực tuyến với BS chuyên khoa', 'code': 'online_consultation', 'description': 'Video call 30 phút với bác sĩ tiêu hóa - tư vấn cá nhân hóa', 'product_ids': []},
+                {'name': 'Gói khám & theo dõi định kỳ', 'code': 'follow_up_package', 'description': 'Gói khám 3 tháng - theo dõi tiến triển, điều chỉnh phác đồ', 'product_ids': []},
+            ]
+        },
+        {
+            'name': 'Dành cho Người già & Hệ tiêu hóa yếu',
+            'code': 'elderly_weak_digestion',
+            'icon': '👴',
+            'description': 'Sản phẩm an toàn cho người cao tuổi, tiêu hóa yếu, dễ hấp thu',
+            'subcategories': [
+                {'name': 'Thuốc chống nôn & điều hòa nhu động', 'code': 'antiemetic_prokinetic', 'description': 'Domperidone - điều hòa dạ dày, an toàn cho người già', 'product_ids': [8]},
+                {'name': 'Thuốc chống co thắt & giảm đau bụng', 'code': 'antispasmodic_pain', 'description': 'Duspatalin (Mebeverine) - chống co thắt, không ảnh hưởng nhu động bình thường', 'product_ids': [10]},
+            ]
+        },
+        {
+            'name': 'Vitamin & Khoáng chất Bổ trợ',
+            'code': 'vitamin_mineral',
+            'icon': '💊',
+            'description': 'Bổ sung Vitamin B12, Vitamin D, Magnesium, Zinc - hỗ trợ miễn dịch & tiêu hóa',
+            'subcategories': [
+                {'name': 'Vitamin nhóm B & B12', 'code': 'vitamin_b_complex', 'description': 'Vitamin B12 - phòng ngừa thiếu máu sau dùng PPI dài hạn', 'product_ids': []},
+                {'name': 'Khoáng chất: Mg, Zn, Ca', 'code': 'minerals', 'description': 'Magnesium, Zinc, Canxi - hỗ trợ hệ miễn dịch, xương', 'product_ids': []},
+            ]
+        },
+    ]
+    
+    logger.info('=' * 60)
+    logger.info('PART D: Seeding medical-catalog-service categories')
+    logger.info('=' * 60)
+    
+    created_count = 0
+    try:
+        for cat_data in CATEGORIES:
+            name = cat_data.pop('name')
+            subcategories = cat_data.pop('subcategories')
+            
+            category, created = MedicalCategory.objects.get_or_create(
+                code=cat_data['code'],
+                defaults={'name': name, **cat_data}
+            )
+            
+            if created:
+                logger.info(f'  ✅ Created category: {category.name} ({category.code})')
+                created_count += 1
+            else:
+                logger.info(f'  ⚠️  Category exists: {category.name} ({category.code})')
+            
+            for sub_data in subcategories:
+                SubCategory.objects.get_or_create(
+                    parent=category,
+                    code=sub_data['code'],
+                    defaults={
+                        'name': sub_data['name'],
+                        'description': sub_data['description'],
+                        'product_ids': sub_data['product_ids'],
+                    }
+                )
+        
+        logger.info(f'\n✅ Part D: {created_count} categories created / {len(CATEGORIES)} total')
+        return created_count
+        
+    except Exception as e:
+        logger.error(f'❌ Part D failed: {e}')
+        logger.error('Make sure medical-catalog-service is running and migrations are applied')
+        return 0
+
 def main():
+    import argparse
     parser = argparse.ArgumentParser(
         description="Seed all data for health-micro-ai system",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Ví dụ:
-  python seed_all.py           # Chạy cả 3 phần
+  python seed_all.py           # Chạy cả 4 phần
   python seed_all.py --part A  # Chỉ seed PostgreSQL (sản phẩm)
+  python seed_all.py --part D  # Chỉ seed Catalog (10 categories)
   python seed_all.py --part B  # Chỉ seed Neo4j (knowledge graph)
   python seed_all.py --part C  # Chỉ seed FAISS (vector store)
         """,
     )
-    parser.add_argument("--part", choices=["A", "B", "C"], help="Phần cần chạy (A, B, hoặc C)")
+    parser.add_argument("--part", choices=["A", "B", "C", "D"], help="Phần cần chạy (A, B, C, hoặc D)")
     args = parser.parse_args()
 
     logger.info("╔══════════════════════════════════════════════════════════╗")
@@ -819,6 +992,11 @@ Ví dụ:
 
     if args.part is None or args.part == "A":
         count = seed_part_a()
+        total_success += count
+        print()
+
+    if args.part is None or args.part == "D":
+        count = seed_part_d()
         total_success += count
         print()
 

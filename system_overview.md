@@ -54,8 +54,7 @@
 | `prescription-service` | Prescription Service | **8004** | FastAPI | Đơn thuốc tạm thời (basket) |
 | `dispensing-service` | Dispensing Service | **8005** | Django | Phiếu xuất thuốc, thanh toán |
 | `medical-review-service` | Medical Review Service | **8006** | FastAPI | Đánh giá hiệu quả điều trị |
-| `treatment-recommender-service` | Treatment Recommender | **8011** | FastAPI | GNN + SPD Manifold recommendation |
-| `clinical-advisory-service` | Clinical Advisory Service | **8013** | FastAPI | Chatbot GraphRAG (Neo4j+FAISS+Gemini) |
+| `ai-service` | Unified AI Service | **8010** | FastAPI | GraphRAG chatbot + GNN/SPD recommender + knowledge graph |
 
 ### Infrastructure
 
@@ -132,7 +131,7 @@ Relationships:
   └── (Product)-[:BELONGS_TO]->(Category)
 ```
 
-### D. FAISS Vector Store (clinical-advisory-service)
+### D. FAISS Vector Store (ai-service)
 ```
 Volume: ai_faiss_data → /app/faiss_data/
 ├── medical.index       ← FAISS IndexFlatIP (cosine similarity, dim=384)
@@ -158,7 +157,7 @@ Browser → api-gateway (POST /login/)
 1. Xem danh sách thuốc
    api-gateway → pharmacy-service GET /products/
               → medical-review-service GET /reviews/summary/ (ratings)
-              → treatment-recommender-service GET /api/recommend/ (AI)
+              → ai-service GET /api/recommend/ (AI)
 
 2. Thêm vào đơn thuốc tạm thời
    api-gateway → prescription-service POST /cart-items/
@@ -176,7 +175,7 @@ Browser → api-gateway (POST /login/)
 ### 4.3 Luồng AI Chat (GraphRAG)
 ```
 Browser → api-gateway POST /ai/chat/ (AJAX)
-    → clinical-advisory-service POST /api/chat
+    → ai-service POST /api/chat
         1. [Intent Detection] → phân loại: drug_info | symptom | diet | emergency
         2. [Neo4j Query] → tìm Symptom → Disease → Product (structured)
         3. [FAISS Search] → tìm text chunks liên quan (unstructured)
@@ -187,7 +186,7 @@ Browser → api-gateway POST /ai/chat/ (AJAX)
 ### 4.4 Luồng AI Recommender (GNN + SPD Manifold)
 ```
 Browser → api-gateway GET /ai/recommend/
-    → treatment-recommender-service GET /api/recommend/?user_id=U{id}
+    → ai-service GET /api/recommend/?user_id=U{id}
         1. Lấy user interactions từ in-memory store (VIEWED, PURCHASED)
         2. SPDManifold.encode_user_behavior() → Covariance Matrix (SPD)
         3. GNN GraphSAGE embedding (từ Neo4j graph structure)

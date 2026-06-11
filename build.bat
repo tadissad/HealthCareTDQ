@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 REM ============================================================
 REM build.bat – Health-Micro-AI
 REM Script khởi động hệ thống tối ưu (dùng shared AI base image)
@@ -52,7 +53,7 @@ echo [OK] Base image da san sang!
 
 :COMPOSE
 echo.
-echo [2/4] Khoi dong toan bo he thong voi Docker Compose...
+echo [2/5] Khoi dong toan bo he thong voi Docker Compose...
 echo.
 docker-compose up --build -d
 
@@ -64,7 +65,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo.
-echo [3/4] Dang cho cac service on dinh va thiet lap CSDL (10 giay)...
+echo [3/5] Dang cho cac service on dinh va thiet lap CSDL (10 giay)...
 timeout /t 10 /nobreak >nul
 
 echo ----------------------------------------------------
@@ -91,7 +92,20 @@ docker-compose exec -T api-gateway python manage.py ensure_staff
 echo [OK] Hoan tat khoi tao CSDL quy mo Microservices!
 
 echo.
-echo [4/4] Nap du lieu ban dau (Seeding) vao Tri Nhien Tao...
+echo [4/5] Tao cac Category (Danh muc) cho medical-catalog-service...
+echo ----------------------------------------------------
+docker-compose exec -T medical-catalog-service python ../seed_catalog_10categories.py
+IF %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo [CANH BAO] Khong the tao 10 categories. Hay chay thu cong:
+    echo   cd medical-catalog-service
+    echo   python ../seed_catalog_10categories.py
+) ELSE (
+    echo [OK] Hoan tat khoi tao 10 categories moi!
+)
+
+echo.
+echo [5/6] Nap du lieu ban dau (Seeding) vao Tri Nhien Tao...
 echo ----------------------------------------------------
 echo Luu y: Script can kiem tra cac thu vien: requests, neo4j, faiss-cpu, google-genai
 python seed_all.py
@@ -102,8 +116,29 @@ IF %ERRORLEVEL% NEQ 0 (
 ) ELSE (
     echo.
     echo [OK] Nap Tri Tue Nhan Tao vao he thong thanh cong!
+    echo Dang dong bo danh muc 50 san pham theo unified_kb va tat san pham du...
+    python sync_pharmacy_catalog.py --kb-path ai-service/kb/unified_kb.json --pharmacy-url http://localhost:8002 --deactivate-stale
+    IF %ERRORLEVEL% NEQ 0 (
+        echo [CANH BAO] Dong bo 50 san pham that bai, ban co the chay lai thu cong:
+        echo   python sync_pharmacy_catalog.py --kb-path ai-service/kb/unified_kb.json --pharmacy-url http://localhost:8002 --deactivate-stale
+    ) ELSE (
+        echo [OK] Da dong bo catalog ve bo du lieu chuan (50 san pham).
+    )
+
+    echo.
+    echo [6/6] Kiem tra so luong du lieu sau khi seed...
+    for /f %%A in ('powershell -NoProfile -Command "try { ((Invoke-WebRequest -Uri http://localhost:8002/products/ -UseBasicParsing).Content ^| ConvertFrom-Json).Count } catch { -1 }"') do set PRODUCT_COUNT=%%A
+    for /f %%A in ('powershell -NoProfile -Command "try { ((Invoke-WebRequest -Uri http://localhost:8003/categories/ -UseBasicParsing).Content ^| ConvertFrom-Json).Count } catch { -1 }"') do set CATEGORY_COUNT=%%A
+    echo [CHECK] products_active=!PRODUCT_COUNT! ^| categories=!CATEGORY_COUNT!
+    IF "!PRODUCT_COUNT!" NEQ "50" (
+        echo [CANH BAO] So luong san pham hien tai khong phai 50. Hay kiem tra lai seed/sync.
+    )
+    IF "!CATEGORY_COUNT!" NEQ "10" (
+        echo [CANH BAO] So luong category hien tai khong phai 10. Hay kiem tra lai seed category.
+    )
+
     echo Dang Reload lai khoi AI de thuc tinh bien nho moi...
-    docker-compose restart clinical-advisory-service
+    docker-compose restart ai-service
 )
 
 echo.

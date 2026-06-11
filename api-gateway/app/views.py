@@ -14,6 +14,7 @@ Luồng xác thực:
 import hashlib
 import logging
 import requests
+from decimal import Decimal, InvalidOperation
 from functools import wraps
 
 from django.shortcuts import render, redirect
@@ -33,8 +34,8 @@ MED_CATALOG_URL      = getattr(settings, 'MEDICAL_CATALOG_SERVICE_URL',   'http:
 PRESCRIPTION_URL     = getattr(settings, 'PRESCRIPTION_SERVICE_URL',      'http://prescription-service:8000')
 DISPENSING_URL       = getattr(settings, 'DISPENSING_SERVICE_URL',        'http://dispensing-service:8000')
 MED_REVIEW_URL       = getattr(settings, 'MEDICAL_REVIEW_SERVICE_URL',    'http://medical-review-service:8000')
-CLINICAL_ADV_URL     = getattr(settings, 'CLINICAL_ADVISORY_SERVICE_URL', 'http://clinical-advisory-service:8000')
-TREATMENT_REC_URL    = getattr(settings, 'TREATMENT_REC_SERVICE_URL',     'http://treatment-recommender-service:8000')
+CLINICAL_ADV_URL     = getattr(settings, 'CLINICAL_ADVISORY_SERVICE_URL', 'http://ai-service:8000')
+TREATMENT_REC_URL    = getattr(settings, 'TREATMENT_REC_SERVICE_URL',     'http://ai-service:8000')
 
 
 # ── Helper Functions ──────────────────────────────────────────────────────────
@@ -153,17 +154,15 @@ class IndexView(View):
             rec_ids = [r['product_id'] for r in recs.get('recommendations', [])]
             recommendations = [p for p in products if p['id'] in rec_ids][:4]
 
-        # Categories list for pill filters
-        filter_categories = [
-            ('antacid',      'Kháng acid'),
-            ('ppi',          'PPI'),
-            ('h2_blocker',   'H2 Blocker'),
-            ('antibiotic',   'Kháng sinh'),
-            ('probiotic',    'Probiotic'),
-            ('antiemetic',   'Chống nôn'),
-            ('mucosal',      'Bảo vệ niêm mạc'),
-            ('antispasmodic','Chống co thắt'),
-        ]
+        # Build category pills from the live product list to avoid stale hardcoded sets.
+        category_labels = {}
+        for p in products or []:
+            code = p.get('category')
+            if not code:
+                continue
+            if code not in category_labels:
+                category_labels[code] = p.get('category_display') or code
+        filter_categories = sorted(category_labels.items(), key=lambda x: x[1])
 
         return render(request, 'index.html', {
             'products':          products,
@@ -654,6 +653,20 @@ class ProfileView(View):
             request,
             params={'customer_id': account_id},
         )
+
+        # Keep total_spent in sync with actual paid order history.
+        if isinstance(profile_data, dict) and isinstance(orders, list):
+            spent_statuses = {'Paid', 'Shipping', 'Delivered', 'Confirmed'}
+            total_spent = Decimal('0')
+            for order in orders:
+                if order.get('status') not in spent_statuses:
+                    continue
+                try:
+                    total_spent += Decimal(str(order.get('total_amount', 0)))
+                except (InvalidOperation, TypeError, ValueError):
+                    continue
+            profile_data = {**profile_data, 'total_spent': str(total_spent)}
+
         return render(request, 'profile.html', {
             'profile':    profile_data,
             'orders':     orders,
@@ -753,8 +766,8 @@ class HealthView(View):
             ('prescription-service',        f"{PRESCRIPTION_URL}/health/"),
             ('dispensing-service',          f"{DISPENSING_URL}/health/"),
             ('medical-review-service',      f"{MED_REVIEW_URL}/health/"),
-            ('clinical-advisory-service',   f"{CLINICAL_ADV_URL}/health/"),
-            ('treatment-recommender-service', f"{TREATMENT_REC_URL}/health/"),
+            ('ai-service-chat',   f"{CLINICAL_ADV_URL}/health/"),
+            ('ai-service-recommend', f"{TREATMENT_REC_URL}/health/"),
         ]:
             try:
                 r = requests.get(url, timeout=3)

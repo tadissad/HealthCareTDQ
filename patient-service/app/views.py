@@ -11,6 +11,7 @@ Endpoints:
   GET       /health/                              – Health check
 """
 from django.shortcuts import get_object_or_404
+from decimal import Decimal, InvalidOperation
 from rest_framework.views import APIView
 from rest_framework import generics, status
 from rest_framework.response import Response
@@ -95,9 +96,17 @@ class CustomerMembership(APIView):
         if membership:
             customer.membership = membership
         if total_spent is not None:
-            customer.total_spent = float(total_spent)
+            try:
+                customer.total_spent = Decimal(str(total_spent))
+            except (InvalidOperation, TypeError, ValueError):
+                return Response({'error': 'total_spent không hợp lệ'}, status=status.HTTP_400_BAD_REQUEST)
         if increment_spent is not None:
-            customer.total_spent += float(increment_spent)
+            try:
+                customer.total_spent += Decimal(str(increment_spent))
+            except (InvalidOperation, TypeError, ValueError):
+                return Response({'error': 'increment_spent không hợp lệ'}, status=status.HTTP_400_BAD_REQUEST)
+        if customer.total_spent < 0:
+            customer.total_spent = Decimal('0')
             
         if total_spent is not None or increment_spent is not None:
             customer.update_membership()   # auto-upgrade dựa trên chi tiêu

@@ -77,5 +77,5 @@ MEDICAL_CATALOG_SERVICE_URL   = os.getenv('MEDICAL_CATALOG_SERVICE_URL',   'http
 PRESCRIPTION_SERVICE_URL      = os.getenv('PRESCRIPTION_SERVICE_URL',      'http://prescription-service:8000')
 DISPENSING_SERVICE_URL        = os.getenv('DISPENSING_SERVICE_URL',        'http://dispensing-service:8000')
 MEDICAL_REVIEW_SERVICE_URL    = os.getenv('MEDICAL_REVIEW_SERVICE_URL',    'http://medical-review-service:8000')
-CLINICAL_ADVISORY_SERVICE_URL = os.getenv('CLINICAL_ADVISORY_SERVICE_URL', 'http://clinical-advisory-service:8000')
-TREATMENT_REC_SERVICE_URL     = os.getenv('TREATMENT_REC_SERVICE_URL',     'http://treatment-recommender-service:8000')
+CLINICAL_ADVISORY_SERVICE_URL = os.getenv('CLINICAL_ADVISORY_SERVICE_URL', 'http://ai-service:8000')
+TREATMENT_REC_SERVICE_URL     = os.getenv('TREATMENT_REC_SERVICE_URL',     'http://ai-service:8000')

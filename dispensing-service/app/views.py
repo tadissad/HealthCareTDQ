@@ -169,7 +169,8 @@ class OrderCreate(APIView):
         try:
             requests.put(
                 f"{PATIENT_SERVICE_URL}/customers/by-account/{customer_id}/membership/",
-                json={'increment_spent': order.total_amount},
+                # Decimal is not JSON-serializable by default, cast to string.
+                json={'increment_spent': str(order.total_amount)},
                 timeout=5
             )
         except Exception:

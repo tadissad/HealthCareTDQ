@@ -1,0 +1,341 @@
+{
+  "symptoms": [
+    {
+      "name": "đau dạ dày",
+      "name_en": "stomach pain",
+      "aliases": ["đau bụng trên", "đau thượng vị", "xót ruột"]
+    },
+    {
+      "name": "ợ chua",
+      "name_en": "sour belching",
+      "aliases": ["ợ lên men chua", "trớ chua"]
+    },
+    {
+      "name": "ợ hơi",
+      "name_en": "belching",
+      "aliases": ["trớ hơi", "nấc cụt liên tục"]
+    },
+    {
+      "name": "đầy bụng",
+      "name_en": "bloating",
+      "aliases": ["chướng bụng", "căng tức bụng", "bụng óc ách"]
+    },
+    {
+      "name": "khó tiêu",
+      "name_en": "indigestion",
+      "aliases": ["ăn không tiêu", "ấm ách", "ậm ạch"]
+    },
+    {
+      "name": "trào ngược",
+      "name_en": "acid reflux",
+      "aliases": ["nước chua trào lên cổ", "chớ"]
+    },
+    {
+      "name": "buồn nôn",
+      "name_en": "nausea",
+      "aliases": ["lợm giọng", "muốn ói", "nhộn nhạo trong dạ dày"]
+    },
+    {
+      "name": "nôn mửa",
+      "name_en": "vomiting",
+      "aliases": ["nôn trớ", "ói mửa"]
+    },
+    {
+      "name": "đi ngoài phân đen",
+      "name_en": "black stool",
+      "aliases": ["phân đen như bã cà phê", "phân có máu"]
+    },
+    {
+      "name": "chán ăn",
+      "name_en": "loss of appetite",
+      "aliases": ["ăn không ngon miệng", "nhạt miệng", "lười ăn"]
+    },
+    {
+      "name": "sụt cân không rõ nguyên nhân",
+      "name_en": "unexplained weight loss",
+      "aliases": ["tự nhiên gầy đi", "giảm cân nhanh"]
+    },
+    {
+      "name": "đau quặn bụng",
+      "name_en": "abdominal cramps",
+      "aliases": ["đau xoắn ruột", "đau từng cơn"]
+    },
+    {
+      "name": "tiêu chảy",
+      "name_en": "diarrhea",
+      "aliases": ["đi ngoài phân lỏng", "tào tháo đuổi", "đi tướt"]
+    },
+    {
+      "name": "táo bón",
+      "name_en": "constipation",
+      "aliases": ["đi ngoài khó", "khó rặn"]
+    },
+    {
+      "name": "đắng miệng",
+      "name_en": "bitter taste in mouth",
+      "aliases": ["miệng có vị đắng", "nhạt đắng miệng"]
+    },
+    {
+      "name": "nóng rát ngực",
+      "name_en": "heartburn",
+      "aliases": ["nóng cổ họng", "rát thực quản", "nóng ran vùng ngực"]
+    },
+    {
+      "name": "sôi bụng",
+      "name_en": "stomach rumbling",
+      "aliases": ["bụng kêu ọc ọc", "réo rắt trong bụng"]
+    },
+    {
+      "name": "xì hơi nhiều",
+      "name_en": "excessive flatulence",
+      "aliases": ["đánh rắm nhiều", "thoát hơi nhiều"]
+    },
+    {
+      "name": "mệt mỏi",
+      "name_en": "fatigue",
+      "aliases": ["uể oải", "hụt hơi", "thiếu sức sống"]
+    },
+    {
+      "name": "nuốt nghẹn",
+      "name_en": "difficulty swallowing",
+      "aliases": ["vướng cổ họng", "cảm giác có cục nghẹn", "khó nuốt"]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Viêm loét dạ dày",
+      "icd_code": "K25",
+      "description": "Tình trạng niêm mạc dạ dày bị tổn thương, sưng viêm và tạo thành các vết loét rát đau.",
+      "severity": "medium",
+      "indicates_symptoms": ["đau dạ dày", "ợ chua", "buồn nôn", "đầy bụng"]
+    },
+    {
+      "name": "Viêm loét tá tràng",
+      "icd_code": "K26",
+      "description": "Vết loét hình thành ở phần đầu của ruột non (tá tràng), thường gây đau lúc đói hoặc sau ăn vài giờ.",
+      "severity": "medium",
+      "indicates_symptoms": ["đau dạ dày", "đau quặn bụng", "đói thấy đau"]
+    },
+    {
+      "name": "Trào ngược dạ dày thực quản (GERD)",
+      "icd_code": "K21",
+      "description": "Dịch axit từ dạ dày trào ngược lên ống thực quản, gây nóng rát và khó chịu ở ngực.",
+      "severity": "medium",
+      "indicates_symptoms": ["trào ngược", "ợ chua", "nóng rát ngực", "nuốt nghẹn", "đắng miệng"]
+    },
+    {
+      "name": "Nhiễm vi khuẩn HP dạ dày",
+      "icd_code": "B98.0",
+      "description": "Nhiễm loại vi khuẩn có thể sống trong môi trường axit dạ dày, là nguyên nhân hàng đầu gây viêm loét.",
+      "severity": "high",
+      "indicates_symptoms": ["đau dạ dày", "ợ hơi", "buồn nôn", "hôi miệng"]
+    },
+    {
+      "name": "Viêm dạ dày cấp tính",
+      "icd_code": "K29.0",
+      "description": "Dạ dày bị viêm sưng đột ngột, thường do ngộ độc thực phẩm, uống nhiều rượu bia hoặc dùng thuốc giảm đau.",
+      "severity": "medium",
+      "indicates_symptoms": ["đau quặn bụng", "nôn mửa", "buồn nôn", "đầy bụng"]
+    },
+    {
+      "name": "Viêm hang vị dạ dày",
+      "icd_code": "K29.6",
+      "description": "Tình trạng viêm nhiễm xảy ra ở phần bờ cong nhỏ gần cuối dạ dày (hang vị).",
+      "severity": "medium",
+      "indicates_symptoms": ["đau dạ dày", "khó tiêu", "đầy bụng"]
+    },
+    {
+      "name": "Hội chứng ruột kích thích (IBS)",
+      "icd_code": "K58",
+      "description": "Rối loạn chức năng đại tràng gây đau bụng, thay đổi thói quen đi vệ sinh dù không có tổn thương thực thể.",
+      "severity": "low",
+      "indicates_symptoms": ["đau quặn bụng", "tiêu chảy", "táo bón", "đầy bụng"]
+    },
+    {
+      "name": "Rối loạn tiêu hóa",
+      "icd_code": "K30",
+      "description": "Tình trạng hệ tiêu hóa hoạt động bất thường gây khó chịu sau khi ăn uống.",
+      "severity": "low",
+      "indicates_symptoms": ["đầy bụng", "khó tiêu", "sôi bụng", "xì hơi nhiều"]
+    },
+    {
+      "name": "Xuất huyết tiêu hóa",
+      "icd_code": "K92.2",
+      "description": "Tình trạng chảy máu bên trong đường tiêu hóa, thường do vết loét sâu hoặc vỡ tĩnh mạch.",
+      "severity": "high",
+      "indicates_symptoms": ["đi ngoài phân đen", "nôn mửa ra máu", "mệt mỏi", "chóng mặt"]
+    },
+    {
+      "name": "Ung thư dạ dày",
+      "icd_code": "C16",
+      "description": "Khối u ác tính hình thành ở dạ dày, bệnh nguy hiểm cần phát hiện và điều trị sớm.",
+      "severity": "high",
+      "indicates_symptoms": ["sụt cân không rõ nguyên nhân", "đau dạ dày dai dẳng", "đi ngoài phân đen", "chán ăn", "nôn mửa"]
+    },
+    {
+      "name": "Táo bón mãn tính",
+      "icd_code": "K59.0",
+      "description": "Khó đi đại tiện kéo dài nhiều tuần lễ, phân khô cứng do nhu động ruột kém.",
+      "severity": "low",
+      "indicates_symptoms": ["táo bón", "đầy bụng", "chán ăn"]
+    },
+    {
+      "name": "Viêm đại tràng",
+      "icd_code": "K51",
+      "description": "Viêm nhiễm ở ruột già (đại tràng), thường gây đau bụng dưới và đi ngoài nhiều lần.",
+      "severity": "medium",
+      "indicates_symptoms": ["đau quặn bụng", "tiêu chảy", "phân có nhầy"]
+    },
+    {
+      "name": "Co thắt thực quản",
+      "icd_code": "K22.4",
+      "description": "Sự co thắt bất thường của các cơ trơn thực quản gây khó khăn khi nuốt.",
+      "severity": "medium",
+      "indicates_symptoms": ["nuốt nghẹn", "đau tức ngực", "trào ngược"]
+    },
+    {
+      "name": "Viêm ruột non cấp tính",
+      "icd_code": "A09",
+      "description": "Nhiễm trùng dạ dày ruột do vi khuẩn hoặc virus, dân gian hay gọi là tiêu chảy cấp.",
+      "severity": "medium",
+      "indicates_symptoms": ["tiêu chảy", "đau quặn bụng", "nôn mửa", "mệt mỏi"]
+    },
+    {
+      "name": "Bệnh trĩ nội/ngoại",
+      "icd_code": "I84",
+      "description": "Phình giãn tĩnh mạch ở hậu môn trực tràng, thường là hậu quả của táo bón lâu ngày.",
+      "severity": "low",
+      "indicates_symptoms": ["táo bón", "đi ngoài ra máu tươi"]
+    }
+  ],
+  "product_mappings": [
+    {
+      "disease_name": "Viêm loét dạ dày",
+      "product_names": ["Phosphalugel (Thuốc chữ P)", "Yumangel (Thuốc chữ Y)", "Nexium 40mg", "Gastropulgite"],
+      "category_key": "ulcer_hp",
+      "priority": 1
+    },
+    {
+      "disease_name": "Nhiễm vi khuẩn HP dạ dày",
+      "product_names": ["Pylopass", "Kit thử HP tại nhà", "Men vi sinh hỗ trợ giảm HP"],
+      "category_key": "ulcer_hp",
+      "priority": 1
+    },
+    {
+      "disease_name": "Trào ngược dạ dày thực quản (GERD)",
+      "product_names": ["Gaviscon Dual Action", "Kẹo ngậm giảm axit dạ dày", "Hỗn dịch chống trào ngược"],
+      "category_key": "acid_reflux",
+      "priority": 1
+    },
+    {
+      "disease_name": "Rối loạn tiêu hóa",
+      "product_names": ["Enterogermina", "Men vi sinh Optibac", "Cốm vi sinh Bio-Acimin"],
+      "category_key": "probiotics",
+      "priority": 1
+    },
+    {
+      "disease_name": "Viêm hang vị dạ dày",
+      "product_names": ["Tinh nghệ Nano Curcumin", "Trà dây Bstar", "Viên uống nghệ mật ong"],
+      "category_key": "herbal",
+      "priority": 2
+    },
+    {
+      "disease_name": "Viêm loét dạ dày",
+      "product_names": ["Sữa hạt tốt cho dạ dày", "Bánh quy lạt kiềm tính", "Bột ngũ cốc dễ tiêu"],
+      "category_key": "nutrition",
+      "priority": 2
+    },
+    {
+      "disease_name": "Trào ngược dạ dày thực quản (GERD)",
+      "product_names": ["Gối chống trào ngược dạ dày Yorokobi", "Đai chườm nóng bụng"],
+      "category_key": "equipment",
+      "priority": 2
+    },
+    {
+      "disease_name": "Nhiễm vi khuẩn HP dạ dày",
+      "product_names": ["Test nhanh HP qua phân", "Que thử HP đường tiêu hóa"],
+      "category_key": "testing_kits",
+      "priority": 1
+    },
+    {
+      "disease_name": "Ung thư dạ dày",
+      "product_names": ["Gói khám tầm soát ung thư tiêu hóa", "Voucher nội soi dạ dày không đau"],
+      "category_key": "medical_services",
+      "priority": 1
+    },
+    {
+      "disease_name": "Táo bón mãn tính",
+      "product_names": ["Sữa Ensure dành cho người già", "Chất xơ hòa tan FOS", "Men vi sinh cho người cao tuổi"],
+      "category_key": "elderly_weak_gut",
+      "priority": 1
+    },
+    {
+      "disease_name": "Rối loạn tiêu hóa",
+      "product_names": ["Viên sủi Vitamin C sảng khoái", "Viên kẽm hỗ trợ tiêu hóa", "Vitamin tổng hợp mệt mỏi chán ăn"],
+      "category_key": "vitamins",
+      "priority": 2
+    }
+  ],
+  "category_symptoms": [
+    {
+      "category_key": "ulcer_hp",
+      "category_label": "Hỗ trợ Điều trị Viêm loét & HP",
+      "primary_symptoms": ["đau dạ dày", "buồn nôn", "đau quặn bụng", "chán ăn"],
+      "related_diseases": ["Viêm loét dạ dày", "Nhiễm vi khuẩn HP dạ dày", "Viêm dạ dày cấp tính"]
+    },
+    {
+      "category_key": "acid_reflux",
+      "category_label": "Giảm Trào ngược & Ợ chua",
+      "primary_symptoms": ["ợ chua", "trào ngược", "nóng rát ngực", "đắng miệng", "nuốt nghẹn"],
+      "related_diseases": ["Trào ngược dạ dày thực quản (GERD)", "Co thắt thực quản"]
+    },
+    {
+      "category_key": "probiotics",
+      "category_label": "Men vi sinh & Hỗ trợ Tiêu hóa",
+      "primary_symptoms": ["đầy bụng", "khó tiêu", "sôi bụng", "tiêu chảy", "táo bón"],
+      "related_diseases": ["Rối loạn tiêu hóa", "Hội chứng ruột kích thích (IBS)", "Viêm ruột non cấp tính"]
+    },
+    {
+      "category_key": "herbal",
+      "category_label": "Tinh chất Nghệ & Thảo dược",
+      "primary_symptoms": ["đau dạ dày", "ợ hơi", "khó tiêu", "chán ăn"],
+      "related_diseases": ["Viêm hang vị dạ dày", "Viêm loét dạ dày", "Rối loạn tiêu hóa"]
+    },
+    {
+      "category_key": "nutrition",
+      "category_label": "Thực phẩm & Dinh dưỡng Dạ dày",
+      "primary_symptoms": ["chán ăn", "sụt cân không rõ nguyên nhân", "mệt mỏi", "đau dạ dày lúc đói"],
+      "related_diseases": ["Viêm loét dạ dày", "Trào ngược dạ dày thực quản (GERD)"]
+    },
+    {
+      "category_key": "equipment",
+      "category_label": "Dụng cụ & Thiết bị Hỗ trợ",
+      "primary_symptoms": ["trào ngược", "nóng rát ngực", "đau bụng do lạnh", "nuốt nghẹn"],
+      "related_diseases": ["Trào ngược dạ dày thực quản (GERD)", "Rối loạn tiêu hóa"]
+    },
+    {
+      "category_key": "testing_kits",
+      "category_label": "Bộ xét nghiệm & Kiểm tra tại nhà",
+      "primary_symptoms": ["đau dạ dày dai dẳng", "hôi miệng do HP", "buồn nôn", "đi ngoài phân đen"],
+      "related_diseases": ["Nhiễm vi khuẩn HP dạ dày", "Viêm loét dạ dày", "Xuất huyết tiêu hóa"]
+    },
+    {
+      "category_key": "medical_services",
+      "category_label": "Gói khám & Tư vấn Bác sĩ",
+      "primary_symptoms": ["đi ngoài phân đen", "nôn mửa ra máu", "sụt cân không rõ nguyên nhân", "đau dạ dày không dứt"],
+      "related_diseases": ["Ung thư dạ dày", "Xuất huyết tiêu hóa", "Viêm loét tá tràng nặng"]
+    },
+    {
+      "category_key": "elderly_weak_gut",
+      "category_label": "Dành cho Người già & Hệ tiêu hóa yếu",
+      "primary_symptoms": ["táo bón", "khó tiêu", "đầy bụng", "chán ăn", "mệt mỏi"],
+      "related_diseases": ["Táo bón mãn tính", "Rối loạn tiêu hóa ở người già", "Hội chứng ruột kích thích (IBS)"]
+    },
+    {
+      "category_key": "vitamins",
+      "category_label": "Vitamin & Khoáng chất Bổ trợ",
+      "primary_symptoms": ["mệt mỏi", "chán ăn", "suy nhược cơ thể sau ốm", "rụng tóc do kém hấp thu"],
+      "related_diseases": ["Rối loạn hấp thu", "Viêm dạ dày mãn tính", "Tình trạng sau phẫu thuật dạ dày"]
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+@startuml classdiagram
+' ============================================================
+' Class Diagram Tổng Thể — Health-Micro-AI
+' Tất cả Aggregate Root chính của toàn hệ thống
+' ============================================================
+skinparam classBackgroundColor #AEE2F0
+skinparam classBorderColor #1565C0
+skinparam classFontSize 11
+skinparam classAttributeFontSize 10
+skinparam ArrowThickness 1.5
+skinparam shadowing false
+
+' --- AUTH / GATEWAY ---
+class Account {
+  <<api-gateway · SQLite>>
+  -ID : int
+  -username : String
+  -role : String
+  -is_active : bool
+}
+
+class User {
+  <<auth-service>>
+  -ID : String
+  -email : String
+  -credential_hash : String
+  -is_active : bool
+  -is_locked : bool
+}
+
+class Role {
+  -ID : int
+  -name : String
+}
+
+class TokenBundle {
+  -access_token : String
+  -refresh_token : String
+  -expires_at : DateTime
+}
+
+' --- PATIENT ---
+class Patient {
+  <<patient-service · Aggregate Root>>
+  -ID : String
+  -account_id : String
+  -full_name : String
+  -phone : String
+  -blood_type : String
+  -created_at : DateTime
+}
+
+class PatientAddress {
+  -street : String
+  -ward : String
+  -district : String
+  -province : String
+}
+
+class InsuranceInfo {
+  -code : String
+  -discount_rate : float
+  -valid_until : Date
+}
+
+class MedicalRecord {
+  -visit_date : Date
+  -diagnosis : String
+  -notes : String
+}
+
+' --- PHARMACY ---
+class Product {
+  <<pharmacy-service · Aggregate Root>>
+  -ID : String
+  -sku : String
+  -generic_name : String
+  -category : String
+  -price_amount : Decimal
+  -requires_prescription : bool
+  -total_quantity : int
+  -active : bool
+}
+
+class Batch {
+  -batch_number : String
+  -quantity : int
+  -expiry_date : Date
+}
+
+class Manufacturer {
+  -name : String
+  -country : String
+}
+
+' --- PRESCRIPTION ---
+class Prescription {
+  <<prescription-service · Aggregate Root>>
+  -ID : String
+  -customer_id : String
+  -total_amount : Decimal
+  -cart_status : String
+  -created_at : DateTime
+}
+
+class PrescriptionItem {
+  -product_id : String
+  -quantity : int
+  -unit_price : Decimal
+  -dosage : String
+}
+
+' --- DISPENSING ---
+class Order {
+  <<dispensing-service · Aggregate Root>>
+  -ID : String
+  -customer_id : String
+  -status : String
+  -total_amount : Decimal
+  -order_date : DateTime
+}
+
+class OrderItem {
+  -product_id : String
+  -qty_ordered : int
+  -unit_price : Decimal
+  -line_total : Decimal
+}
+
+class Payment {
+  -method : String
+  -status : String
+  -paid_at : DateTime
+}
+
+class ShippingInfo {
+  -street : String
+  -city : String
+  -district : String
+}
+
+' --- REVIEW ---
+class Review {
+  <<medical-review-service>>
+  -product_id : String
+  -user_id : String
+  -rating : int
+  -content : String
+  -created_at : DateTime
+}
+
+class AverageRating {
+  -product_id : String
+  -average_rating : float
+  -total_reviews : int
+}
+
+' ============================================================
+' RELATIONSHIPS
+' ============================================================
+Account -- User
+Account -- Patient :"account_id"User *-- Role
+User *-- TokenBundle
+
+Patient *-- PatientAddress
+Patient *-- InsuranceInfo
+Patient *-- MedicalRecord
+Patient -- Prescription
+Patient -- Order
+
+Product *-- Manufacturer
+Product *-- Batch
+
+Prescription *-- PrescriptionItem
+PrescriptionItem --> Product
+
+Order *-- OrderItem
+Order *-- Payment
+Order *-- ShippingInfo
+Order --> Prescription
+OrderItem --> Product
+
+Review --> Product
+AverageRating --> Product
+AverageRating ..> Review
+
+@enduml

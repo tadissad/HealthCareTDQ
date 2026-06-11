@@ -1,0 +1,1730 @@
+[
+  {
+    "text": "San pham: Nexium 40mg. Danh muc: ulcer_hp_support. Mo ta: Nexium 40mg chứa Esomeprazole thuộc nhóm ức chế bơm proton, giúp làm giảm tiết acid dạ dày. Thuốc được chỉ định điều trị viêm loét dạ dày tá tràng, trào ngược thực quản và thường được kết hợp trong phác đồ tiêu diệt vi khuẩn HP. Giúp ngăn ngừa tái phát và làm lành các tổn thương niêm mạc một cách hiệu quả. Trieu chung goi y: viem loet da day, trao nguoc, nhiem hp.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "ulcer_hp_support"
+    ],
+    "id": "CHUNK_00001"
+  },
+  {
+    "text": "San pham: Pantoloc 40mg. Danh muc: ulcer_hp_support. Mo ta: Pantoloc 40mg là thuốc đặc trị hiệu quả cho bệnh nhân viêm loét dạ dày tá tràng và hội chứng trào ngược. Thuốc giúp ức chế quá trình tiết axit dịch vị dư thừa, từ đó giảm đau nhanh chóng. Hỗ trợ tốt trong phác đồ kết hợp diệt vi khuẩn Helicobacter pylori. Trieu chung goi y: dau da day, o chua, nong rat.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "ulcer_hp_support"
+    ],
+    "id": "CHUNK_00002"
+  },
+  {
+    "text": "San pham: Trymo. Danh muc: ulcer_hp_support. Mo ta: Trymo có chứa Bismuth giúp tạo một lớp màng bảo vệ bao phủ trực tiếp lên vết loét, ngăn cản sự tấn công của axit dịch vị. Đặc biệt thuốc có đặc tính diệt khuẩn, rất quan trọng trong phác đồ điều trị viêm loét dạ dày có vi khuẩn HP. Giúp hỗ trợ làm lành niêm mạc tổn thương. Trieu chung goi y: viem loet da day, nhiem hp, dau am i.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "ulcer_hp_support"
+    ],
+    "id": "CHUNK_00003"
+  },
+  {
+    "text": "San pham: Phosphalugel. Danh muc: reflux_heartburn. Mo ta: Thường được gọi là 'thuốc dạ dày chữ P', Phosphalugel dạng gel giúp trung hòa axit dịch vị ngay lập tức. Thuốc tạo màng nhầy che phủ bảo vệ niêm mạc dạ dày thực quản khỏi tác nhân ăn mòn. Giúp cắt đứt cơn đau nóng rát, ợ chua và đầy bụng một cách an toàn. Trieu chung goi y: o chua, nong rat, dau da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "reflux_heartburn"
+    ],
+    "id": "CHUNK_00004"
+  },
+  {
+    "text": "San pham: Yumangel. Danh muc: reflux_heartburn. Mo ta: Được biết đến với tên gọi 'thuốc dạ dày chữ Y', Yumangel kháng axit mạnh mẽ, làm dịu nhanh cơn đau thượng vị. Dạng hỗn dịch màu trắng sữa, có mùi thơm nhẹ dễ uống, thấm đều qua lớp niêm mạc. Cực kỳ hiệu quả trong việc kiểm soát chứng trào ngược dạ dày thực quản. Trieu chung goi y: trao nguoc, dau thuong vi, day bung.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "reflux_heartburn"
+    ],
+    "id": "CHUNK_00005"
+  },
+  {
+    "text": "San pham: Gaviscon. Danh muc: reflux_heartburn. Mo ta: Gaviscon hoạt động bằng cách tạo ra một lớp gel bảo vệ nổi trên bề mặt các chất có trong dạ dày. Lớp gel này giúp ngăn ngừa axit trào ngược lên thực quản một cách vật lý. Sản phẩm mang lại hiệu quả giảm đau rát tức ngực và ợ hơi ngay sau khi sử dụng. Trieu chung goi y: trao nguoc, o chua, nong rat.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "reflux_heartburn"
+    ],
+    "id": "CHUNK_00006"
+  },
+  {
+    "text": "San pham: Enterogermina 2 Tỷ. Danh muc: probiotic_digestion. Mo ta: Enterogermina chứa 2 tỷ bào tử lợi khuẩn Bacillus clausii có khả năng sống sót qua dịch vị axit dạ dày. Giúp phục hồi và cân bằng hệ vi sinh đường ruột sau khi sử dụng kháng sinh dài ngày (như phác đồ trị HP). Rất hữu hiệu trong điều trị rối loạn tiêu hóa, tiêu chảy. Trieu chung goi y: roi loan tieu hoa, tieu chay, day bung.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "probiotic_digestion"
+    ],
+    "id": "CHUNK_00007"
+  },
+  {
+    "text": "San pham: Bioflora 200mg. Danh muc: probiotic_digestion. Mo ta: Men vi sinh Bioflora cung cấp nấm men sống Saccharomyces boulardii, có khả năng chống lại các vi khuẩn gây bệnh tại đường ruột. Giúp hỗ trợ tiêu hóa tốt, giảm tình trạng đầy bụng do sử dụng nhiều thuốc tây. Sản phẩm thường được khuyên dùng để phòng tiêu chảy do kháng sinh. Trieu chung goi y: tieu chay, kho tieu, roi loan tieu hoa.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "probiotic_digestion"
+    ],
+    "id": "CHUNK_00008"
+  },
+  {
+    "text": "San pham: Men vi sinh Antibio Pro. Danh muc: probiotic_digestion. Mo ta: Antibio Pro chứa vi khuẩn Lactobacillus acidophilus giúp cân bằng hệ vi sinh, tạo môi trường ruột khỏe mạnh. Ức chế vi khuẩn có hại sinh sôi, cải thiện tình trạng đầy bụng, chán ăn, đi ngoài phân sống. Hỗ trợ hệ tiêu hóa hoạt động trơn tru sau chuỗi ngày đau dạ dày. Trieu chung goi y: day bung, di ngoai, roi loan tieu hoa.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "probiotic_digestion"
+    ],
+    "id": "CHUNK_00009"
+  },
+  {
+    "text": "San pham: CumarGold New. Danh muc: herbal_extract. Mo ta: CumarGold New sử dụng công nghệ Nano Curcumin siêu sinh khả dụng, thấm sâu vào niêm mạc. Hỗ trợ giảm nhanh tình trạng xung huyết, ợ hơi, viêm loét dạ dày tá tràng. Thành phần gừng giúp cải thiện khả năng tiêu hóa và giảm cảm giác buồn nôn mệt mỏi. Trieu chung goi y: dau da day, buon non, viem loet da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "herbal_extract"
+    ],
+    "id": "CHUNK_00010"
+  },
+  {
+    "text": "San pham: Viên sủi SCurma Fizzy. Danh muc: herbal_extract. Mo ta: SCurma Fizzy là viên sủi Nano Curcumin đầu tiên tại Việt Nam, giúp thẩm thấu nhanh vào máu và bề mặt vết loét dạ dày. Sản phẩm chống oxy hóa mạnh, hỗ trợ liền sẹo, tái tạo niêm mạc dạ dày hiệu quả. Dạng sủi dễ uống, thích hợp cho người khó nuốt viên nang. Trieu chung goi y: dau da day, nong rat, viem loet da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "herbal_extract"
+    ],
+    "id": "CHUNK_00011"
+  },
+  {
+    "text": "San pham: Dạ Dày Nam Dược. Danh muc: herbal_extract. Mo ta: Sản phẩm là sự kết hợp của các loại thảo dược quý như Lá khôi tía, nghệ vàng và cam thảo. Giúp hỗ trợ cầm máu, giảm tiết axit dịch vị và làm se lành các ổ loét sâu. Hữu hiệu trong việc làm nhẹ các cơn đau thắt thượng vị và chướng bụng do ăn uống. Trieu chung goi y: dau thuong vi, o chua, day bung.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "herbal_extract"
+    ],
+    "id": "CHUNK_00012"
+  },
+  {
+    "text": "San pham: Bình Vị Thái Minh. Danh muc: stomach_nutrition. Mo ta: Bình Vị Thái Minh chứa chiết xuất Mucosave từ Xương rồng Nopal và lá Oliu, tạo lớp rào chắn sinh học bảo vệ dạ dày. Hỗ trợ giảm trào ngược axit, ợ hơi, kích thích quá trình tự chữa lành và nuôi dưỡng niêm mạc khỏe mạnh. Đặc biệt thích hợp cho trào ngược kéo dài. Trieu chung goi y: trao nguoc, nong rat, o chua.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "stomach_nutrition"
+    ],
+    "id": "CHUNK_00013"
+  },
+  {
+    "text": "San pham: Sữa Peptamen. Danh muc: stomach_nutrition. Mo ta: Peptamen là thực phẩm dinh dưỡng y học chuyên biệt với 100% đạm Whey thủy phân thành Peptides. Rất dễ tiêu hóa và hấp thu, giúp phục hồi sức khỏe cho người bệnh viêm loét dạ dày, kém hấp thu hoặc phẫu thuật đường ruột. Bổ sung dồi dào năng lượng mà không gây gánh nặng tiêu hóa. Trieu chung goi y: kho tieu, roi loan tieu hoa, viem loet da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "stomach_nutrition"
+    ],
+    "id": "CHUNK_00014"
+  },
+  {
+    "text": "San pham: Gastosic. Danh muc: stomach_nutrition. Mo ta: Gastosic là sự kết hợp giữa Nano Curcumin và 7 loại thảo dược quý giúp giải quyết chứng trào ngược từ gốc. Sản phẩm không chỉ xoa dịu niêm mạc mà còn hỗ trợ an thần, giảm căng thẳng stress - tác nhân lớn gây bệnh dạ dày. Giúp ngủ ngon và tiêu hóa nhẹ nhàng. Trieu chung goi y: trao nguoc, cang thang, o chua.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "stomach_nutrition"
+    ],
+    "id": "CHUNK_00015"
+  },
+  {
+    "text": "San pham: Túi chườm nóng lạnh Thiên Thanh. Danh muc: equipment_device. Mo ta: Túi chườm đa năng bằng dung dịch gel an toàn, thiết kế mềm mại ôm sát cơ thể. Chườm nóng vùng bụng giúp kích thích tuần hoàn máu, thư giãn cơ trơn dạ dày, xoa dịu cơn đau thắt bao tử hiệu quả mà không cần dùng thuốc. Thiết bị y tế cá nhân cần thiết cho mọi gia đình. Trieu chung goi y: dau da day, dau bung, cang thang.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "equipment_device"
+    ],
+    "id": "CHUNK_00016"
+  },
+  {
+    "text": "San pham: Đai massage làm ấm bụng Beurer. Danh muc: equipment_device. Mo ta: Đai quấn rung và làm ấm vùng bụng tự động, hỗ trợ kích thích nhu động ruột và tăng cường tiêu hóa. Nhiệt lượng tỏa đều giúp đẩy lùi cảm giác chướng bụng, đầy hơi sau khi ăn no và làm dịu cơn co thắt dạ dày do lạnh hoặc rối loạn thần kinh thực vật. Trieu chung goi y: day bung, kho tieu, dau am i.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "equipment_device"
+    ],
+    "id": "CHUNK_00017"
+  },
+  {
+    "text": "San pham: Cân sức khỏe điện tử Omron HN-289. Danh muc: equipment_device. Mo ta: Cân điện tử mặt kính cường lực với độ chính xác cao đến 100g. Công cụ đắc lực hỗ trợ bệnh nhân viêm loét dạ dày mãn tính tự theo dõi biến động cân nặng tại nhà, giúp phát hiện sớm dấu hiệu sụt cân bất thường do chứng kém hấp thu hay ung thư dạ dày tiềm ẩn. Trieu chung goi y: roi loan tieu hoa, viem loet da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "equipment_device"
+    ],
+    "id": "CHUNK_00018"
+  },
+  {
+    "text": "San pham: Kit test nhanh vi khuẩn HP qua phân. Danh muc: test_kit_home. Mo ta: Bộ xét nghiệm nhanh phát hiện kháng nguyên Helicobacter pylori (HP) trong mẫu phân tại nhà. Cung cấp kết quả trong vòng 15 phút với độ nhạy cao. Rất tiện lợi để tự sàng lọc nguyên nhân gây viêm loét dạ dày trước khi đến bệnh viện thăm khám chuyên sâu. Trieu chung goi y: nhiem hp, dau da day, viem loet da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "test_kit_home"
+    ],
+    "id": "CHUNK_00019"
+  },
+  {
+    "text": "San pham: Bộ kit test máu ẩn trong phân FOB. Danh muc: test_kit_home. Mo ta: Sản phẩm test nhanh để phát hiện lượng nhỏ hồng cầu ẩn trong phân (FOB). Giúp người dùng tầm soát sớm các tình trạng xuất huyết tiêu hóa, viêm loét dạ dày tá tràng rỉ máu hoặc nguy cơ ung thư đại trực tràng mà mắt thường không thể quan sát. Trieu chung goi y: viem loet da day, dau da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "test_kit_home"
+    ],
+    "id": "CHUNK_00020"
+  },
+  {
+    "text": "San pham: Que thử nước tiểu 10 thông số. Danh muc: test_kit_home. Mo ta: Bộ que thử nước tiểu giúp kiểm tra 10 chỉ số sức khỏe quan trọng. Hỗ trợ gián tiếp đánh giá mức độ hấp thu dinh dưỡng, rà soát các vấn đề chuyển hóa và tình trạng mất nước (thông qua tỷ trọng) khi bệnh nhân mắc chứng tiêu chảy, nôn mửa do trào ngược hay ngộ độc. Trieu chung goi y: buon non, tieu chay, roi loan tieu hoa.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "test_kit_home"
+    ],
+    "id": "CHUNK_00021"
+  },
+  {
+    "text": "San pham: Gói khám Tiêu hóa Dạ dày Cơ bản. Danh muc: consultation_package. Mo ta: Gói khám bao gồm tư vấn cùng bác sĩ chuyên khoa nội tiêu hóa, thực hiện xét nghiệm máu cơ bản, siêu âm ổ bụng và test hơi thở HP. Giúp phát hiện sớm các bệnh lý về dạ dày như viêm loét, trào ngược, và chẩn đoán chính xác vi khuẩn Helicobacter pylori. Trieu chung goi y: dau da day, nhiem hp, trao nguoc.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "consultation_package"
+    ],
+    "id": "CHUNK_00022"
+  },
+  {
+    "text": "San pham: Dịch vụ xét nghiệm máu và HP tại nhà. Danh muc: consultation_package. Mo ta: Điều dưỡng viên sẽ đến tận nhà lấy mẫu máu và mẫu phân/hơi thở để kiểm tra vi khuẩn HP. Dịch vụ tiện lợi, an toàn, giúp bệnh nhân không cần xếp hàng chờ đợi. Kết quả sẽ được trả online và có bác sĩ gọi điện tư vấn phác đồ điều trị từ xa. Trieu chung goi y: nhiem hp, dau thuong vi, roi loan tieu hoa.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "consultation_package"
+    ],
+    "id": "CHUNK_00023"
+  },
+  {
+    "text": "San pham: Gói tư vấn dinh dưỡng Dạ dày Online. Danh muc: consultation_package. Mo ta: Trò chuyện video trực tuyến 30 phút cùng chuyên gia tiêu hóa và dinh dưỡng. Bác sĩ sẽ phân tích tình trạng viêm loét, thói quen ăn uống, từ đó thiết lập thực đơn cá nhân hóa. Giúp người bệnh biết ăn gì tốt cho dạ dày, rút ngắn thời gian dùng thuốc. Trieu chung goi y: kho tieu, day bung, dau da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "consultation_package"
+    ],
+    "id": "CHUNK_00024"
+  },
+  {
+    "text": "San pham: Neopeptine. Danh muc: elderly_weak_digestion. Mo ta: Neopeptine bổ sung trực tiếp các enzyme tiêu hóa tự nhiên thiết yếu như Amylase và Papain, cộng thêm Simethicone giúp phá bọt khí. Đặc biệt tốt cho người cao tuổi suy giảm chức năng dạ dày, hay bị đầy hơi, chướng bụng, ăn uống không tiêu sau khi ăn đồ giàu đạm. Trieu chung goi y: kho tieu, day bung, o chua.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "elderly_weak_digestion"
+    ],
+    "id": "CHUNK_00025"
+  },
+  {
+    "text": "San pham: Smecta. Danh muc: elderly_weak_digestion. Mo ta: Thuốc bột Smecta chứa Diosmectite có cấu trúc từng lớp với độ nhầy cao, giúp bao phủ và bảo vệ mạnh mẽ niêm mạc ruột, dạ dày người già yếu. Thường được chỉ định để điều trị tiêu chảy cấp và mạn tính, đồng thời giảm đau do rối loạn dạ dày thực quản. Trieu chung goi y: tieu chay, roi loan tieu hoa, dau da day.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "elderly_weak_digestion"
+    ],
+    "id": "CHUNK_00026"
+  },
+  {
+    "text": "San pham: Sữa Ensure Gold. Danh muc: elderly_weak_digestion. Mo ta: Ensure Gold là công thức dinh dưỡng đầy đủ bổ sung HMB và đạm chất lượng cao, giúp tái tạo khối cơ. Hàm lượng chất xơ FOS thân thiện với dạ dày người lớn tuổi, chống táo bón và dễ tiêu hóa. Là giải pháp năng lượng thay thế khi bệnh nhân đau dạ dày không ăn được cơm. Trieu chung goi y: kho tieu, roi loan tieu hoa.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "elderly_weak_digestion"
+    ],
+    "id": "CHUNK_00027"
+  },
+  {
+    "text": "San pham: Farzincol 10mg. Danh muc: vitamin_mineral. Mo ta: Khoáng chất Kẽm đóng vai trò thiết yếu trong việc phân chia tế bào và tổng hợp protein. Farzincol hỗ trợ tăng tốc độ làm lành các vết loét ở niêm mạc dạ dày và ruột. Đồng thời bổ sung kẽm giúp giảm tình trạng tiêu chảy, kích thích vị giác ăn ngon miệng hơn. Trieu chung goi y: viem loet da day, tieu chay, kho tieu.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00028"
+  },
+  {
+    "text": "San pham: Magne-B6 Corbiere. Danh muc: vitamin_mineral. Mo ta: Magie kết hợp Vitamin B6 giúp duy trì hệ thần kinh trung ương ổn định. Việc bổ sung Magne-B6 đặc biệt có lợi cho bệnh nhân viêm loét dạ dày nguyên nhân do stress căng thẳng mạn tính. Magie cũng đóng vai trò nhuận tràng tự nhiên, giảm co thắt dạ dày. Trieu chung goi y: cang thang, dau da day, roi loan tieu hoa.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00029"
+  },
+  {
+    "text": "San pham: Ferrovit. Danh muc: vitamin_mineral. Mo ta: Viên nang mềm Ferrovit bổ sung ion Sắt, Acid folic và Vitamin B12. Rất thiết yếu để tái tạo máu, điều trị và dự phòng thiếu máu cho bệnh nhân có biến chứng xuất huyết dạ dày, xuất huyết tá tràng do viêm loét dai dẳng. Thuốc dễ hấp thu, ít mùi tanh. Trieu chung goi y: viem loet da day, dau am i.",
+    "type": "product",
+    "source": "prompt1.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00030"
+  },
+  {
+    "text": "San pham: Rabeprazole HP Care 20mg. Danh muc: ulcer_hp_support. Mo ta: Thuoc ho tro giam acid cho phac do diet HP, phu hop nguoi hay dau thuong vi ban dem. Trieu chung goi y: dau da day, o chua, nhiem hp.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "ulcer_hp_support"
+    ],
+    "id": "CHUNK_00031"
+  },
+  {
+    "text": "San pham: Sucralfate Mucosa Shield 1g. Danh muc: ulcer_hp_support. Mo ta: Tao lop mang bao ve vet loet, ho tro phuc hoi niem mac da day trong giai doan cap. Trieu chung goi y: viem loet da day, dau thuong vi, buon non.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "ulcer_hp_support"
+    ],
+    "id": "CHUNK_00032"
+  },
+  {
+    "text": "San pham: Esoplus Reflux 20mg. Danh muc: reflux_heartburn. Mo ta: Ho tro kiem soat trao nguoc, giam nong rat nguc va dang mieng vao buoi sang. Trieu chung goi y: trao nguoc, nong rat nguc, dang mieng.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "reflux_heartburn"
+    ],
+    "id": "CHUNK_00033"
+  },
+  {
+    "text": "San pham: Alginate Reflux Barrier. Danh muc: reflux_heartburn. Mo ta: Tao mang gel ngan acid trao nguoc len thuc quan, dung sau bua an va truoc khi ngu. Trieu chung goi y: o chua, trao nguoc, nuot nghen.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "reflux_heartburn"
+    ],
+    "id": "CHUNK_00034"
+  },
+  {
+    "text": "San pham: LactoBalance IBS. Danh muc: probiotic_digestion. Mo ta: Can bang he vi sinh duong ruot, ho tro giam day bung va hoi chung ruot kich thich. Trieu chung goi y: day bung, kho tieu, tao bon.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "probiotic_digestion"
+    ],
+    "id": "CHUNK_00035"
+  },
+  {
+    "text": "San pham: Digestzyme Plus. Danh muc: probiotic_digestion. Mo ta: Bo sung enzyme tieu hoa cho nguoi hay day hoi sau an nhieu dam va dau mo. Trieu chung goi y: kho tieu, soi bung, day hoi.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "probiotic_digestion"
+    ],
+    "id": "CHUNK_00036"
+  },
+  {
+    "text": "San pham: Curcumin Forte Plus. Danh muc: herbal_extract. Mo ta: Ho tro khang viem niem mac da day va giam dau rat sau cac bua an cay nong. Trieu chung goi y: dau da day, o hoi, viem loet da day.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "herbal_extract"
+    ],
+    "id": "CHUNK_00037"
+  },
+  {
+    "text": "San pham: Che day Gastro Tea. Danh muc: herbal_extract. Mo ta: Tra thao duoc ho tro lam diu niem mac va giam trieu chung kho tieu, dang mieng. Trieu chung goi y: kho tieu, dang mieng, day bung.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "herbal_extract"
+    ],
+    "id": "CHUNK_00038"
+  },
+  {
+    "text": "San pham: Gastro Protein Soup. Danh muc: stomach_nutrition. Mo ta: Dinh duong de hap thu cho nguoi viem loet da day, kem an va sut can. Trieu chung goi y: chan an, sut can, met moi.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "stomach_nutrition"
+    ],
+    "id": "CHUNK_00039"
+  },
+  {
+    "text": "San pham: Low Acid Oat Meal Mix. Danh muc: stomach_nutrition. Mo ta: Bot yen mach do acid thap, ho tro nguoi trao nguoc va dau da day luc doi. Trieu chung goi y: dau da day luc doi, trao nguoc, kho tieu.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "stomach_nutrition"
+    ],
+    "id": "CHUNK_00040"
+  },
+  {
+    "text": "San pham: HeatPad Digest Comfort. Danh muc: equipment_device. Mo ta: Dem chuom nong dieu nhiet giam co that bung va dau do lanh bung. Trieu chung goi y: dau quan bung, lanh bung, chuong bung.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "equipment_device"
+    ],
+    "id": "CHUNK_00041"
+  },
+  {
+    "text": "San pham: Reflux Sleep Wedge. Danh muc: equipment_device. Mo ta: Goi nem nang dau giuong giup han che trao nguoc ve dem va non tra. Trieu chung goi y: trao nguoc ban dem, o nong, nuot nghen.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "equipment_device"
+    ],
+    "id": "CHUNK_00042"
+  },
+  {
+    "text": "San pham: HP Stool Antigen Rapid. Danh muc: test_kit_home. Mo ta: Bo test nhanh HP qua phan tai nha, doc ket qua trong 10-15 phut. Trieu chung goi y: nhiem hp, hoi mieng, dau thuong vi.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "test_kit_home"
+    ],
+    "id": "CHUNK_00043"
+  },
+  {
+    "text": "San pham: FOB Home Screening. Danh muc: test_kit_home. Mo ta: Kit sang loc mau an trong phan, canh bao som nguy co xuat huyet tieu hoa. Trieu chung goi y: phan den, met moi, xuat huyet tieu hoa.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "test_kit_home"
+    ],
+    "id": "CHUNK_00044"
+  },
+  {
+    "text": "San pham: Telehealth GI Basic. Danh muc: consultation_package. Mo ta: Goi tu van truc tuyen cho benh nhan dau da day, trao nguoc, ROI loan tieu hoa. Trieu chung goi y: dau da day, o chua, kho tieu.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "consultation_package"
+    ],
+    "id": "CHUNK_00045"
+  },
+  {
+    "text": "San pham: GI Endoscopy Package. Danh muc: consultation_package. Mo ta: Goi noi soi da day khong dau va doc ket qua boi bac si tieu hoa. Trieu chung goi y: dau da day khong dut, sut can, non ra mau.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "consultation_package"
+    ],
+    "id": "CHUNK_00046"
+  },
+  {
+    "text": "San pham: ElderDigest Fiber Soft. Danh muc: elderly_weak_digestion. Mo ta: Chat xo hoa tan danh cho nguoi cao tuoi hay tao bon va day bung lau ngay. Trieu chung goi y: tao bon, day bung, chan an.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "elderly_weak_digestion"
+    ],
+    "id": "CHUNK_00047"
+  },
+  {
+    "text": "San pham: Senior Probiotic 60+. Danh muc: elderly_weak_digestion. Mo ta: Men vi sinh cho nguoi lon tuoi, ho tro tieu hoa yeu va hap thu kem. Trieu chung goi y: kho tieu, tao bon, met moi.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "elderly_weak_digestion"
+    ],
+    "id": "CHUNK_00048"
+  },
+  {
+    "text": "San pham: Zinc B Complex Digest. Danh muc: vitamin_mineral. Mo ta: Bo sung kem va vitamin nhom B cho nguoi kem an, met moi do roi loan tieu hoa. Trieu chung goi y: met moi, chan an, kho hap thu.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00049"
+  },
+  {
+    "text": "San pham: Electrolyte Rehydrate Plus. Danh muc: vitamin_mineral. Mo ta: Bo sung dien giai cho benh nhan tieu chay, non mua va mat nuoc nhe. Trieu chung goi y: tieu chay, non mua, met moi.",
+    "type": "product",
+    "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00050"
+  },
+  {
+    "text": "Benh: Bệnh trĩ nội/ngoại (ICD: I84). Muc do: low. Mo ta: Phình giãn tĩnh mạch ở hậu môn trực tràng, thường là hậu quả của táo bón lâu ngày.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00051"
+  },
+  {
+    "text": "Benh: Co thắt thực quản (ICD: K22.4). Muc do: medium. Mo ta: Sự co thắt bất thường của các cơ trơn thực quản gây khó khăn khi nuốt.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00052"
+  },
+  {
+    "text": "Benh: Hội chứng ruột kích thích (IBS) (ICD: K58). Muc do: low. Mo ta: Rối loạn chức năng đại tràng gây đau bụng, thay đổi thói quen đi vệ sinh dù không có tổn thương thực thể.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00053"
+  },
+  {
+    "text": "Benh: Nhiễm vi khuẩn HP dạ dày (ICD: B98.0). Muc do: high. Mo ta: Nhiễm loại vi khuẩn có thể sống trong môi trường axit dạ dày, là nguyên nhân hàng đầu gây viêm loét.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00054"
+  },
+  {
+    "text": "Benh: Rối loạn tiêu hóa (ICD: K30). Muc do: low. Mo ta: Tình trạng hệ tiêu hóa hoạt động bất thường gây khó chịu sau khi ăn uống.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00055"
+  },
+  {
+    "text": "Benh: Trào ngược dạ dày thực quản (GERD) (ICD: K21). Muc do: medium. Mo ta: Dịch axit từ dạ dày trào ngược lên ống thực quản, gây nóng rát và khó chịu ở ngực.",
+    "type": "disease",
+    "source": "prompt2.seed.json|benhdaday.seed.csv",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00056"
+  },
+  {
+    "text": "Benh: Táo bón mãn tính (ICD: K59.0). Muc do: low. Mo ta: Khó đi đại tiện kéo dài nhiều tuần lễ, phân khô cứng do nhu động ruột kém.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00057"
+  },
+  {
+    "text": "Benh: Ung thư dạ dày (ICD: C16). Muc do: high. Mo ta: Khối u ác tính hình thành ở dạ dày, bệnh nguy hiểm cần phát hiện và điều trị sớm.",
+    "type": "disease",
+    "source": "prompt2.seed.json|benhdaday.seed.csv",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00058"
+  },
+  {
+    "text": "Benh: Viêm dạ dày cấp tính (ICD: K29.0). Muc do: medium. Mo ta: Dạ dày bị viêm sưng đột ngột, thường do ngộ độc thực phẩm, uống nhiều rượu bia hoặc dùng thuốc giảm đau.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00059"
+  },
+  {
+    "text": "Benh: Viêm dạ dày ruột (Gastroenteritis) (ICD: A09, K52). Muc do: medium. Mo ta: Nguyen nhan: Nhiễm trùng do virus (Norovirus, rotavirus), vi khuẩn (E. coli, Salmonella...), ký sinh trùng, hóa chất, độc tố.. Chan doan: Khám lâm sàng, nuôi cấy phân, xét nghiệm phản ứng chuỗi polymerase (PCR), xét nghiệm miễn dịch..",
+    "type": "disease",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00060"
+  },
+  {
+    "text": "Benh: Viêm hang vị dạ dày (ICD: K29.6). Muc do: medium. Mo ta: Tình trạng viêm nhiễm xảy ra ở phần bờ cong nhỏ gần cuối dạ dày (hang vị).",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00061"
+  },
+  {
+    "text": "Benh: Viêm loét dạ dày (ICD: K25). Muc do: medium. Mo ta: Tình trạng niêm mạc dạ dày bị tổn thương, sưng viêm và tạo thành các vết loét rát đau.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00062"
+  },
+  {
+    "text": "Benh: Viêm loét dạ dày - tá tràng (ICD: K25, K26, K27). Muc do: medium. Mo ta: Nguyen nhan: Vi khuẩn Helicobacter pylori (H. pylori), dùng thuốc kháng viêm không steroid (NSAIDs), lối sống không lành mạnh.. Chan doan: Nội soi dạ dày - tá tràng, test hơi thở, xét nghiệm máu, xét nghiệm phân sinh thiết tìm H. pylori..",
+    "type": "disease",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00063"
+  },
+  {
+    "text": "Benh: Viêm loét tá tràng (ICD: K26). Muc do: medium. Mo ta: Vết loét hình thành ở phần đầu của ruột non (tá tràng), thường gây đau lúc đói hoặc sau ăn vài giờ.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00064"
+  },
+  {
+    "text": "Benh: Viêm ruột non cấp tính (ICD: A09). Muc do: medium. Mo ta: Nhiễm trùng dạ dày ruột do vi khuẩn hoặc virus, dân gian hay gọi là tiêu chảy cấp.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00065"
+  },
+  {
+    "text": "Benh: Viêm teo dạ dày chuyển sản tự miễn (ICD: K29.4). Muc do: medium. Mo ta: Nguyen nhan: Tự miễn di truyền (có kháng thể kháng lại tế bào thành dạ dày và yếu tố nội sinh).. Chan doan: Nội soi dạ dày sinh thiết, xét nghiệm nồng độ Vitamin B12 huyết thanh..",
+    "type": "disease",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00066"
+  },
+  {
+    "text": "Benh: Viêm đại tràng (ICD: K51). Muc do: medium. Mo ta: Viêm nhiễm ở ruột già (đại tràng), thường gây đau bụng dưới và đi ngoài nhiều lần.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00067"
+  },
+  {
+    "text": "Benh: Xuất huyết dạ dày (ICD: K92.2, K25.4, K26.4). Muc do: medium. Mo ta: Nguyen nhan: Biến chứng của viêm loét dạ dày tá tràng, lạm dụng thuốc NSAIDs kéo dài, uống nhiều bia rượu.. Chan doan: Nội soi dạ dày cấp cứu, xét nghiệm máu và phân..",
+    "type": "disease",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00068"
+  },
+  {
+    "text": "Benh: Xuất huyết tiêu hóa (ICD: K92.2). Muc do: high. Mo ta: Tình trạng chảy máu bên trong đường tiêu hóa, thường do vết loét sâu hoặc vỡ tĩnh mạch.",
+    "type": "disease",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "disease"
+    ],
+    "id": "CHUNK_00069"
+  },
+  {
+    "text": "Trieu chung: Có thể khó chịu vùng bụng trên. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00070"
+  },
+  {
+    "text": "Trieu chung: Cảm thấy có vị chua trong miệng. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00071"
+  },
+  {
+    "text": "Trieu chung: Nôn ra máu đỏ tươi hoặc nâu đen như bã cà phê. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00072"
+  },
+  {
+    "text": "Trieu chung: Tiêu chảy. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00073"
+  },
+  {
+    "text": "Trieu chung: biểu hiện thần kinh (kém cảm giác, yếu chi) do thiếu vitamin B12. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00074"
+  },
+  {
+    "text": "Trieu chung: buồn nôn. Alias: lợm giọng, muốn ói, nhộn nhạo trong dạ dày.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00075"
+  },
+  {
+    "text": "Trieu chung: chán ăn. Alias: ăn không ngon miệng, nhạt miệng, lười ăn.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00076"
+  },
+  {
+    "text": "Trieu chung: chóng mặt. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00077"
+  },
+  {
+    "text": "Trieu chung: chướng bụng. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00078"
+  },
+  {
+    "text": "Trieu chung: ho kéo dài. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00079"
+  },
+  {
+    "text": "Trieu chung: hoa mắt. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00080"
+  },
+  {
+    "text": "Trieu chung: hôi miệng. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00081"
+  },
+  {
+    "text": "Trieu chung: khó nuốt. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00082"
+  },
+  {
+    "text": "Trieu chung: khó tiêu. Alias: ăn không tiêu, ấm ách, ậm ạch.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00083"
+  },
+  {
+    "text": "Trieu chung: mệt mỏi. Alias: uể oải, hụt hơi, thiếu sức sống.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00084"
+  },
+  {
+    "text": "Trieu chung: nuốt nghẹn. Alias: vướng cổ họng, cảm giác có cục nghẹn, khó nuốt.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00085"
+  },
+  {
+    "text": "Trieu chung: nóng rát ngực. Alias: nóng cổ họng, rát thực quản, nóng ran vùng ngực.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00086"
+  },
+  {
+    "text": "Trieu chung: nóng rát thượng vị lan lên họng. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00087"
+  },
+  {
+    "text": "Trieu chung: nóng rát vùng ngực. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00088"
+  },
+  {
+    "text": "Trieu chung: nôn (thường có máu). Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00089"
+  },
+  {
+    "text": "Trieu chung: nôn mửa. Alias: nôn trớ, ói mửa.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00090"
+  },
+  {
+    "text": "Trieu chung: nôn mửa ra máu. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00091"
+  },
+  {
+    "text": "Trieu chung: phân có nhầy. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00092"
+  },
+  {
+    "text": "Trieu chung: phân đen/có máu. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00093"
+  },
+  {
+    "text": "Trieu chung: suy nhược. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00094"
+  },
+  {
+    "text": "Trieu chung: sôi bụng. Alias: bụng kêu ọc ọc, réo rắt trong bụng.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00095"
+  },
+  {
+    "text": "Trieu chung: sốt. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00096"
+  },
+  {
+    "text": "Trieu chung: sụt cân. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00097"
+  },
+  {
+    "text": "Trieu chung: sụt cân không rõ nguyên nhân. Alias: tự nhiên gầy đi, giảm cân nhanh.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00098"
+  },
+  {
+    "text": "Trieu chung: thiếu máu hồng cầu to. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00099"
+  },
+  {
+    "text": "Trieu chung: tiêu chảy. Alias: đi ngoài phân lỏng, tào tháo đuổi, đi tướt.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00100"
+  },
+  {
+    "text": "Trieu chung: trào ngược. Alias: nước chua trào lên cổ, chớ.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00101"
+  },
+  {
+    "text": "Trieu chung: táo bón. Alias: đi ngoài khó, khó rặn.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00102"
+  },
+  {
+    "text": "Trieu chung: xì hơi nhiều. Alias: đánh rắm nhiều, thoát hơi nhiều.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00103"
+  },
+  {
+    "text": "Trieu chung: ăn không ngon. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00104"
+  },
+  {
+    "text": "Trieu chung: Đau khắp vùng thượng vị (mức độ tăng dần). Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00105"
+  },
+  {
+    "text": "Trieu chung: Đau ở thượng vị (khi đói hoặc ngay sau bữa ăn). Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00106"
+  },
+  {
+    "text": "Trieu chung: đau bụng. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00107"
+  },
+  {
+    "text": "Trieu chung: đau bụng dữ dội vùng thượng vị. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00108"
+  },
+  {
+    "text": "Trieu chung: đau dạ dày. Alias: đau bụng trên, đau thượng vị, xót ruột.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00109"
+  },
+  {
+    "text": "Trieu chung: đau dạ dày dai dẳng. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00110"
+  },
+  {
+    "text": "Trieu chung: đau quặn bụng. Alias: đau xoắn ruột, đau từng cơn.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00111"
+  },
+  {
+    "text": "Trieu chung: đau tức ngực. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00112"
+  },
+  {
+    "text": "Trieu chung: đi ngoài phân đen. Alias: phân đen như bã cà phê, phân có máu.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00113"
+  },
+  {
+    "text": "Trieu chung: đi ngoài phân đen hoặc có máu. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00114"
+  },
+  {
+    "text": "Trieu chung: đi ngoài phân đen và hôi. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00115"
+  },
+  {
+    "text": "Trieu chung: đi ngoài ra máu tươi. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00116"
+  },
+  {
+    "text": "Trieu chung: đói thấy đau. Alias: .",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00117"
+  },
+  {
+    "text": "Trieu chung: đầy bụng. Alias: chướng bụng, căng tức bụng, bụng óc ách.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00118"
+  },
+  {
+    "text": "Trieu chung: đầy hơi. Alias: .",
+    "type": "symptom",
+    "source": "benhdaday.seed.csv",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00119"
+  },
+  {
+    "text": "Trieu chung: đắng miệng. Alias: miệng có vị đắng, nhạt đắng miệng.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00120"
+  },
+  {
+    "text": "Trieu chung: ợ chua. Alias: ợ lên men chua, trớ chua.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00121"
+  },
+  {
+    "text": "Trieu chung: ợ hơi. Alias: trớ hơi, nấc cụt liên tục.",
+    "type": "symptom",
+    "source": "prompt2.seed.json",
+    "tags": [
+      "symptom"
+    ],
+    "id": "CHUNK_00122"
+  },
+  {
+    "text": "Câu hỏi: Bị đau bụng trên sau ăn phải làm sao?\nTrả lời: Đau vùng bụng trên (thượng vị) sau khi ăn thường là dấu hiệu của viêm dạ dày, loét dạ dày tá tràng hoặc trào ngược. Nguyên nhân do niêm mạc dạ dày bị tổn thương, khi thức ăn và axit tiết ra sẽ gây kích ứng và đau thắt. Trong lúc đau, bạn nên ngừng ăn, uống một chút nước ấm, nới lỏng quần áo và ngồi nghỉ ngơi hoặc chườm ấm vùng bụng. Tránh uống sữa hay trà đặc lúc này vì có thể làm tình trạng tệ hơn. Về lâu dài, cần ăn đúng giờ, nhai kỹ và hạn chế đồ cay nóng. Để giảm đau rát tức thời và bảo vệ niêm mạc, bạn có thể tham khảo dùng các sản phẩm như: Yumangel, Phosphalugel, hoặc Trymo.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "ulcer_hp"
+    ],
+    "id": "CHUNK_00123"
+  },
+  {
+    "text": "Câu hỏi: Vi khuẩn HP có nguy hiểm không và có lây không?\nTrả lời: Vi khuẩn HP (Helicobacter pylori) là nguyên nhân hàng đầu gây ra viêm loét và ung thư dạ dày. HP rất dễ lây nhiễm, chủ yếu qua đường ăn uống (miệng - miệng) khi dùng chung bát đũa, ly nước hoặc qua đường vệ sinh kém (phân - miệng). Mặc dù nhiều người nhiễm HP không có triệu chứng, nhưng nếu bạn cảm thấy đau tức thượng vị, buồn nôn, ợ hơi liên tục thì vi khuẩn đang tấn công làm tổn thương dạ dày. Khi đó, HP trở nên nguy hiểm và cần được điều trị bằng kháng sinh theo phác đồ bác sĩ. Để hỗ trợ điều trị và diệt HP hiệu quả, bạn có thể tham khảo: Nexium 40mg, Pantoloc 40mg, Trymo.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "ulcer_hp"
+    ],
+    "id": "CHUNK_00124"
+  },
+  {
+    "text": "Câu hỏi: Viêm loét dạ dày tá tràng là gì và dấu hiệu nhận biết?\nTrả lời: Viêm loét dạ dày tá tràng là tình trạng lớp niêm mạc bảo vệ dạ dày hoặc phần đầu ruột non (tá tràng) bị bào mòn, tạo thành các vết loét hở. Dấu hiệu đặc trưng nhất là những cơn đau râm ran hoặc bỏng rát ở vùng bụng trên rốn. Đau dạ dày thường xuất hiện ngay sau khi ăn, trong khi loét tá tràng lại hay đau lúc bụng đói hoặc lúc nửa đêm. Kèm theo đó là cảm giác chán ăn, sụt cân, buồn nôn hoặc ợ chua. Việc lạm dụng thuốc giảm đau NSAIDs và nhiễm vi khuẩn HP là hai thủ phạm chính. Các sản phẩm hỗ trợ làm lành vết loét phổ biến: Nexium 40mg, Trymo, CumarGold New.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "ulcer_hp"
+    ],
+    "id": "CHUNK_00125"
+  },
+  {
+    "text": "Câu hỏi: Tại sao tôi hay bị đau dạ dày vào ban đêm gây mất ngủ?\nTrả lời: Đau dạ dày vào ban đêm chủ yếu do axit dịch vị tiết ra nhiều trong lúc dạ dày trống rỗng không có thức ăn để tiêu hóa. Axit dư thừa này sẽ tấn công trực tiếp vào lớp niêm mạc hoặc các vết loét sẵn có gây đau đớn dữ dội. Ngoài ra, việc ăn quá no ngay trước khi đi ngủ hoặc căng thẳng, stress kéo dài cũng làm tăng tiết axit. Để khắc phục, không nên ăn tối sau 8 giờ tối, ngủ kê cao đầu và tập thư giãn. Để giảm cơn đau đêm, có thể dùng thuốc ức chế bơm proton trước bữa tối hoặc dùng thuốc trung hòa axit. Tham khảo: Nexium 40mg, Phosphalugel, Dạ Dày Nam Dược.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "ulcer_hp"
+    ],
+    "id": "CHUNK_00126"
+  },
+  {
+    "text": "Câu hỏi: Làm thế nào để phòng ngừa bệnh viêm loét dạ dày tái phát?\nTrả lời: Bệnh dạ dày rất dễ tái phát nếu thói quen sinh hoạt không thay đổi. Để phòng ngừa, yếu tố cốt lõi là ăn uống điều độ: không bỏ bữa, không để bụng quá đói hay quá no, hạn chế tối đa rượu bia, thuốc lá và thức ăn chua cay, muối chua. Bên cạnh đó, kiểm soát căng thẳng tâm lý (stress) là cực kỳ quan trọng vì stress làm co thắt dạ dày và tăng tiết axit. Bạn cũng cần cẩn trọng khi sử dụng các loại thuốc giảm đau, xương khớp. Sau khi điều trị khỏi HP, nên duy trì dùng thêm các thảo dược bảo vệ niêm mạc. Các sản phẩm hỗ trợ ngăn ngừa tái phát: Bình Vị Thái Minh, CumarGold New, SCurma Fizzy.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "ulcer_hp"
+    ],
+    "id": "CHUNK_00127"
+  },
+  {
+    "text": "Câu hỏi: Ợ chua là gì và nguyên nhân do đâu?\nTrả lời: Ợ chua là cảm giác nóng rát ở ngực và cổ họng do axit từ dạ dày trào ngược lên thực quản. Nguyên nhân phổ biến gồm: cơ vòng thực quản bị giãn yếu, ăn quá no, nằm ngay sau bữa ăn, tiêu thụ thức ăn cay chua béo, béo phì, hoặc do căng thẳng tâm lý. Phụ nữ mang thai cũng rất hay bị ợ chua do thai nhi chèn ép lên dạ dày. Để giảm thiểu, nên chia nhỏ bữa ăn trong ngày, không nằm ngay sau ăn 2-3 giờ, tránh cà phê, rượu bia và sô-cô-la. Các sản phẩm trung hòa axit và tạo màng ngăn trào ngược có thể giúp giảm triệu chứng nhanh: Phosphalugel, Gaviscon, Yumangel.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "acid_reflux"
+    ],
+    "id": "CHUNK_00128"
+  },
+  {
+    "text": "Câu hỏi: Bệnh trào ngược dạ dày thực quản (GERD) có chữa khỏi hẳn được không?\nTrả lời: Trào ngược dạ dày thực quản (GERD) hoàn toàn có thể kiểm soát và chữa khỏi nếu phát hiện sớm và tuân thủ đúng phác đồ điều trị. Tuy nhiên, bệnh rất dễ tái phát do liên quan mật thiết đến thói quen ăn uống và sinh hoạt hàng ngày. Để chữa dứt điểm, ngoài việc dùng thuốc giảm tiết axit theo đơn của bác sĩ, người bệnh phải kiên trì thay đổi lối sống: giảm cân nếu béo phì, ngủ nệm kê cao góc đầu giường, bỏ hút thuốc lá và tránh ăn đêm. Hỗ trợ quá trình phục hồi, bạn có thể tham khảo dùng các sản phẩm: Gaviscon, Pantoloc 40mg, Bình Vị Thái Minh.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "acid_reflux"
+    ],
+    "id": "CHUNK_00129"
+  },
+  {
+    "text": "Câu hỏi: Uống gì cho hết cảm giác nghẹn cổ và đắng miệng vào buổi sáng?\nTrả lời: Đắng miệng và cảm giác vướng nghẹn ở cổ họng vào mỗi sáng ngủ dậy là triệu chứng điển hình của trào ngược dịch mật và axit dạ dày trong lúc ngủ. Dịch vị trào lên làm viêm thanh quản, tổn thương hầu họng gây cảm giác đắng, hôi miệng và khó nuốt. Để khắc phục, bạn cần súc miệng nước muối, uống một cốc nước ấm ngay khi thức dậy. Buổi tối hôm trước không nên ăn đồ khó tiêu. Cần sử dụng các thuốc tạo lớp màng bảo vệ nổi trên bề mặt dạ dày để ngăn chặn dòng trào ngược. Các sản phẩm hiệu quả cho tình trạng này: Gaviscon, Gastosic, Nexium 40mg.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "acid_reflux"
+    ],
+    "id": "CHUNK_00130"
+  },
+  {
+    "text": "Câu hỏi: Trào ngược dạ dày kéo dài có gây biến chứng ung thư không?\nTrả lời: Trào ngược dạ dày nếu không được điều trị kịp thời và kéo dài nhiều năm có thể dẫn đến các biến chứng nguy hiểm. Axit liên tục ăn mòn thực quản sẽ gây viêm loét, hẹp thực quản, và nguy hiểm nhất là hội chứng 'Barrett thực quản'. Đây là tình trạng các tế bào thực quản bị biến đổi cấu trúc, được xem là tiền ung thư. Do đó, không nên chủ quan với những triệu chứng ợ chua, ợ nóng thông thường. Cần nội soi kiểm tra định kỳ và dùng thuốc đều đặn để bảo vệ thực quản. Các sản phẩm hỗ trợ kiểm soát bệnh: Yumangel, Nexium 40mg, CumarGold New.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "acid_reflux"
+    ],
+    "id": "CHUNK_00131"
+  },
+  {
+    "text": "Câu hỏi: Đang mang thai mà bị trào ngược dạ dày, ợ nóng thì nên dùng gì cho an toàn?\nTrả lời: Khi mang thai, sự thay đổi nội tiết tố làm nới lỏng cơ thắt thực quản, cộng thêm sức ép từ thai nhi lên dạ dày khiến mẹ bầu rất dễ bị trào ngược, ợ nóng. Việc dùng thuốc lúc này cần hết sức cẩn trọng để không ảnh hưởng đến thai nhi. Mẹ bầu nên chia nhỏ làm 5-6 bữa ăn mỗi ngày, ăn chậm, nhai kỹ, mặc quần áo rộng rãi và kê cao gối khi ngủ. Khi triệu chứng quá khó chịu, có thể dùng các loại thuốc kháng axit có tác dụng tại chỗ, không hấp thu vào máu. Sản phẩm tham khảo an toàn cho mẹ bầu (cần hỏi ý kiến bác sĩ trước khi dùng): Gaviscon, Phosphalugel.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "acid_reflux"
+    ],
+    "id": "CHUNK_00132"
+  },
+  {
+    "text": "Câu hỏi: Uống gì cho hết đầy bụng khó tiêu sau khi ăn đồ dầu mỡ?\nTrả lời: Đầy bụng khó tiêu sau bữa ăn giàu đạm, dầu mỡ thường do dạ dày quá tải, thiếu hụt enzyme tiêu hóa, hoặc hệ vi sinh vật đường ruột bị mất cân bằng, làm chậm quá trình phân giải thức ăn sinh ra nhiều khí ga. Bạn nên vận động nhẹ nhàng, uống một ly trà gừng ấm hoặc massage vùng bụng theo chiều kim đồng hồ. Bổ sung ngay enzyme tiêu hóa và lợi khuẩn là cách nhanh nhất để làm xẹp bụng và kích thích chuyển hóa thức ăn. Các sản phẩm hỗ trợ đắc lực: Men vi sinh Antibio Pro, Neopeptine, Enterogermina 2 Tỷ.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "probiotic_gut"
+    ],
+    "id": "CHUNK_00133"
+  },
+  {
+    "text": "Câu hỏi: Trẻ em bị táo bón kéo dài hoặc đi phân sống nên dùng gì?\nTrả lời: Táo bón hoặc đi phân sống ở trẻ em thường bắt nguồn từ hệ tiêu hóa chưa hoàn thiện, chế độ ăn thiếu chất xơ, hoặc loạn khuẩn đường ruột. Việc này khiến thức ăn không được hấp thu triệt để và phân bị khô cứng hoặc lỏng nát. Phụ huynh nên tăng cường cho bé uống đủ nước, ăn nhiều rau xanh, trái cây mềm như đu đủ, chuối. Đồng thời, bổ sung lợi khuẩn đường ruột (probiotics) giúp tái thiết lập sự cân bằng hệ vi sinh, làm mềm phân và bảo vệ thành ruột non yếu của trẻ. Các sản phẩm an toàn cho trẻ: Enterogermina 2 Tỷ, Bioflora 200mg.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "probiotic_gut"
+    ],
+    "id": "CHUNK_00134"
+  },
+  {
+    "text": "Câu hỏi: Tại sao sau khi uống kháng sinh trị dạ dày lại hay bị tiêu chảy, rối loạn tiêu hóa?\nTrả lời: Kháng sinh (đặc biệt trong phác đồ diệt vi khuẩn HP) có tác dụng tiêu diệt vi khuẩn gây bệnh, nhưng đồng thời cũng quét sạch luôn những lợi khuẩn có ích sống trong đường ruột. Sự thiếu hụt lợi khuẩn này làm hệ tiêu hóa bị loạn khuẩn, gây ra tình trạng tiêu chảy, đi ngoài nhiều lần, đau quặn bụng. Để phòng ngừa và khắc phục, người bệnh bắt buộc phải bổ sung men vi sinh trong và sau đợt dùng kháng sinh. Lưu ý uống men vi sinh cách xa giờ uống kháng sinh ít nhất 2 tiếng. Sản phẩm khuyên dùng: Enterogermina 2 Tỷ, Bioflora 200mg, Antibio Pro.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "probiotic_gut"
+    ],
+    "id": "CHUNK_00135"
+  },
+  {
+    "text": "Câu hỏi: Có nên uống men vi sinh hàng ngày dù không bị bệnh không?\nTrả lời: Men vi sinh bản chất là bổ sung các chủng vi khuẩn có lợi (Probiotics) giúp duy trì hệ sinh thái đường ruột khỏe mạnh. Nếu bạn có một hệ tiêu hóa bình thường, ăn uống khoa học thì không nhất thiết phải uống men vi sinh đóng gói hàng ngày; bạn có thể lấy lợi khuẩn tự nhiên từ sữa chua, kim chi, kombucha. Tuy nhiên, với những người có hệ tiêu hóa nhạy cảm, hay ăn nhậu ngoài hàng quán, hoặc hấp thu kém, việc dùng men vi sinh định kỳ (thành từng đợt) là rất hữu ích để tăng cường sức đề kháng ruột và ngăn ngừa ốm vặt. Có thể dùng bổ sung: Antibio Pro, Bioflora 200mg.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "probiotic_gut"
+    ],
+    "id": "CHUNK_00136"
+  },
+  {
+    "text": "Câu hỏi: Làm thế nào phân biệt Men vi sinh và Men tiêu hóa, khi nào nên dùng loại nào?\nTrả lời: Men vi sinh (Probiotics) chứa các lợi khuẩn sống, giúp cân bằng lại hệ vi sinh đường ruột, dùng cho trường hợp tiêu chảy, táo bón, loạn khuẩn do kháng sinh, có thể dùng dài ngày. Còn Men tiêu hóa chứa các enzyme (như amylase, protease) giúp cắt nhỏ thức ăn, dùng khi bị đầy bụng, ăn không tiêu, chán ăn do chức năng tuyến tụy/dạ dày kém. Lưu ý, men tiêu hóa chỉ nên dùng tối đa 1-2 tuần, nếu lạm dụng cơ thể sẽ lười tự tiết enzyme. Tùy tình trạng, bạn có thể tham khảo: Enterogermina (Men vi sinh) hoặc Neopeptine (Men tiêu hóa).",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "probiotic_gut"
+    ],
+    "id": "CHUNK_00137"
+  },
+  {
+    "text": "Câu hỏi: Uống tinh bột nghệ với mật ong có chữa được đau dạ dày không?\nTrả lời: Tinh bột nghệ kết hợp mật ong là bài thuốc dân gian rất tốt cho người đau dạ dày. Nghệ chứa hoạt chất Curcumin có tính kháng viêm, chống oxy hóa và giúp liền sẹo, trong khi mật ong có tính sát khuẩn và làm dịu niêm mạc. Tuy nhiên, tinh bột nghệ thông thường rất khó tan trong nước và cơ thể chỉ hấp thu được một lượng cực nhỏ, nên hiệu quả trị bệnh thường chậm. Để đạt hiệu quả chữa viêm loét nhanh chóng, nền y học hiện đại khuyên dùng dạng Nano Curcumin giúp thẩm thấu tối đa. Tham khảo các sản phẩm công nghệ cao như: CumarGold New, Viên sủi SCurma Fizzy.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "herbal_turmeric"
+    ],
+    "id": "CHUNK_00138"
+  },
+  {
+    "text": "Câu hỏi: Nghệ nano (Nano Curcumin) khác gì so với nghệ tươi hay tinh bột nghệ thường?\nTrả lời: Hoạt chất trị bệnh chính trong củ nghệ là Curcumin, nhưng nó không tan trong nước, khiến cơ thể đào thải gần hết trước khi kịp phát huy tác dụng. Nghệ tươi và tinh bột nghệ thông thường chứa rất ít Curcumin (khoảng 2-3%) và còn lẫn nhiều nhựa, tinh dầu gây nóng gan, vàng da. Nghệ Nano (Nano Curcumin) là sản phẩm công nghệ cao, bào chế Curcumin thành kích thước siêu nhỏ (tính bằng nanomet), hòa tan hoàn toàn trong nước, tăng độ hấp thu lên đến 95%. Do đó, chỉ cần một lượng nhỏ Nano Curcumin đã cho hiệu quả gấp hàng chục lần nghệ tươi. Sản phẩm gợi ý: CumarGold New, SCurma Fizzy, Gastosic.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "herbal_turmeric"
+    ],
+    "id": "CHUNK_00139"
+  },
+  {
+    "text": "Câu hỏi: Bị đau dạ dày kèm theo cảm giác buồn nôn có nên uống nước gừng không?\nTrả lời: Gừng có tính ấm, giúp ôn trung, tán hàn, giảm co thắt và kích thích tiêu hóa hoạt động trơn tru. Đặc biệt, gừng cực kỳ hiệu quả trong việc cắt cơn buồn nôn, chống nôn mửa do dạ dày bị kích thích hoặc do trào ngược. Khi bị đau bao tử kèm buồn nôn, bạn hoàn toàn có thể nhâm nhi một tách trà gừng ấm hoặc ngậm lát gừng tươi. Tuy nhiên, không nên uống quá nhiều lúc đói vì vị cay của gừng có thể gây xót ruột. Hiện nay có nhiều sản phẩm dạ dày kết hợp cả nghệ và chiết xuất gừng chuẩn hóa, như: CumarGold New, Dạ Dày Nam Dược.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "herbal_turmeric"
+    ],
+    "id": "CHUNK_00140"
+  },
+  {
+    "text": "Câu hỏi: Chữa trào ngược và viêm loét bằng thảo dược đông y có thực sự hiệu quả không?\nTrả lời: Chữa bệnh dạ dày bằng thảo dược (như lá khôi tía, cam thảo, chè dây, nghệ vàng...) mang lại hiệu quả rất tích cực, đặc biệt an toàn cho việc sử dụng lâu dài để chống tái phát. Nếu thuốc Tây (thuốc kháng axit) có thế mạnh cắt cơn đau nhanh chóng nhưng dễ gây lờn thuốc hoặc rối loạn hệ vi sinh, thì thảo dược tác động sâu vào căn nguyên, giúp se lành ổ loét và phục hồi chức năng dạ dày tự nhiên. Thảo dược phù hợp nhất trong giai đoạn bệnh nhẹ, mãn tính hoặc sau phác đồ Tây y. Sản phẩm thảo dược uy tín: Dạ Dày Nam Dược, Gastosic, CumarGold New.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "herbal_turmeric"
+    ],
+    "id": "CHUNK_00141"
+  },
+  {
+    "text": "Câu hỏi: Người hay uống rượu bia làm thế nào để bảo vệ dạ dày bằng thảo dược?\nTrả lời: Cồn trong rượu bia tàn phá trực tiếp lớp chất nhầy bảo vệ niêm mạc, làm sung huyết và tăng nguy cơ xuất huyết dạ dày. Để bảo vệ dạ dày, nguyên tắc đầu tiên là tuyệt đối không uống rượu bia với chiếc bụng rỗng; hãy lót dạ bằng thức ăn tinh bột hoặc súp. Về lâu dài, sử dụng các chiết xuất từ nghệ vàng (Nano Curcumin) giúp thúc đẩy gan đào thải độc tố cồn, đồng thời phủ một lớp màng chống viêm lên dạ dày, đẩy nhanh liền sẹo. Các sản phẩm bảo vệ dạ dày phù hợp cho người hay nhậu: Viên sủi SCurma Fizzy (uống trước khi nhậu), CumarGold New.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "herbal_turmeric"
+    ],
+    "id": "CHUNK_00142"
+  },
+  {
+    "text": "Câu hỏi: Người bị viêm loét dạ dày tá tràng nên ăn gì và kiêng gì?\nTrả lời: Người bị viêm loét dạ dày cần có chế độ ăn mềm, dễ tiêu và bảo vệ niêm mạc. Nên ăn: cháo, súp, cơm nhão, bánh mì, khoai lang luộc, cá, thịt nạc hấp và các loại rau có màu xanh đậm. Nên chia nhỏ làm 5-6 bữa/ngày, không để bụng quá đói hay quá no. Cần kiêng tuyệt đối: trái cây có vị chua (cam, chanh, xoài), đồ muối lên men (cà muối, dưa muối), thức ăn cay nóng (ớt, tiêu), đồ hộp, nước ngọt có ga và rượu bia. Khi đau nặng không ăn được cơm, có thể bổ sung dinh dưỡng bằng các loại sữa chuyên biệt: Sữa Peptamen, Sữa Ensure Gold.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "gut_nutrition"
+    ],
+    "id": "CHUNK_00143"
+  },
+  {
+    "text": "Câu hỏi: Đau bao tử, trào ngược axit có được uống sữa tươi không?\nTrả lời: Uống sữa tươi khi bị đau bao tử có hai mặt. Một mặt, sữa giúp tráng một lớp mỏng lên niêm mạc và trung hòa tạm thời axit dịch vị. Mặt khác, sữa bò tươi chứa nhiều chất béo và protein phức tạp, kích thích dạ dày tiết thêm axit để tiêu hóa, đôi khi gây đầy bụng, ợ hơi và trào ngược nặng hơn, đặc biệt với người bất dung nạp lactose. Nếu muốn uống sữa, bạn nên chọn sữa tách béo (skim milk), uống dạng ấm, không uống lúc bụng rỗng hoàn toàn và chỉ uống một lượng nhỏ. Giải pháp an toàn hơn là sữa y học thủy phân đạm: Sữa Peptamen.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "gut_nutrition"
+    ],
+    "id": "CHUNK_00144"
+  },
+  {
+    "text": "Câu hỏi: Bị viêm dạ dày hoặc trào ngược có nên ăn sữa chua không?\nTrả lời: Sữa chua rất tốt cho tiêu hóa vì chứa lượng lớn lợi khuẩn (probiotics) giúp cân bằng hệ vi sinh, ức chế vi khuẩn HP và tiêu hóa thức ăn nhanh hơn. Tuy nhiên, người đau dạ dày cần biết cách ăn sữa chua cho đúng để không bị xót ruột do axit lactic. Nguyên tắc là: Tuyệt đối KHÔNG ăn sữa chua khi bụng đói. Chỉ nên ăn sữa chua sau bữa ăn chính khoảng 1-2 tiếng, lúc này dịch vị đã loãng ra, môi trường rất lý tưởng cho lợi khuẩn phát triển. Không ăn sữa chua quá lạnh. Có thể dùng thêm thực phẩm chức năng: Gastosic, Bình Vị Thái Minh để ổn định tiêu hóa.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "gut_nutrition"
+    ],
+    "id": "CHUNK_00145"
+  },
+  {
+    "text": "Câu hỏi: Làm sao để phục hồi niêm mạc dạ dày sau thời gian dài bị viêm loét?\nTrả lời: Dạ dày là cơ quan liên tục nhào trộn thức ăn trong môi trường axit nên việc phục hồi lớp niêm mạc khá chậm. Sau khi trị khỏi HP hoặc giảm triệu chứng đau, bạn cần cung cấp nguyên liệu để tái tạo tế bào bằng dinh dưỡng giàu chất đạm dễ tiêu (ức gà, cá biển), kẽm và vitamin nhóm B. Duy trì tinh thần thư thái, ngủ đủ 8 tiếng/ngày để dạ dày có thời gian nghỉ ngơi sửa chữa tổn thương. Bổ sung các hoạt chất sinh học tạo lớp nhầy nhân tạo bảo vệ vết loét cũ là rất cần thiết. Sản phẩm khuyên dùng: Bình Vị Thái Minh, CumarGold New, Sữa Peptamen.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "gut_nutrition"
+    ],
+    "id": "CHUNK_00146"
+  },
+  {
+    "text": "Câu hỏi: Ăn thực phẩm chứa nhiều chất xơ có làm xước dạ dày không?\nTrả lời: Chất xơ hòa tan (có trong yến mạch, các loại đậu, bơ, mồng tơi, củ quả luộc mềm) rất tốt cho người dạ dày, nó hút nước tạo thành lớp gel bảo vệ niêm mạc và hỗ trợ lợi khuẩn phát triển. Tuy nhiên, chất xơ không hòa tan dạng thô cứng (có trong măng khô, rau muống già, gân sụn, ngũ cốc nguyên hạt cứng) lại rất nguy hiểm khi đang bị viêm loét. Chúng cọ xát mạnh làm xước thêm ổ loét và khiến dạ dày phải co bóp vất vả, sinh ra đau đớn tức bụng. Bạn nên ưu tiên nấu chín nhừ đồ ăn. Có thể bổ sung dưỡng chất mềm qua: Sữa Ensure Gold, Peptamen.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "gut_nutrition"
+    ],
+    "id": "CHUNK_00147"
+  },
+  {
+    "text": "Câu hỏi: Chườm ấm vùng bụng có làm giảm đau dạ dày tức thời không?\nTrả lời: Chườm ấm vùng bụng là phương pháp giảm đau dạ dày tức thời cực kỳ hiệu quả và an toàn. Khi bị cơn co thắt bao tử hành hạ, nhiệt độ ấm nóng sẽ giúp làm giãn mạch máu, kích thích lưu thông máu đến vùng bụng, từ đó làm thư giãn các bó cơ trơn dạ dày đang bị căng cứng. Tình trạng chướng khí và đau rát sẽ thuyên giảm đáng kể mà không cần lạm dụng thuốc giảm đau. Bạn nên giữ tư thế nằm nghỉ ngơi thoải mái khi chườm. Các thiết bị y tế tại nhà khuyên dùng: Túi chườm nóng lạnh Thiên Thanh, Đai massage làm ấm bụng Beurer.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "medical_device"
+    ],
+    "id": "CHUNK_00148"
+  },
+  {
+    "text": "Câu hỏi: Đai massage bụng có tốt cho người hay bị đầy bụng khó tiêu không?\nTrả lời: Với những người lười vận động, làm việc văn phòng ngồi nhiều thường bị tình trạng nhu động ruột yếu, thức ăn tiêu hóa chậm gây sinh hơi đầy bụng. Việc sử dụng đai massage rung kết hợp làm ấm bụng mô phỏng lại các động tác xoa bóp, giúp kích thích cơ học lên nhu động ruột, đẩy luồng khí ga tích tụ ra ngoài dễ dàng. Nó cũng thúc đẩy quá trình tuần hoàn máu tại hệ tiêu hóa. Tuy nhiên, không dùng đai massage lúc vừa ăn no hay khi đang đau dạ dày cấp tính. Tham khảo sản phẩm: Đai massage làm ấm bụng Beurer.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "medical_device"
+    ],
+    "id": "CHUNK_00149"
+  },
+  {
+    "text": "Câu hỏi: Người bệnh viêm loét dạ dày sụt cân nhanh có đáng lo không?\nTrả lời: Viêm loét dạ dày kéo dài làm giảm khả năng hấp thu chất dinh dưỡng và gây tâm lý sợ ăn, chán ăn, dẫn đến sụt cân. Sụt 1-2kg có thể là bình thường. Tuy nhiên, nếu bạn sụt cân nhanh, không rõ lý do (mất >5% trọng lượng cơ thể trong 1-2 tháng) kèm theo nôn mửa, đi ngoài phân đen, thì đây là dấu hiệu cảnh báo đỏ của viêm loét ác tính hoặc ung thư dạ dày. Người bệnh mạn tính cần tự theo dõi cân nặng tại nhà để báo bác sĩ sớm. Công cụ hỗ trợ theo dõi thiết yếu: Cân sức khỏe điện tử Omron HN-289.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "medical_device"
+    ],
+    "id": "CHUNK_00150"
+  },
+  {
+    "text": "Câu hỏi: Bị lạnh bụng gây đau quặn và tiêu chảy nên xử trí như thế nào?\nTrả lời: Lạnh bụng (hay còn gọi là trúng thực do hàn) xảy ra khi bạn ăn quá nhiều đồ ăn sống lạnh (hải sản, gỏi, kem) hoặc nằm ngủ bị gió lạnh thổi vào bụng. Triệu chứng là đau quặn từng cơn, sôi bụng và tiêu chảy phân lỏng. Cách xử trí nhanh là thoa một chút dầu gió hoặc dầu tràm quanh rốn, uống một cốc trà gừng nóng và lập tức chườm nóng toàn bộ vùng bụng để trục hàn, làm ấm tạng phủ. Sau đó nằm nghỉ. Các sản phẩm cấp cứu tại nhà hiệu quả: Túi chườm nóng lạnh Thiên Thanh, Men vi sinh Enterogermina 2 Tỷ.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "medical_device"
+    ],
+    "id": "CHUNK_00151"
+  },
+  {
+    "text": "Câu hỏi: Nằm ngủ tư thế nào tốt nhất cho người bị trào ngược dạ dày?\nTrả lời: Tư thế ngủ đóng vai trò quyết định với người mắc hội chứng trào ngược GERD. Dạ dày của con người nằm lệch về bên trái cơ thể. Do đó, nằm nghiêng sang TRÁI là tư thế tốt nhất, giúp dạ dày nằm thấp hơn thực quản, axit sẽ đọng ở vùng đáy và khó trào ngược lên trên. Ngược lại, nằm nghiêng phải hoặc nằm ngửa thẳng sẽ khiến axit dễ dàng tràn vào cuống họng gây bỏng rát, ho sặc sụa. Bạn cũng nên dùng đai định hình hoặc gối nêm cao góc đầu giường. Kết hợp uống thuốc bọc dạ dày ban đêm: Gaviscon, Phosphalugel.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "medical_device"
+    ],
+    "id": "CHUNK_00152"
+  },
+  {
+    "text": "Câu hỏi: Có cách nào tự kiểm tra vi khuẩn HP tại nhà mà không cần đến bệnh viện không?\nTrả lời: Hiện nay bạn hoàn toàn có thể tự sàng lọc nguy cơ nhiễm vi khuẩn HP ngay tại nhà bằng các bộ xét nghiệm nhanh. Phương pháp phổ biến và dễ thực hiện nhất là test kháng nguyên HP qua mẫu phân. Bộ kit này hoạt động giống như que thử thai, bạn chỉ cần lấy một lượng nhỏ mẫu phân chọc vào dung dịch đệm và nhỏ lên khay thử. Sau 10-15 phút, kết quả dương tính (2 vạch) hay âm tính (1 vạch) sẽ hiện ra. Độ chính xác tương đối cao, giúp bạn an tâm trước khi quyết định đi khám sâu hơn. Sản phẩm tham khảo: Kit test nhanh vi khuẩn HP qua phân.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "home_test"
+    ],
+    "id": "CHUNK_00153"
+  },
+  {
+    "text": "Câu hỏi: Tại sao lại bị đi ngoài ra phân có màu đen, có phải dạ dày bị chảy máu không?\nTrả lời: Phân có màu đen sệt như bã cà phê, mùi khắm khó chịu là dấu hiệu cảnh báo rất nghiêm trọng của tình trạng xuất huyết tiêu hóa trên (chảy máu ở dạ dày hoặc tá tràng). Máu chảy ra trộn lẫn với axit dịch vị bị oxy hóa chuyển thành màu đen khi thải ra ngoài. Nguyên nhân thường do viêm loét quá sâu làm vỡ mạch máu. (Lưu ý: phân đen cũng có thể do bạn vừa uống thuốc bổ Sắt hoặc ăn tiết canh). Để phân biệt và kiểm tra máu ẩn rỉ rả, bạn có thể dùng: Bộ kit test máu ẩn trong phân FOB, hoặc đi cấp cứu ngay nếu kèm nôn ra máu.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "home_test"
+    ],
+    "id": "CHUNK_00154"
+  },
+  {
+    "text": "Câu hỏi: Xét nghiệm máu ẩn trong phân (FOB test) tại nhà có tác dụng gì?\nTrả lời: Xét nghiệm FOB (Fecal Occult Blood) giúp phát hiện lượng rất nhỏ hồng cầu (máu) lẫn trong phân mà mắt thường không thể nhìn thấy được. Trái với xuất huyết ồ ạt gây đi ngoài phân đen, tình trạng rỉ máu vi thể do các polyp đại tràng, trĩ nội sâu, hoặc viêm loét dạ dày mức độ nhẹ thường diễn ra âm thầm. Đây là công cụ đắc lực để sàng lọc sớm các tổn thương đường tiêu hóa và đặc biệt là phòng ngừa ung thư trực tràng ở người lớn tuổi. Thiết bị tự test tại nhà khuyên dùng: Bộ kit test máu ẩn trong phân FOB.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "home_test"
+    ],
+    "id": "CHUNK_00155"
+  },
+  {
+    "text": "Câu hỏi: Trẻ bị nôn trớ trào ngược liên tục, tiêu chảy làm sao để biết có bị mất nước không?\nTrả lời: Nôn mửa và tiêu chảy liên tục do trào ngược dạ dày hoặc ngộ độc thức ăn sẽ vắt kiệt lượng nước và chất điện giải của cơ thể. Nếu bệnh nhân thấy khát nước khô miệng, tiểu ít, nước tiểu có màu vàng sậm thì đó là dấu hiệu mất nước. Để kiểm tra kỹ hơn về tình trạng độ pH, tỷ trọng nước tiểu nhằm đánh giá chức năng thận và bù nước kịp thời, bạn có thể dùng que thử nước tiểu tại nhà. Quan trọng nhất là cần uống Oresol bù điện giải ngay. Tham khảo: Que thử nước tiểu 10 thông số, Enterogermina 2 Tỷ.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "home_test"
+    ],
+    "id": "CHUNK_00156"
+  },
+  {
+    "text": "Câu hỏi: Kết quả test HP tại nhà 1 vạch (âm tính) liệu đã an tâm chưa?\nTrả lời: Nếu bạn test HP tại nhà ra kết quả 1 vạch (âm tính) nhưng vẫn có các triệu chứng đau rát thượng vị, ợ chua dữ dội thì chưa thể chủ quan. Dù không nhiễm HP, bạn vẫn có thể bị viêm loét dạ dày do các nguyên nhân khác như: tác dụng phụ của thuốc giảm đau NSAIDs, stress kéo dài, chế độ ăn uống độc hại, hoặc âm tính giả do thao tác test chưa đúng. Trong trường hợp này, bạn nên ưu tiên sử dụng các loại thuốc trung hòa axit, thảo dược làm dịu niêm mạc và sắp xếp đi nội soi. Tham khảo: Phosphalugel, CumarGold New, Dạ Dày Nam Dược.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "home_test"
+    ],
+    "id": "CHUNK_00157"
+  },
+  {
+    "text": "Câu hỏi: Khi nào thì tôi cần bắt buộc phải đi nội soi dạ dày?\nTrả lời: Bạn bắt buộc phải đến bệnh viện để nội soi dạ dày ngay nếu thuộc một trong các trường hợp sau: Đau vùng thượng vị dữ dội không thuyên giảm; nôn ra máu hoặc chất lỏng màu cà phê; đi ngoài phân đen nhão; sụt cân nhanh chóng không rõ nguyên nhân; nuốt nghẹn cục bộ; hoặc trong gia đình có tiền sử người mắc ung thư dạ dày. Nội soi là tiêu chuẩn vàng giúp bác sĩ nhìn trực tiếp bằng camera để đánh giá ổ loét, lấy mẫu sinh thiết tầm soát ung thư chính xác nhất. Để tiện lợi, bạn có thể mua trước: Gói khám Tiêu hóa Dạ dày Cơ bản.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "consult_package"
+    ],
+    "id": "CHUNK_00158"
+  },
+  {
+    "text": "Câu hỏi: Tôi rất bận rộn, có cách nào xét nghiệm vi khuẩn HP và máu mà không cần đến bệnh viện chờ đợi không?\nTrả lời: Hoàn toàn có. Với sự phát triển của y tế hiện đại, các dịch vụ y tế tại nhà đang rất phổ biến. Bạn chỉ cần đặt lịch online, điều dưỡng viên sẽ mang vật tư chuyên dụng đến tận nhà hoặc cơ quan để lấy mẫu máu, mẫu phân hoặc cho bạn thổi bong bóng (test hơi thở HP). Sau đó, mẫu sẽ được bảo quản chuẩn mang về phòng lab. Kết quả trả trực tuyến trong ngày và có bác sĩ gọi điện tư vấn đơn thuốc nếu dương tính. Vừa bảo mật, vừa tiết kiệm nửa ngày chờ đợi. Giải pháp cho bạn: Dịch vụ xét nghiệm máu và HP tại nhà.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "consult_package"
+    ],
+    "id": "CHUNK_00159"
+  },
+  {
+    "text": "Câu hỏi: Đi khám tiêu hóa, dạ dày có cần nhịn ăn sáng không?\nTrả lời: Có, bạn bắt buộc phải nhịn ăn sáng. Để nội soi dạ dày, siêu âm ổ bụng hoặc làm test hơi thở C13/C14 tìm vi khuẩn HP cho kết quả chính xác tuyệt đối, dạ dày của bạn phải hoàn toàn trống rỗng không có thức ăn che khuất tầm nhìn. Bạn cần nhịn ăn ít nhất 6-8 tiếng trước khi khám. Tuyệt đối không uống nước có màu, sữa, trà, cà phê (chỉ được uống một chút nước lọc tĩnh nếu quá khát). Nếu làm test HP, phải ngừng thuốc kháng sinh 4 tuần và thuốc giảm axit 2 tuần trước ngày khám. Chuẩn bị bằng: Gói khám Tiêu hóa Dạ dày Cơ bản.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "consult_package"
+    ],
+    "id": "CHUNK_00160"
+  },
+  {
+    "text": "Câu hỏi: Uống thuốc dạ dày mãi không đỡ, tôi có nên nhờ chuyên gia tư vấn dinh dưỡng thiết kế thực đơn riêng không?\nTrả lời: Chắc chắn là có. Việc điều trị bệnh tiêu hóa (đặc biệt là trào ngược GERD và viêm loét) phụ thuộc 50% vào thuốc và 50% vào chế độ ăn uống. Nếu bạn dùng thuốc đắt tiền nhưng hàng ngày vẫn ăn sai thực phẩm (như đồ chiên rán xào, cam chanh chua, cà muối) thì bệnh sẽ luẩn quẩn không bao giờ khỏi. Chuyên gia dinh dưỡng sẽ đánh giá thể trạng, loại trừ nhóm thực phẩm dị ứng và lên cho bạn một thực đơn bảo vệ niêm mạc khoa học, dễ nấu. Đặt lịch ngay qua: Gói tư vấn dinh dưỡng Dạ dày Online.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "consult_package"
+    ],
+    "id": "CHUNK_00161"
+  },
+  {
+    "text": "Câu hỏi: Cần chuẩn bị những thông tin gì trước khi gọi video tư vấn dạ dày online với bác sĩ?\nTrả lời: Tư vấn y khoa trực tuyến (Telemedicine) giúp bạn tiết kiệm thời gian, nhưng vì bác sĩ không thể thăm khám trực tiếp vùng bụng, bạn cần chuẩn bị kỹ các tài liệu sau để buổi tư vấn hiệu quả: 1) Toàn bộ hồ sơ bệnh án cũ, kết quả nội soi, xét nghiệm HP gần nhất. 2) Danh sách các loại thuốc dạ dày, huyết áp, xương khớp đang uống. 3) Ghi chú lại rõ các triệu chứng (Đau lúc nào? Đau ra sao? Có ợ chua không? Phân màu gì?). Hãy ở nơi yên tĩnh, kết nối mạng tốt. Dịch vụ tham khảo: Gói tư vấn dinh dưỡng Dạ dày Online, Gói khám Tiêu hóa Dạ dày Cơ bản.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "consult_package"
+    ],
+    "id": "CHUNK_00162"
+  },
+  {
+    "text": "Câu hỏi: Tại sao người già thường xuyên bị đầy chướng bụng, ăn không tiêu hụt hơi?\nTrả lời: Khi tuổi tác cao, mọi cơ quan trong cơ thể đều lão hóa, bao gồm cả hệ tiêu hóa. Dạ dày người già co bóp yếu đi, các tuyến tiết dịch vị và enzyme tụy sản xuất ngày càng ít đi khiến thức ăn nằm nghẽn lại lâu trong dạ dày. Sự tiêu hóa đình trệ này sinh ra nhiều khí ga gây chướng bụng, ợ hơi, chán ăn, mệt mỏi. Lời khuyên là người cao tuổi nên ninh nhừ thức ăn, nhai kỹ, ăn thành nhiều bữa nhỏ. Có thể bổ sung trực tiếp các enzyme tiêu hóa tổng hợp để hỗ trợ phân cắt thức ăn. Sản phẩm khuyên dùng: Neopeptine, Men vi sinh Antibio Pro.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "elderly_gut"
+    ],
+    "id": "CHUNK_00163"
+  },
+  {
+    "text": "Câu hỏi: Người lớn tuổi hay bị tiêu chảy nhiều ngày, bụng dạ yếu ớt phải làm sao?\nTrả lời: Tiêu chảy ở người cao tuổi rất nguy hiểm vì rủi ro kiệt sức do mất nước và rối loạn điện giải cao hơn nhiều so với người trẻ. Nguyên nhân thường do loạn khuẩn ruột, ngộ độc thức ăn nhẹ hoặc hội chứng ruột kích thích. Trước tiên, phải pha dung dịch Oresol cho cụ uống để bù nước. Nên cho ăn cháo loãng với một chút muối nhạt. Sử dụng các loại thuốc có cấu trúc bọc dính niêm mạc để cầm tiêu chảy và tống xuất độc tố ra ngoài là giải pháp ưu tiên. Các sản phẩm an toàn cho người già: Thuốc bột Smecta, Men vi sinh Enterogermina 2 Tỷ.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "elderly_gut"
+    ],
+    "id": "CHUNK_00164"
+  },
+  {
+    "text": "Câu hỏi: Người già bị viêm loét dạ dày đau rát không ăn được cơm, sụt cân thì bổ sung dinh dưỡng bằng cách nào?\nTrả lời: Cơn đau thắt thượng vị do viêm loét khiến người lớn tuổi có tâm lý cực kỳ sợ ăn, lâu ngày dẫn đến suy dinh dưỡng và teo cơ. Trong giai đoạn điều trị đau cấp tính, nếu không nhai được thức ăn thô cứng, giải pháp tốt nhất là thay thế hoặc bổ sung bằng các dòng sữa dinh dưỡng y học chuyên biệt. Những loại sữa này cung cấp đủ đạm, vitamin, khoáng chất giúp nuôi dưỡng cơ thể, lại lỏng mềm dễ tiêu hóa không gây gánh nặng cho bao tử. Sản phẩm sữa dinh dưỡng tối ưu: Sữa Ensure Gold, Sữa Peptamen.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "elderly_gut"
+    ],
+    "id": "CHUNK_00165"
+  },
+  {
+    "text": "Câu hỏi: Tại sao bố tôi uống thuốc trị đau nhức xương khớp lại hay bị đau dạ dày dữ dội?\nTrả lời: Đây là tình trạng vô cùng phổ biến ở người cao tuổi. Các loại thuốc trị viêm khớp, đau nhức xương khớp (thuộc nhóm NSAIDs như Ibuprofen, Diclofenac...) có cơ chế ức chế sản sinh Prostaglandin. Vấn đề là Prostaglandin lại chính là chất tạo ra lớp nhầy bảo vệ thành dạ dày. Khi chất này bị giảm, axit dịch vị sẽ trực tiếp tấn công niêm mạc gây viêm loét, thậm chí xuất huyết. Bác sĩ thường phải kê kèm thuốc bảo vệ dạ dày khi uống thuốc khớp. Để hỗ trợ bao bọc niêm mạc, giảm tác dụng phụ, nên dùng: Phosphalugel, Nexium 40mg, Bình Vị Thái Minh.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "elderly_gut"
+    ],
+    "id": "CHUNK_00166"
+  },
+  {
+    "text": "Câu hỏi: Cách giúp người cao tuổi tiêu hóa tốt hơn khi tham gia các bữa tiệc nhiều đạm và dầu mỡ?\nTrả lời: Trong các dịp lễ tết hay tiệc tùng, việc tiêu thụ lượng lớn thịt cá và đồ chiên xào là 'cực hình' đối với hệ tiêu hóa mỏng manh của người già. Để tránh tình trạng trào ngược, ậm ạch cả đêm, các cụ nên chủ động ăn nhiều rau xanh trước, ăn lượng đạm vừa phải, hạn chế chan nước luộc thịt nhiều mỡ béo. Đặc biệt, có thể chủ động uống một liều men tiêu hóa ngay sau bữa tiệc để đưa thêm lính đánh thuê (enzyme) vào dạ dày, giúp phá vỡ bọt khí và cắt nhỏ thịt cá nhanh chóng. Trợ thủ đắc lực: Neopeptine, Antibio Pro.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "elderly_gut"
+    ],
+    "id": "CHUNK_00167"
+  },
+  {
+    "text": "Câu hỏi: Bị viêm loét dạ dày có nên bổ sung kẽm không?\nTrả lời: Có, việc bổ sung kẽm cực kỳ có lợi cho bệnh nhân loét dạ dày. Kẽm là khoáng chất cốt lõi trong quá trình phân chia tế bào, tái tạo mô và tăng trưởng tổng hợp protein. Khi niêm mạc dạ dày hoặc ruột non bị rách, loét, kẽm sẽ đóng vai trò như 'thợ xây' tăng tốc độ se lành vết thương từ bên trong, đồng thời tăng cường hệ miễn dịch ruột. Ngoài ra kẽm cũng khắc phục tình trạng nhạt miệng, chán ăn. Tuy nhiên kẽm có thể gây xót ruột nhẹ nếu uống lúc đói, nên uống ngay sau bữa ăn. Sản phẩm bổ sung: Kẽm Farzincol 10mg.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00168"
+  },
+  {
+    "text": "Câu hỏi: Đau dạ dày liên tục do căng thẳng stress công việc, tôi nên uống vitamin gì để dịu lại?\nTrả lời: Stress, lo âu là kẻ thù số một của bao tử do hệ trục thần kinh Não - Ruột kết nối trực tiếp với nhau. Căng thẳng làm dạ dày co thắt mạnh và túa ra nhiều axit thừa. Trong trường hợp này, bổ sung Magie kết hợp Vitamin B6 là liệu pháp số một. Magie đóng vai trò như một chất an thần tự nhiên, giúp nới lỏng các cơ trơn dạ dày đang căng cứng, giảm stress thần kinh trung ương và cải thiện giấc ngủ. Thần kinh êm dịu thì dạ dày cũng sẽ yên ổn. Các sản phẩm giảm co thắt, an thần nhẹ: Magne-B6 Corbiere, Gastosic.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00169"
+  },
+  {
+    "text": "Câu hỏi: Xuất huyết dạ dày rỉ rả có làm cơ thể bị thiếu máu không?\nTrả lời: Có, đây là một biến chứng mãn tính rất thường gặp. Viêm loét dạ dày, tá tràng nặng khiến máu bị rỉ rả ngày qua ngày lẫn vào phân. Tình trạng mất máu âm thầm này kéo dài làm cạn kiệt lượng dự trữ sắt của cơ thể, dẫn đến thiếu máu thiếu sắt. Bệnh nhân sẽ có biểu hiện da xanh xao, hoa mắt chóng mặt khi đứng lên ngồi xuống, cơ thể mệt mỏi đuối sức. Do đó, song song với việc trị loét bao tử, việc bổ sung viên sắt và acid folic để tạo máu là điều bắt buộc. Sản phẩm tham khảo: Viên sắt Ferrovit.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00170"
+  },
+  {
+    "text": "Câu hỏi: Uống viên sắt bổ máu hay làm tôi bị buồn nôn và đau dạ dày, có cách nào khắc phục không?\nTrả lời: Các chế phẩm sắt bổ sung, đặc biệt là sắt vô cơ, thường có tác dụng phụ gây kích ứng niêm mạc đường tiêu hóa, dẫn đến cảm giác cồn cào, buồn nôn, đau bao tử và táo bón sẫm màu phân. Để khắc phục, bạn không nên uống sắt lúc bụng đói rỗng. Hãy uống viên sắt trong hoặc ngay sau bữa ăn trưa. Lựa chọn các dòng sắt hữu cơ dạng nang mềm sẽ thân thiện với dạ dày hơn, ít mùi tanh. Lưu ý: không uống thuốc đau dạ dày (thuốc kháng axit sữa) cùng lúc với sắt vì sẽ làm mất tác dụng hấp thu sắt. Sản phẩm dễ uống: Ferrovit.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00171"
+  },
+  {
+    "text": "Câu hỏi: Làm sao để hạn chế táo bón khi bổ sung vitamin và khoáng chất (như sắt, canxi) ở người bệnh tiêu hóa?\nTrả lời: Uống bổ sung Canxi và Sắt rất dễ gây tác dụng phụ là táo bón nhiệt bón, làm nặng thêm tình trạng trĩ hoặc nứt kẽ hậu môn ở những người vốn có hệ tiêu hóa kém. Để giải quyết, bạn cần thay đổi loại vi chất đang dùng sang dạng hữu cơ dễ hấp thu, đồng thời bắt buộc phải uống thật nhiều nước lọc trong ngày. Chế độ ăn tăng cường rau xanh mồng tơi, khoai lang để phân mềm mại. Nếu tình trạng táo bón gây khó chịu lớn, có thể dùng tạm men vi sinh hoặc thuốc nhuận tràng nhẹ. Hỗ trợ tiêu hóa khi uống vi chất: Men vi sinh Enterogermina, Bioflora.",
+    "type": "qa",
+    "source": "prompt3.seed.json",
+    "tags": [
+      "vitamin_mineral"
+    ],
+    "id": "CHUNK_00172"
+  },
+  {
+    "text": "Câu 1: Bác sĩ ơi, tôi bị bệnh dạ dày thì nên ưu tiên ăn những loại thực phẩm nào? Bạn nên ưu tiên ăn các món dễ tiêu hóa như cơm trắng, khoai lang luộc, cháo yến mạch, khoai tây, rau lá xanh, và các loại trái cây (như chuối, táo nghiền không vỏ) , , . Các món hấp, luộc như thịt gà luộc, cá hấp cũng rất tốt và không gây áp lực lên dạ dày .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00173"
+  },
+  {
+    "text": "Câu 2: Bị bệnh tiêu hóa có cần bổ sung chất xơ không? Rất cần thiết! Chất xơ hòa tan giúp làm chậm quá trình làm rỗng dạ dày, ngăn ngừa tiêu chảy và táo bón . Bạn nên bổ sung khoảng 25-30g chất xơ mỗi ngày từ các loại rau xanh, trái cây và ngũ cốc nguyên cám .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00174"
+  },
+  {
+    "text": "Câu 3: Tôi nghe nói ăn sữa chua tốt cho dạ dày, có đúng không? Đúng vậy. Sữa chua chứa nhiều probiotic (vi khuẩn có lợi) giúp phân hủy độc tố, tiêu diệt vi khuẩn gây bệnh và duy trì sự cân bằng của đường ruột, hỗ trợ giảm đầy hơi và tiêu chảy , , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00175"
+  },
+  {
+    "text": "Câu 4: Bị đau dạ dày tôi cần kiêng ăn những gì? Bạn cần tránh xa thực phẩm chiên rán, nhiều dầu mỡ, đồ ăn cay nóng, thực phẩm chứa chất béo bão hòa vì chúng làm kích ứng niêm mạc và khiến bệnh nặng thêm , , . Ngoài ra, bạn cũng cần nấu ăn nhạt, ít gia vị .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00176"
+  },
+  {
+    "text": "Câu 5: Tôi có thể uống cà phê hoặc rượu bia không? Tuyệt đối không nên. Bạn cần tránh đồ uống có cồn (rượu bia), cà phê, soda và các đồ uống chứa caffeine vì chúng kích thích dạ dày, làm mỏng lớp niêm mạc bảo vệ và có thể gây viêm loét hoặc xuất huyết tiêu hóa , , , , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00177"
+  },
+  {
+    "text": "Câu 6: Việc uống nước có ảnh hưởng đến bệnh dạ dày không? Có ảnh hưởng rất lớn. Uống đủ 1,5 - 2 lít nước mỗi ngày giúp hệ tiêu hóa hoạt động trơn tru , . Uống nước ấm hoặc trà thảo mộc vào buổi sáng cũng giúp kích thích nhu động ruột rất tốt .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00178"
+  },
+  {
+    "text": "Câu 7: Tôi bị trào ngược dạ dày, tôi nên chú ý gì trong sinh hoạt sau ăn? Bạn tuyệt đối không được ăn quá no trong một bữa và không được nằm xuống ngay sau khi ăn. Đây là những thói quen xấu làm tăng áp lực lên ổ bụng và khiến axit dễ dàng trào ngược lên thực quản , . CHUYÊN MỤC: DẤU HIỆU NGUY HIỂM CẦN NHẬP VIỆN NGAY",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00179"
+  },
+  {
+    "text": "Câu 8: Dấu hiệu nào cảnh báo tôi đang bị xuất huyết dạ dày cấp tính? Nếu bạn đột ngột nôn ra máu màu đỏ tươi hoặc nôn ra dịch màu nâu đen giống như bã cà phê, đó là dấu hiệu xuất huyết tiêu hóa nghiêm trọng, cần được cấp cứu ngay lập tức , , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00180"
+  },
+  {
+    "text": "Câu 9: Màu sắc phân thay đổi thế nào thì đáng lo ngại? Hãy đến bệnh viện ngay nếu bạn đi ngoài phân có màu đen sì (như hắc ín), phân có mùi rất hôi, hoặc trong phân có lẫn máu tươi , , , . Đây là bằng chứng cho thấy máu đang chảy trong dạ dày hoặc ruột của bạn.",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00181"
+  },
+  {
+    "text": "Câu 10: Những cơn đau bụng như thế nào thì không được chủ quan? Đau bụng âm ỉ là bình thường, nhưng nếu bạn cảm thấy đau bụng dữ dội vùng thượng vị (trên rốn), đau liên tục kéo dài hơn 2 tuần, hoặc đau dữ dội ngay sau khi ăn, bạn cần đi khám ngay để loại trừ thủng dạ dày hoặc viêm tụy , , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00182"
+  },
+  {
+    "text": "Câu 11: Dấu hiệu mệt mỏi, hoa mắt chóng mặt cảnh báo điều gì? Nếu bạn bị đau dạ dày kèm theo cảm giác hoa mắt, chóng mặt, mệt lả, đánh trống ngực hoặc tụt huyết áp khi thay đổi tư thế, rất có thể bạn đang bị thiếu máu cấp do xuất huyết tiêu hóa ẩn bên trong , , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00183"
+  },
+  {
+    "text": "Câu 12: Cảm giác nuốt vướng, khó nuốt có nguy hiểm không? Rất nguy hiểm. Nếu bạn cảm thấy đau khi nuốt, khó nuốt hoặc có cảm giác thức ăn bị mắc nghẹn trong thực quản, đó có thể là biến chứng hẹp thực quản hoặc nguy cơ ung thư thực quản, bạn cần nội soi kiểm tra sớm , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00184"
+  },
+  {
+    "text": "Câu 13: Sụt cân nhanh khi đau dạ dày có đáng lo không? Nếu bạn mệt mỏi, chán ăn và sụt cân nhanh chóng mà không rõ nguyên nhân, kết hợp với các cơn đau lan khắp vùng bụng, đây là một trong những dấu hiệu cảnh báo bệnh lý ác tính như ung thư dạ dày , , , . CHUYÊN MỤC: HƯỚNG DẪN SỬ DỤNG THUỐC ĐÚNG CÁCH",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00185"
+  },
+  {
+    "text": "Câu 14: Tôi đang dùng thuốc kháng axit (để giảm ợ chua), nên uống lúc nào? Thuốc kháng axit (chứa nhôm, magnesi) giúp trung hòa axit dịch vị. Bạn nên uống thuốc này từ 1 đến 3 giờ sau bữa ăn và trước khi đi ngủ để đạt hiệu quả tốt nhất .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00186"
+  },
+  {
+    "text": "Câu 15: Thuốc bảo vệ niêm mạc dạ dày (như Sucralfate) nên dùng ra sao? Nhóm thuốc bảo vệ niêm mạc tạo ra một lớp bao bọc vết loét, ngăn cản axit tấn công. Bạn cần uống thuốc này từ 30 phút đến 60 phút trước khi ăn để thuốc kịp tạo màng bảo vệ .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00187"
+  },
+  {
+    "text": "Câu 16: Tôi được kê đơn kháng sinh trị vi khuẩn HP, tôi uống vài ngày thấy đỡ đau thì dừng được không? Tuyệt đối không! Việc diệt vi khuẩn H. pylori yêu cầu bạn phải uống phối hợp nhiều loại kháng sinh và thuốc giảm tiết axit liên tục trong 10 đến 14 ngày , . Tự ý dừng thuốc sẽ khiến vi khuẩn kháng thuốc, làm bệnh khó chữa hơn rất nhiều , .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00188"
+  },
+  {
+    "text": "Câu 17: Tôi hay bị đau nhức xương khớp và hay uống thuốc giảm đau (NSAIDs), điều này có hại dạ dày không? Có, rất hại. Thuốc giảm đau chống viêm không steroid (NSAIDs) là một trong hai nguyên nhân hàng đầu gây viêm loét và xuất huyết dạ dày do chúng làm phá vỡ hàng rào bảo vệ niêm mạc , , , . Nếu bắt buộc phải dùng, hãy báo cho bác sĩ để được kê thêm thuốc bảo vệ dạ dày.",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00189"
+  },
+  {
+    "text": "Câu 18: Tôi có thể uống cùng lúc nhiều loại thuốc dạ dày không? Không nên tự ý phối hợp. Nguyên tắc điều trị là không dùng phối hợp các thuốc cùng chung một cơ chế, và không dùng nhóm thuốc kháng axit cùng lúc với các thuốc khác để tránh làm mất tác dụng của nhau .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00190"
+  },
+  {
+    "text": "Câu 19: Làm sao tôi biết việc dùng thuốc chữa loét dạ dày của mình có hiệu quả? Thông thường, một đợt điều trị kéo dài 4-8 tuần . Sau đợt điều trị này, bác sĩ sẽ chỉ định nội soi kiểm tra lại. Nếu sau 8 tuần vết loét không lành, bác sĩ sẽ phải đổi phác đồ hoặc sinh thiết để loại trừ ung thư .",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00191"
+  },
+  {
+    "text": "Câu 20: Tại sao tôi uống thuốc diệt vi khuẩn HP mà vẫn bị tái phát? Tái phát có thể do bạn uống không đúng thuốc, không đủ liều, vẫn tiếp tục dùng thuốc giảm đau xương khớp, chưa loại trừ được vi khuẩn (kháng thuốc), hoặc do thói quen hút thuốc lá làm giảm khả năng lành vết loét , , , . Hãy tuân thủ tuyệt đối phác đồ của bác sĩ và bỏ thuốc lá nhé.",
+    "type": "faq",
+    "source": "faq.seed.txt",
+    "tags": [
+      "faq"
+    ],
+    "id": "CHUNK_00192"
+  }
+]

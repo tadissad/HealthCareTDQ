@@ -1,0 +1,142 @@
+[
+  {
+    "user_id": "U264",
+    "action": "view",
+    "timestamp": "2026-01-01T09:45:38.000000000+00:00",
+    "product_id": "P095",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "click",
+    "timestamp": "2026-01-01T10:01:38.000000000+00:00",
+    "product_id": "P095",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "add_to_cart",
+    "timestamp": "2026-01-01T11:14:38.000000000+00:00",
+    "product_id": "P075",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "purchase",
+    "timestamp": "2026-01-01T12:28:38.000000000+00:00",
+    "product_id": "P075",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "review",
+    "timestamp": "2026-01-01T12:48:38.000000000+00:00",
+    "product_id": "P075",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "view",
+    "timestamp": "2026-01-01T12:55:38.000000000+00:00",
+    "product_id": "P075",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "click",
+    "timestamp": "2026-01-01T14:15:38.000000000+00:00",
+    "product_id": "P075",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "compare",
+    "timestamp": "2026-01-01T15:22:38.000000000+00:00",
+    "product_id": "P075",
+    "category": "stomach_nutrition"
+  },
+  {
+    "user_id": "U264",
+    "action": "view",
+    "timestamp": "2026-01-03T07:31:38.000000000+00:00",
+    "product_id": "P037",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "compare",
+    "timestamp": "2026-01-03T07:50:38.000000000+00:00",
+    "product_id": "P057",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "view",
+    "timestamp": "2026-01-03T08:02:38.000000000+00:00",
+    "product_id": "P087",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "compare",
+    "timestamp": "2026-01-03T08:42:38.000000000+00:00",
+    "product_id": "P027",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "add_to_cart",
+    "timestamp": "2026-01-03T09:39:38.000000000+00:00",
+    "product_id": "P087",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "compare",
+    "timestamp": "2026-01-03T10:20:38.000000000+00:00",
+    "product_id": "P087",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "purchase",
+    "timestamp": "2026-01-03T11:35:38.000000000+00:00",
+    "product_id": "P087",
+    "category": "test_kit_home"
+  },
+  {
+    "user_id": "U264",
+    "action": "view",
+    "timestamp": "2026-01-04T13:47:38.000000000+00:00",
+    "product_id": "P046",
+    "category": "equipment_device"
+  },
+  {
+    "user_id": "U264",
+    "action": "click",
+    "timestamp": "2026-01-04T14:49:38.000000000+00:00",
+    "product_id": "P056",
+    "category": "equipment_device"
+  },
+  {
+    "user_id": "U264",
+    "action": "click",
+    "timestamp": "2026-01-04T15:41:38.000000000+00:00",
+    "product_id": "P056",
+    "category": "equipment_device"
+  },
+  {
+    "user_id": "U264",
+    "action": "view",
+    "timestamp": "2026-01-04T16:24:38.000000000+00:00",
+    "product_id": "P016",
+    "category": "equipment_device"
+  },
+  {
+    "user_id": "U264",
+    "action": "click",
+    "timestamp": "2026-01-04T16:47:38.000000000+00:00",
+    "product_id": "P016",
+    "category": "equipment_device"
+  }
+]

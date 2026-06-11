@@ -278,7 +278,7 @@ curl -X POST http://localhost:8008/api/reviews/review_123/upvote \
 ### Check Service Logs
 ```bash
 # Xem logs của một service cụ thể
-docker-compose logs -f clinical-advisory-service
+docker-compose logs -f ai-service
 
 # Xem logs của tất cả services
 docker-compose logs -f

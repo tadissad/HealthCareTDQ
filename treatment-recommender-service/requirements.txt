@@ -1,8 +1,0 @@
-# treatment-recommender-service/requirements.txt
-# ⚠️  Các thư viện AI lớn (torch, torch-geometric, scipy, numpy, neo4j,
-#     fastapi, uvicorn, pydantic, requests, python-dotenv)
-#     ĐÃ được cài trong health-ai-base image.
-#     Chỉ liệt kê phần khác biệt so với base ở đây:
-
-# (Không có dependency bổ sung nào — toàn bộ đã nằm trong base image)
-# Giữ file này để pip install không bị lỗi "file not found"

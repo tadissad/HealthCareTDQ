@@ -1,0 +1,2136 @@
+{
+  "metadata": {
+    "generated_at": "2026-04-20T14:00:19.561455+00:00",
+    "builder": "ai-service/kb/build_unified_kb.py",
+    "target_products": 50,
+    "actual_products": 50,
+    "sources": [
+      {
+        "file": "kb/sources/prompt1.seed.json",
+        "purpose": "seed products",
+        "used_for": [
+          "products",
+          "chunks",
+          "neo4j"
+        ]
+      },
+      {
+        "file": "kb/sources/prompt2.seed.json",
+        "purpose": "taxonomy symptoms-diseases-mappings",
+        "used_for": [
+          "symptoms",
+          "diseases",
+          "neo4j",
+          "chunks"
+        ]
+      },
+      {
+        "file": "kb/sources/prompt3.seed.json",
+        "purpose": "rich QA chunks",
+        "used_for": [
+          "chunks",
+          "neo4j_hints"
+        ]
+      },
+      {
+        "file": "kb/sources/benhdaday.seed.csv",
+        "purpose": "disease clinical table",
+        "used_for": [
+          "diseases",
+          "symptom_edges",
+          "chunks"
+        ]
+      },
+      {
+        "file": "kb/sources/faq.seed.txt",
+        "purpose": "FAQ corpus",
+        "used_for": [
+          "chunks"
+        ]
+      }
+    ]
+  },
+  "categories": [
+    {
+      "code": "ulcer_hp_support",
+      "name": "Ho tro dieu tri Viem loet va HP",
+      "legacy_keys": [
+        "ulcer_hp",
+        "ulcer_hp_support"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "reflux_heartburn",
+      "name": "Giam trao nguoc va o chua",
+      "legacy_keys": [
+        "acid_reflux",
+        "reflux_heartburn"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "probiotic_digestion",
+      "name": "Men vi sinh va ho tro tieu hoa",
+      "legacy_keys": [
+        "probiotic_gut",
+        "probiotics",
+        "probiotic_digestion"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "herbal_extract",
+      "name": "Tinh chat nghe va thao duoc",
+      "legacy_keys": [
+        "herbal_turmeric",
+        "herbal",
+        "herbal_extract"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "stomach_nutrition",
+      "name": "Thuc pham va dinh duong da day",
+      "legacy_keys": [
+        "gut_nutrition",
+        "nutrition",
+        "stomach_nutrition"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "equipment_device",
+      "name": "Dung cu va thiet bi ho tro",
+      "legacy_keys": [
+        "medical_device",
+        "equipment",
+        "equipment_device"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "test_kit_home",
+      "name": "Bo xet nghiem va kiem tra tai nha",
+      "legacy_keys": [
+        "home_test",
+        "testing_kits",
+        "test_kit_home"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "consultation_package",
+      "name": "Goi kham va tu van bac si",
+      "legacy_keys": [
+        "consult_package",
+        "medical_services",
+        "consultation_package"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "elderly_weak_digestion",
+      "name": "Danh cho nguoi gia va he tieu hoa yeu",
+      "legacy_keys": [
+        "elderly_gut",
+        "elderly_weak_gut",
+        "elderly_weak_digestion"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    },
+    {
+      "code": "vitamin_mineral",
+      "name": "Vitamin va khoang chat bo tro",
+      "legacy_keys": [
+        "vitamins",
+        "vitamin_mineral"
+      ],
+      "source_refs": [
+        "prompt2.seed.json",
+        "data_user500.csv"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "name": "Nexium 40mg",
+      "category_codes": [
+        "ulcer_hp_support"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Pantoloc 40mg",
+      "category_codes": [
+        "ulcer_hp_support"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Trymo",
+      "category_codes": [
+        "ulcer_hp_support"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Phosphalugel",
+      "category_codes": [
+        "reflux_heartburn"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Yumangel",
+      "category_codes": [
+        "reflux_heartburn"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Gaviscon",
+      "category_codes": [
+        "reflux_heartburn"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Enterogermina 2 Tỷ",
+      "category_codes": [
+        "probiotic_digestion"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Bioflora 200mg",
+      "category_codes": [
+        "probiotic_digestion"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Men vi sinh Antibio Pro",
+      "category_codes": [
+        "probiotic_digestion"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "CumarGold New",
+      "category_codes": [
+        "herbal_extract"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Viên sủi SCurma Fizzy",
+      "category_codes": [
+        "herbal_extract"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Dạ Dày Nam Dược",
+      "category_codes": [
+        "herbal_extract"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Bình Vị Thái Minh",
+      "category_codes": [
+        "stomach_nutrition"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Sữa Peptamen",
+      "category_codes": [
+        "stomach_nutrition"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Gastosic",
+      "category_codes": [
+        "stomach_nutrition"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Túi chườm nóng lạnh Thiên Thanh",
+      "category_codes": [
+        "equipment_device"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Đai massage làm ấm bụng Beurer",
+      "category_codes": [
+        "equipment_device"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Cân sức khỏe điện tử Omron HN-289",
+      "category_codes": [
+        "equipment_device"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Kit test nhanh vi khuẩn HP qua phân",
+      "category_codes": [
+        "test_kit_home"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Bộ kit test máu ẩn trong phân FOB",
+      "category_codes": [
+        "test_kit_home"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Que thử nước tiểu 10 thông số",
+      "category_codes": [
+        "test_kit_home"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Gói khám Tiêu hóa Dạ dày Cơ bản",
+      "category_codes": [
+        "consultation_package"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Dịch vụ xét nghiệm máu và HP tại nhà",
+      "category_codes": [
+        "consultation_package"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Gói tư vấn dinh dưỡng Dạ dày Online",
+      "category_codes": [
+        "consultation_package"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Neopeptine",
+      "category_codes": [
+        "elderly_weak_digestion"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Smecta",
+      "category_codes": [
+        "elderly_weak_digestion"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Sữa Ensure Gold",
+      "category_codes": [
+        "elderly_weak_digestion"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Farzincol 10mg",
+      "category_codes": [
+        "vitamin_mineral"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Magne-B6 Corbiere",
+      "category_codes": [
+        "vitamin_mineral"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Ferrovit",
+      "category_codes": [
+        "vitamin_mineral"
+      ],
+      "source_refs": [
+        "prompt1.seed.json"
+      ]
+    },
+    {
+      "name": "Rabeprazole HP Care 20mg",
+      "category_codes": [
+        "ulcer_hp_support"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Sucralfate Mucosa Shield 1g",
+      "category_codes": [
+        "ulcer_hp_support"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Esoplus Reflux 20mg",
+      "category_codes": [
+        "reflux_heartburn"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Alginate Reflux Barrier",
+      "category_codes": [
+        "reflux_heartburn"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "LactoBalance IBS",
+      "category_codes": [
+        "probiotic_digestion"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Digestzyme Plus",
+      "category_codes": [
+        "probiotic_digestion"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Curcumin Forte Plus",
+      "category_codes": [
+        "herbal_extract"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Che day Gastro Tea",
+      "category_codes": [
+        "herbal_extract"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Gastro Protein Soup",
+      "category_codes": [
+        "stomach_nutrition"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Low Acid Oat Meal Mix",
+      "category_codes": [
+        "stomach_nutrition"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "HeatPad Digest Comfort",
+      "category_codes": [
+        "equipment_device"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Reflux Sleep Wedge",
+      "category_codes": [
+        "equipment_device"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "HP Stool Antigen Rapid",
+      "category_codes": [
+        "test_kit_home"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "FOB Home Screening",
+      "category_codes": [
+        "test_kit_home"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Telehealth GI Basic",
+      "category_codes": [
+        "consultation_package"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "GI Endoscopy Package",
+      "category_codes": [
+        "consultation_package"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "ElderDigest Fiber Soft",
+      "category_codes": [
+        "elderly_weak_digestion"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Senior Probiotic 60+",
+      "category_codes": [
+        "elderly_weak_digestion"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Zinc B Complex Digest",
+      "category_codes": [
+        "vitamin_mineral"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Electrolyte Rehydrate Plus",
+      "category_codes": [
+        "vitamin_mineral"
+      ],
+      "source_refs": [
+        "synthetic.product_expansion.v1",
+        "prompt1.seed.json",
+        "prompt2.seed.json"
+      ]
+    }
+  ],
+  "symptoms": [
+    {
+      "name": "Có thể khó chịu vùng bụng trên",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Cảm thấy có vị chua trong miệng",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Nôn ra máu đỏ tươi hoặc nâu đen như bã cà phê",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Tiêu chảy",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "biểu hiện thần kinh (kém cảm giác, yếu chi) do thiếu vitamin B12",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "buồn nôn",
+      "name_en": "nausea",
+      "aliases": [
+        "lợm giọng",
+        "muốn ói",
+        "nhộn nhạo trong dạ dày"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "chán ăn",
+      "name_en": "loss of appetite",
+      "aliases": [
+        "ăn không ngon miệng",
+        "nhạt miệng",
+        "lười ăn"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "chóng mặt",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "chướng bụng",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "ho kéo dài",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "hoa mắt",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "hôi miệng",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "khó nuốt",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "khó tiêu",
+      "name_en": "indigestion",
+      "aliases": [
+        "ăn không tiêu",
+        "ấm ách",
+        "ậm ạch"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "mệt mỏi",
+      "name_en": "fatigue",
+      "aliases": [
+        "uể oải",
+        "hụt hơi",
+        "thiếu sức sống"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "nuốt nghẹn",
+      "name_en": "difficulty swallowing",
+      "aliases": [
+        "vướng cổ họng",
+        "cảm giác có cục nghẹn",
+        "khó nuốt"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "nóng rát ngực",
+      "name_en": "heartburn",
+      "aliases": [
+        "nóng cổ họng",
+        "rát thực quản",
+        "nóng ran vùng ngực"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "nóng rát thượng vị lan lên họng",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "nóng rát vùng ngực",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "nôn (thường có máu)",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "nôn mửa",
+      "name_en": "vomiting",
+      "aliases": [
+        "nôn trớ",
+        "ói mửa"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "nôn mửa ra máu",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "phân có nhầy",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "phân đen/có máu",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "suy nhược",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "sôi bụng",
+      "name_en": "stomach rumbling",
+      "aliases": [
+        "bụng kêu ọc ọc",
+        "réo rắt trong bụng"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "sốt",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "sụt cân",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "sụt cân không rõ nguyên nhân",
+      "name_en": "unexplained weight loss",
+      "aliases": [
+        "tự nhiên gầy đi",
+        "giảm cân nhanh"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "thiếu máu hồng cầu to",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "tiêu chảy",
+      "name_en": "diarrhea",
+      "aliases": [
+        "đi ngoài phân lỏng",
+        "tào tháo đuổi",
+        "đi tướt"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "trào ngược",
+      "name_en": "acid reflux",
+      "aliases": [
+        "nước chua trào lên cổ",
+        "chớ"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "táo bón",
+      "name_en": "constipation",
+      "aliases": [
+        "đi ngoài khó",
+        "khó rặn"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "xì hơi nhiều",
+      "name_en": "excessive flatulence",
+      "aliases": [
+        "đánh rắm nhiều",
+        "thoát hơi nhiều"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "ăn không ngon",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Đau khắp vùng thượng vị (mức độ tăng dần)",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Đau ở thượng vị (khi đói hoặc ngay sau bữa ăn)",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "đau bụng",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "đau bụng dữ dội vùng thượng vị",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "đau dạ dày",
+      "name_en": "stomach pain",
+      "aliases": [
+        "đau bụng trên",
+        "đau thượng vị",
+        "xót ruột"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đau dạ dày dai dẳng",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đau quặn bụng",
+      "name_en": "abdominal cramps",
+      "aliases": [
+        "đau xoắn ruột",
+        "đau từng cơn"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đau tức ngực",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đi ngoài phân đen",
+      "name_en": "black stool",
+      "aliases": [
+        "phân đen như bã cà phê",
+        "phân có máu"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đi ngoài phân đen hoặc có máu",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "đi ngoài phân đen và hôi",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "đi ngoài ra máu tươi",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đói thấy đau",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đầy bụng",
+      "name_en": "bloating",
+      "aliases": [
+        "chướng bụng",
+        "căng tức bụng",
+        "bụng óc ách"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "đầy hơi",
+      "name_en": null,
+      "aliases": [],
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "đắng miệng",
+      "name_en": "bitter taste in mouth",
+      "aliases": [
+        "miệng có vị đắng",
+        "nhạt đắng miệng"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "ợ chua",
+      "name_en": "sour belching",
+      "aliases": [
+        "ợ lên men chua",
+        "trớ chua"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "ợ hơi",
+      "name_en": "belching",
+      "aliases": [
+        "trớ hơi",
+        "nấc cụt liên tục"
+      ],
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    }
+  ],
+  "diseases": [
+    {
+      "name": "Bệnh trĩ nội/ngoại",
+      "icd_code": "I84",
+      "severity": "low",
+      "description": "Phình giãn tĩnh mạch ở hậu môn trực tràng, thường là hậu quả của táo bón lâu ngày.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Co thắt thực quản",
+      "icd_code": "K22.4",
+      "severity": "medium",
+      "description": "Sự co thắt bất thường của các cơ trơn thực quản gây khó khăn khi nuốt.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Hội chứng ruột kích thích (IBS)",
+      "icd_code": "K58",
+      "severity": "low",
+      "description": "Rối loạn chức năng đại tràng gây đau bụng, thay đổi thói quen đi vệ sinh dù không có tổn thương thực thể.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Nhiễm vi khuẩn HP dạ dày",
+      "icd_code": "B98.0",
+      "severity": "high",
+      "description": "Nhiễm loại vi khuẩn có thể sống trong môi trường axit dạ dày, là nguyên nhân hàng đầu gây viêm loét.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Rối loạn tiêu hóa",
+      "icd_code": "K30",
+      "severity": "low",
+      "description": "Tình trạng hệ tiêu hóa hoạt động bất thường gây khó chịu sau khi ăn uống.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Trào ngược dạ dày thực quản (GERD)",
+      "icd_code": "K21",
+      "severity": "medium",
+      "description": "Dịch axit từ dạ dày trào ngược lên ống thực quản, gây nóng rát và khó chịu ở ngực.",
+      "source_refs": [
+        "prompt2.seed.json",
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Táo bón mãn tính",
+      "icd_code": "K59.0",
+      "severity": "low",
+      "description": "Khó đi đại tiện kéo dài nhiều tuần lễ, phân khô cứng do nhu động ruột kém.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Ung thư dạ dày",
+      "icd_code": "C16",
+      "severity": "high",
+      "description": "Khối u ác tính hình thành ở dạ dày, bệnh nguy hiểm cần phát hiện và điều trị sớm.",
+      "source_refs": [
+        "prompt2.seed.json",
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Viêm dạ dày cấp tính",
+      "icd_code": "K29.0",
+      "severity": "medium",
+      "description": "Dạ dày bị viêm sưng đột ngột, thường do ngộ độc thực phẩm, uống nhiều rượu bia hoặc dùng thuốc giảm đau.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Viêm dạ dày ruột (Gastroenteritis)",
+      "icd_code": "A09, K52",
+      "severity": "medium",
+      "description": "Nguyen nhan: Nhiễm trùng do virus (Norovirus, rotavirus), vi khuẩn (E. coli, Salmonella...), ký sinh trùng, hóa chất, độc tố.. Chan doan: Khám lâm sàng, nuôi cấy phân, xét nghiệm phản ứng chuỗi polymerase (PCR), xét nghiệm miễn dịch..",
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Viêm hang vị dạ dày",
+      "icd_code": "K29.6",
+      "severity": "medium",
+      "description": "Tình trạng viêm nhiễm xảy ra ở phần bờ cong nhỏ gần cuối dạ dày (hang vị).",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Viêm loét dạ dày",
+      "icd_code": "K25",
+      "severity": "medium",
+      "description": "Tình trạng niêm mạc dạ dày bị tổn thương, sưng viêm và tạo thành các vết loét rát đau.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Viêm loét dạ dày - tá tràng",
+      "icd_code": "K25, K26, K27",
+      "severity": "medium",
+      "description": "Nguyen nhan: Vi khuẩn Helicobacter pylori (H. pylori), dùng thuốc kháng viêm không steroid (NSAIDs), lối sống không lành mạnh.. Chan doan: Nội soi dạ dày - tá tràng, test hơi thở, xét nghiệm máu, xét nghiệm phân sinh thiết tìm H. pylori..",
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Viêm loét tá tràng",
+      "icd_code": "K26",
+      "severity": "medium",
+      "description": "Vết loét hình thành ở phần đầu của ruột non (tá tràng), thường gây đau lúc đói hoặc sau ăn vài giờ.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Viêm ruột non cấp tính",
+      "icd_code": "A09",
+      "severity": "medium",
+      "description": "Nhiễm trùng dạ dày ruột do vi khuẩn hoặc virus, dân gian hay gọi là tiêu chảy cấp.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Viêm teo dạ dày chuyển sản tự miễn",
+      "icd_code": "K29.4",
+      "severity": "medium",
+      "description": "Nguyen nhan: Tự miễn di truyền (có kháng thể kháng lại tế bào thành dạ dày và yếu tố nội sinh).. Chan doan: Nội soi dạ dày sinh thiết, xét nghiệm nồng độ Vitamin B12 huyết thanh..",
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Viêm đại tràng",
+      "icd_code": "K51",
+      "severity": "medium",
+      "description": "Viêm nhiễm ở ruột già (đại tràng), thường gây đau bụng dưới và đi ngoài nhiều lần.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    },
+    {
+      "name": "Xuất huyết dạ dày",
+      "icd_code": "K92.2, K25.4, K26.4",
+      "severity": "medium",
+      "description": "Nguyen nhan: Biến chứng của viêm loét dạ dày tá tràng, lạm dụng thuốc NSAIDs kéo dài, uống nhiều bia rượu.. Chan doan: Nội soi dạ dày cấp cứu, xét nghiệm máu và phân..",
+      "source_refs": [
+        "benhdaday.seed.csv"
+      ]
+    },
+    {
+      "name": "Xuất huyết tiêu hóa",
+      "icd_code": "K92.2",
+      "severity": "high",
+      "description": "Tình trạng chảy máu bên trong đường tiêu hóa, thường do vết loét sâu hoặc vỡ tĩnh mạch.",
+      "source_refs": [
+        "prompt2.seed.json"
+      ]
+    }
+  ],
+  "relations": {
+    "symptom_indicates": [
+      {
+        "symptom": "Có thể khó chịu vùng bụng trên",
+        "disease": "Viêm teo dạ dày chuyển sản tự miễn",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "Cảm thấy có vị chua trong miệng",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "Nôn ra máu đỏ tươi hoặc nâu đen như bã cà phê",
+        "disease": "Xuất huyết dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "Tiêu chảy",
+        "disease": "Viêm dạ dày ruột (Gastroenteritis)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "biểu hiện thần kinh (kém cảm giác, yếu chi) do thiếu vitamin B12",
+        "disease": "Viêm teo dạ dày chuyển sản tự miễn",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "buồn nôn",
+        "disease": "Nhiễm vi khuẩn HP dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "buồn nôn",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "buồn nôn",
+        "disease": "Viêm dạ dày cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "buồn nôn",
+        "disease": "Viêm dạ dày ruột (Gastroenteritis)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "buồn nôn",
+        "disease": "Viêm loét dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "chán ăn",
+        "disease": "Táo bón mãn tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "chán ăn",
+        "disease": "Ung thư dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "chóng mặt",
+        "disease": "Xuất huyết dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "chóng mặt",
+        "disease": "Xuất huyết tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "chướng bụng",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "ho kéo dài",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "hoa mắt",
+        "disease": "Xuất huyết dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "hôi miệng",
+        "disease": "Nhiễm vi khuẩn HP dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "khó nuốt",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "khó tiêu",
+        "disease": "Rối loạn tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "khó tiêu",
+        "disease": "Viêm hang vị dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "mệt mỏi",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "mệt mỏi",
+        "disease": "Viêm dạ dày ruột (Gastroenteritis)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "mệt mỏi",
+        "disease": "Viêm ruột non cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "mệt mỏi",
+        "disease": "Viêm teo dạ dày chuyển sản tự miễn",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "mệt mỏi",
+        "disease": "Xuất huyết dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "mệt mỏi",
+        "disease": "Xuất huyết tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nuốt nghẹn",
+        "disease": "Co thắt thực quản",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nuốt nghẹn",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nóng rát ngực",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nóng rát thượng vị lan lên họng",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "nóng rát vùng ngực",
+        "disease": "Viêm loét dạ dày - tá tràng",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "nôn (thường có máu)",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "nôn mửa",
+        "disease": "Ung thư dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nôn mửa",
+        "disease": "Viêm dạ dày cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nôn mửa",
+        "disease": "Viêm dạ dày ruột (Gastroenteritis)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "nôn mửa",
+        "disease": "Viêm ruột non cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "nôn mửa ra máu",
+        "disease": "Xuất huyết tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "phân có nhầy",
+        "disease": "Viêm đại tràng",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "phân đen/có máu",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "suy nhược",
+        "disease": "Viêm teo dạ dày chuyển sản tự miễn",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "sôi bụng",
+        "disease": "Rối loạn tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "sốt",
+        "disease": "Viêm dạ dày ruột (Gastroenteritis)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "sụt cân",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "sụt cân không rõ nguyên nhân",
+        "disease": "Ung thư dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "thiếu máu hồng cầu to",
+        "disease": "Viêm teo dạ dày chuyển sản tự miễn",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "tiêu chảy",
+        "disease": "Hội chứng ruột kích thích (IBS)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "tiêu chảy",
+        "disease": "Viêm ruột non cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "tiêu chảy",
+        "disease": "Viêm đại tràng",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "trào ngược",
+        "disease": "Co thắt thực quản",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "trào ngược",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "táo bón",
+        "disease": "Bệnh trĩ nội/ngoại",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "táo bón",
+        "disease": "Hội chứng ruột kích thích (IBS)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "táo bón",
+        "disease": "Táo bón mãn tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "xì hơi nhiều",
+        "disease": "Rối loạn tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "ăn không ngon",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "Đau khắp vùng thượng vị (mức độ tăng dần)",
+        "disease": "Ung thư dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "Đau ở thượng vị (khi đói hoặc ngay sau bữa ăn)",
+        "disease": "Viêm loét dạ dày - tá tràng",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đau bụng",
+        "disease": "Viêm dạ dày ruột (Gastroenteritis)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đau bụng dữ dội vùng thượng vị",
+        "disease": "Xuất huyết dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đau dạ dày",
+        "disease": "Nhiễm vi khuẩn HP dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau dạ dày",
+        "disease": "Viêm hang vị dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau dạ dày",
+        "disease": "Viêm loét dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau dạ dày",
+        "disease": "Viêm loét tá tràng",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau dạ dày dai dẳng",
+        "disease": "Ung thư dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau quặn bụng",
+        "disease": "Hội chứng ruột kích thích (IBS)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau quặn bụng",
+        "disease": "Viêm dạ dày cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau quặn bụng",
+        "disease": "Viêm loét tá tràng",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau quặn bụng",
+        "disease": "Viêm ruột non cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau quặn bụng",
+        "disease": "Viêm đại tràng",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau tức ngực",
+        "disease": "Co thắt thực quản",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đau tức ngực",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đi ngoài phân đen",
+        "disease": "Ung thư dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đi ngoài phân đen",
+        "disease": "Xuất huyết tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đi ngoài phân đen hoặc có máu",
+        "disease": "Viêm loét dạ dày - tá tràng",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đi ngoài phân đen và hôi",
+        "disease": "Xuất huyết dạ dày",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đi ngoài ra máu tươi",
+        "disease": "Bệnh trĩ nội/ngoại",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đói thấy đau",
+        "disease": "Viêm loét tá tràng",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy bụng",
+        "disease": "Hội chứng ruột kích thích (IBS)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy bụng",
+        "disease": "Rối loạn tiêu hóa",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy bụng",
+        "disease": "Táo bón mãn tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy bụng",
+        "disease": "Viêm dạ dày cấp tính",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy bụng",
+        "disease": "Viêm hang vị dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy bụng",
+        "disease": "Viêm loét dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "đầy hơi",
+        "disease": "Viêm loét dạ dày - tá tràng",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "đắng miệng",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "ợ chua",
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "ợ chua",
+        "disease": "Viêm loét dạ dày",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "symptom": "ợ chua",
+        "disease": "Viêm loét dạ dày - tá tràng",
+        "source": "benhdaday.seed.csv"
+      },
+      {
+        "symptom": "ợ hơi",
+        "disease": "Nhiễm vi khuẩn HP dạ dày",
+        "source": "prompt2.seed.json"
+      }
+    ],
+    "disease_treated_by": [
+      {
+        "disease": "Rối loạn tiêu hóa",
+        "product": "Enterogermina 2 Tỷ",
+        "priority": 1,
+        "category": "probiotic_digestion",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Gaviscon",
+        "priority": 1,
+        "category": "reflux_heartburn",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Bình Vị Thái Minh",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "CumarGold New",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Gastosic",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Nexium 40mg",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Pantoloc 40mg",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Phosphalugel",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Trào ngược dạ dày thực quản (GERD)",
+        "product": "Yumangel",
+        "priority": 3,
+        "category": "reflux_heartburn",
+        "source": "prompt3.seed.json"
+      },
+      {
+        "disease": "Viêm loét dạ dày",
+        "product": "Nexium 40mg",
+        "priority": 1,
+        "category": "ulcer_hp_support",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "disease": "Viêm loét dạ dày",
+        "product": "Phosphalugel",
+        "priority": 1,
+        "category": "ulcer_hp_support",
+        "source": "prompt2.seed.json"
+      },
+      {
+        "disease": "Viêm loét dạ dày",
+        "product": "Yumangel",
+        "priority": 1,
+        "category": "ulcer_hp_support",
+        "source": "prompt2.seed.json"
+      }
+    ],
+    "product_belongs_to": [
+      {
+        "product": "Nexium 40mg",
+        "category": "ulcer_hp_support",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Pantoloc 40mg",
+        "category": "ulcer_hp_support",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Trymo",
+        "category": "ulcer_hp_support",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Phosphalugel",
+        "category": "reflux_heartburn",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Yumangel",
+        "category": "reflux_heartburn",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Gaviscon",
+        "category": "reflux_heartburn",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Enterogermina 2 Tỷ",
+        "category": "probiotic_digestion",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Bioflora 200mg",
+        "category": "probiotic_digestion",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Men vi sinh Antibio Pro",
+        "category": "probiotic_digestion",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "CumarGold New",
+        "category": "herbal_extract",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Viên sủi SCurma Fizzy",
+        "category": "herbal_extract",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Dạ Dày Nam Dược",
+        "category": "herbal_extract",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Bình Vị Thái Minh",
+        "category": "stomach_nutrition",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Sữa Peptamen",
+        "category": "stomach_nutrition",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Gastosic",
+        "category": "stomach_nutrition",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Túi chườm nóng lạnh Thiên Thanh",
+        "category": "equipment_device",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Đai massage làm ấm bụng Beurer",
+        "category": "equipment_device",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Cân sức khỏe điện tử Omron HN-289",
+        "category": "equipment_device",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Kit test nhanh vi khuẩn HP qua phân",
+        "category": "test_kit_home",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Bộ kit test máu ẩn trong phân FOB",
+        "category": "test_kit_home",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Que thử nước tiểu 10 thông số",
+        "category": "test_kit_home",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Gói khám Tiêu hóa Dạ dày Cơ bản",
+        "category": "consultation_package",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Dịch vụ xét nghiệm máu và HP tại nhà",
+        "category": "consultation_package",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Gói tư vấn dinh dưỡng Dạ dày Online",
+        "category": "consultation_package",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Neopeptine",
+        "category": "elderly_weak_digestion",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Smecta",
+        "category": "elderly_weak_digestion",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Sữa Ensure Gold",
+        "category": "elderly_weak_digestion",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Farzincol 10mg",
+        "category": "vitamin_mineral",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Magne-B6 Corbiere",
+        "category": "vitamin_mineral",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Ferrovit",
+        "category": "vitamin_mineral",
+        "source": "prompt1.seed.json"
+      },
+      {
+        "product": "Rabeprazole HP Care 20mg",
+        "category": "ulcer_hp_support",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Sucralfate Mucosa Shield 1g",
+        "category": "ulcer_hp_support",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Esoplus Reflux 20mg",
+        "category": "reflux_heartburn",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Alginate Reflux Barrier",
+        "category": "reflux_heartburn",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "LactoBalance IBS",
+        "category": "probiotic_digestion",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Digestzyme Plus",
+        "category": "probiotic_digestion",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Curcumin Forte Plus",
+        "category": "herbal_extract",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Che day Gastro Tea",
+        "category": "herbal_extract",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Gastro Protein Soup",
+        "category": "stomach_nutrition",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Low Acid Oat Meal Mix",
+        "category": "stomach_nutrition",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "HeatPad Digest Comfort",
+        "category": "equipment_device",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Reflux Sleep Wedge",
+        "category": "equipment_device",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "HP Stool Antigen Rapid",
+        "category": "test_kit_home",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "FOB Home Screening",
+        "category": "test_kit_home",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Telehealth GI Basic",
+        "category": "consultation_package",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "GI Endoscopy Package",
+        "category": "consultation_package",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "ElderDigest Fiber Soft",
+        "category": "elderly_weak_digestion",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Senior Probiotic 60+",
+        "category": "elderly_weak_digestion",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Zinc B Complex Digest",
+        "category": "vitamin_mineral",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      },
+      {
+        "product": "Electrolyte Rehydrate Plus",
+        "category": "vitamin_mineral",
+        "source": "synthetic.product_expansion.v1|prompt1.seed.json|prompt2.seed.json"
+      }
+    ]
+  }
+}

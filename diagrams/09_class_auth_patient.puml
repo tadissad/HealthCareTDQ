@@ -1,0 +1,135 @@
+@startuml class_auth_patient
+' ============================================================
+' Class Diagram: Auth Service + Patient Service
+' ============================================================
+skinparam classBackgroundColor #AEE2F0
+skinparam classBorderColor #1565C0
+skinparam classHeaderBackgroundColor #1565C0
+skinparam classHeaderFontColor #FFFFFF
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
+skinparam ArrowColor #1565C0
+skinparam ArrowThickness 1.5
+skinparam shadowing false
+skinparam linetype ortho
+
+' ============================================================
+' AUTH SERVICE — FastAPI, no Django ORM
+' ============================================================
+package"auth-service :8012 (FastAPI)"#E3F2FD {
+
+  class Account {
+    <<api-gateway · SQLite>>
+    -ID : int
+    -username : String
+    -password : String (SHA-256)
+    -fullname : String
+    -phone : String
+    -email : String
+    -role : String
+    -is_active : bool
+    -created_at : DateTime
+    -updated_at : DateTime
+  }
+
+  class User {
+    <<auth-service · In-memory JWT>>
+    -ID : String (UUID)
+    -email : String
+    -credential_hash : String
+    -is_active : bool
+    -is_locked : bool
+    -failed_login_attempts : int
+    -last_login_at : DateTime
+    -created_at : DateTime
+  }
+
+  class Role {
+    <<Enum>>
+    -ID : int
+    -user_id : String
+    -name : String
+  }
+
+  class Permission {
+    <<Value Object>>
+    -ID : int
+    -role_id : int
+    -resource : String
+    -action : String
+  }
+
+  class TokenBundle {
+    <<Value Object>>
+    -ID : String
+    -user_id : String
+    -access_token : String
+    -refresh_token : String
+    -expires_in : int
+    -issued_at : DateTime
+    -expires_at : DateTime
+  }
+}
+
+' ============================================================
+' PATIENT SERVICE — Django, PostgreSQL: patient_db
+' ============================================================
+package"patient-service :8001 (Django · patient_db)"#E8F5E9 {
+
+  class Patient {
+    <<ORM Persistable>>
+    -ID : String (UUID)
+    -account_id : String
+    -full_name : String
+    -email : String
+    -phone : String
+    -date_of_birth : Date
+    -gender : String
+    -blood_type : String
+    -created_at : DateTime
+    -updated_at : DateTime
+  }
+
+  class PatientAddress {
+    <<ORM Persistable>>
+    -ID : int
+    -patient_id : String
+    -street : String
+    -ward : String
+    -district : String
+    -province : String
+    -postal_code : String
+  }
+
+  class InsuranceInfo {
+    <<ORM Persistable>>
+    -ID : int
+    -patient_id : String
+    -code : String
+    -discount_rate : float
+    -valid_until : Date
+  }
+
+  class MedicalRecord {
+    <<ORM Persistable>>
+    -ID : String
+    -patient_id : String
+    -visit_date : Date
+    -diagnosis : String
+    -notes : String
+    -created_at : DateTime
+  }
+}
+
+' ============================================================
+' RELATIONSHIPS
+' ============================================================
+Account --> User :"links via email"User *-- Role
+Role *-- Permission
+User *-- TokenBundle
+
+Account --> Patient :"1 account_id"Patient *-- PatientAddress
+Patient *-- InsuranceInfo
+Patient *-- MedicalRecord
+
+@enduml

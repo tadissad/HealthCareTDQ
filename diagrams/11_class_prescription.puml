@@ -1,0 +1,89 @@
+@startuml class_prescription
+' ============================================================
+' Class Diagram: Prescription Service (Cart)
+' ============================================================
+skinparam classBackgroundColor #AEE2F0
+skinparam classBorderColor #0D47A1
+skinparam classHeaderBackgroundColor #0D47A1
+skinparam classHeaderFontColor #FFFFFF
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
+skinparam ArrowColor #0D47A1
+skinparam ArrowThickness 1.5
+skinparam shadowing false
+skinparam linetype ortho
+
+package"prescription-service :8004 (FastAPI · prescription_db)"#E3F2FD {
+
+  class Prescription {
+    <<ORM Persistable · Aggregate Root>>
+    -ID : String (UUID)
+    -customer_id : String
+    -prescription_status : String
+    -cart_status : String
+    -subtotal : Decimal
+    -total_amount : Decimal
+    -currency : String
+    -issued_date : DateTime
+    -valid_until : Date
+    -max_refills : int
+    -created_at : DateTime
+    -fulfilled_date : DateTime
+    -notes : String
+  }
+
+  class PrescriberInfo {
+    <<ORM Persistable · Value Object>>
+    -ID : int
+    -prescription_id : String
+    -name : String
+    -license_number : String
+    -specialty : String
+    -hospital : String
+  }
+
+  class Diagnosis {
+    <<ORM Persistable>>
+    -ID : int
+    -prescription_id : String
+    -icd10_code : String
+    -condition_name : String
+    -notes : String
+  }
+
+  class PrescriptionItem {
+    <<ORM Persistable>>
+    -ID : int
+    -prescription_id : String
+    -product_id : String
+    -sku : String
+    -product_name : String
+    -quantity : int
+    -unit_price : Decimal
+    -currency : String
+    -requires_prescription : bool
+    -frequency : String
+    -duration : String
+    -dosage : String
+    -fulfill_quantity : int
+  }
+}
+
+note right of Prescription
+  Đóng vai trò là **Cart Service**
+  trong mẫu E-Commerce.
+  customer_id = account_id từ api-gateway.
+  Bị xóa sau khi dispensing-service
+  tạo Order thành công.
+end note
+
+note bottom of PrescriptionItem
+  product_id → tham chiếu cross-service
+  đến pharmacy-service Product
+end note
+
+Prescription *--"1"PrescriberInfo
+Prescription *--"0..*"Diagnosis
+Prescription *--"1..*"PrescriptionItem
+
+@enduml

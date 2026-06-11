@@ -1,0 +1,52 @@
+[
+  {
+    "product_id": "P028",
+    "category": "consultation_package",
+    "purchase_count": 30
+  },
+  {
+    "product_id": "P009",
+    "category": "elderly_weak_digestion",
+    "purchase_count": 29
+  },
+  {
+    "product_id": "P031",
+    "category": "ulcer_hp_support",
+    "purchase_count": 28
+  },
+  {
+    "product_id": "P060",
+    "category": "vitamin_mineral",
+    "purchase_count": 27
+  },
+  {
+    "product_id": "P035",
+    "category": "stomach_nutrition",
+    "purchase_count": 26
+  },
+  {
+    "product_id": "P062",
+    "category": "reflux_heartburn",
+    "purchase_count": 26
+  },
+  {
+    "product_id": "P072",
+    "category": "reflux_heartburn",
+    "purchase_count": 26
+  },
+  {
+    "product_id": "P011",
+    "category": "ulcer_hp_support",
+    "purchase_count": 25
+  },
+  {
+    "product_id": "P063",
+    "category": "probiotic_digestion",
+    "purchase_count": 25
+  },
+  {
+    "product_id": "P052",
+    "category": "reflux_heartburn",
+    "purchase_count": 24
+  }
+]

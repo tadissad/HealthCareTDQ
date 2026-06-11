@@ -1,0 +1,95 @@
+@startuml microservice_architecture
+' ============================================================
+' Kiến trúc tổng thể Microservices — Health-Micro-AI
+' ============================================================
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam shadowing false
+skinparam componentStyle rectangle
+
+skinparam component {
+  BackgroundColor<<gateway>> #1565C0
+  FontColor<<gateway>> #FFFFFF
+  
+  BackgroundColor<<fastapi>> #6A1B9A
+  FontColor<<fastapi>> #FFFFFF
+  
+  BackgroundColor<<django>> #1B5E20
+  FontColor<<django>> #FFFFFF
+  
+  BackgroundColor<<django_alt>> #BF360C
+  FontColor<<django_alt>> #FFFFFF
+  
+  BackgroundColor<<fastapi_alt>> #E65100
+  FontColor<<fastapi_alt>> #FFFFFF
+}
+
+skinparam database {
+  BackgroundColor<<postgres>> #336791
+  FontColor<<postgres>> #FFFFFF
+  
+  BackgroundColor<<neo4j>> #008CC1
+  FontColor<<neo4j>> #FFFFFF
+  
+  BackgroundColor<<redis>> #DC382D
+  FontColor<<redis>> #FFFFFF
+  
+  BackgroundColor<<faiss>> #FF8F00
+  FontColor<<faiss>> #FFFFFF
+}
+
+actor "Client Browser" as CLIENT
+
+component "API GATEWAY\nDjango · :8000\nRoute requests, JWT Session" <<gateway>> as GW
+
+package "Microservices Layer" {
+  component "auth-service\nFastAPI · :8012" <<fastapi>> as AUTH
+  component "patient-service\nDjango · :8001" <<django>> as PAT
+  component "pharmacy-service\nDjango · :8002" <<django>> as PHAR
+  component "medical-catalog-service\nDjango · :8003" <<django>> as CAT
+  component "prescription-service\nFastAPI · :8004" <<fastapi>> as PRESC
+  component "dispensing-service\nDjango · :8005" <<django_alt>> as DISP
+  component "medical-review-service\nFastAPI · :8006" <<fastapi>> as REV
+  component "ai-service\nFastAPI · :8010" <<fastapi_alt>> as AI
+}
+
+package "Infrastructure Layer" {
+  database "PostgreSQL :5432\n(6 databases)" <<postgres>> as PG
+  database "Neo4j :7687\nKnowledge Graph" <<neo4j>> as NEO
+  database "Redis :6379\nEvent Queue" <<redis>> as REDIS
+  database "FAISS Volume\nVector DB" <<faiss>> as FAISS
+}
+
+' --- Routing from Gateway ---
+CLIENT --> GW : HTTP :8000
+GW --> AUTH
+GW --> PAT
+GW --> PHAR
+GW --> CAT
+GW --> PRESC
+GW --> DISP
+GW --> REV
+GW --> AI
+
+' --- Cross-Service Communication ---
+DISP --> PRESC : GET cart items
+DISP --> PAT : Update membership
+DISP ..> REDIS : Publish OrderFulfilled
+REDIS ..> PHAR : Consume event
+
+AI --> PHAR : GET products
+CAT ..> PHAR : Sync catalog
+
+' --- Database Connections ---
+PAT ---> PG
+PHAR ---> PG
+CAT ---> PG
+PRESC ---> PG
+DISP ---> PG
+REV ---> PG
+
+AI ---> NEO
+AI ---> FAISS
+
+@enduml

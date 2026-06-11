@@ -11,19 +11,16 @@ class MedicalProduct(models.Model):
     """Sản phẩm y tế / dược phẩm"""
 
     CATEGORY_CHOICES = [
-        ('antacid',      'Thuốc kháng acid / trung hòa acid'),
-        ('ppi',          'Ức chế bơm proton (PPI)'),
-        ('h2_blocker',   'Ức chế thụ thể H2'),
-        ('antibiotic',   'Kháng sinh'),
-        ('probiotic',    'Probiotic / Men tiêu hóa'),
-        ('digestive',    'Thuốc hỗ trợ tiêu hóa'),
-        ('antiemetic',   'Thuốc chống nôn'),
-        ('antidiarrheal','Thuốc tiêu chảy'),
-        ('laxative',     'Thuốc nhuận tràng'),
-        ('supplement',   'Bổ sung dinh dưỡng'),
-        ('antispasmodic','Thuốc chống co thắt'),
-        ('mucosal',      'Bảo vệ niêm mạc'),
-        ('other',        'Khác'),
+        ('ulcer_hp_support',        'Hỗ trợ Điều trị Viêm loét & HP'),
+        ('reflux_heartburn',        'Giảm Trào ngược & Ợ chua'),
+        ('probiotic_digestion',     'Men vi sinh & Hỗ trợ Tiêu hóa'),
+        ('herbal_extract',          'Tinh chất Nghệ & Thảo dược'),
+        ('stomach_nutrition',       'Thực phẩm & Dinh dưỡng Dạ dày'),
+        ('equipment_device',        'Dụng cụ & Thiết bị Hỗ trợ'),
+        ('test_kit_home',           'Bộ xét nghiệm & Kiểm tra tại nhà'),
+        ('consultation_package',    'Gói khám & Tư vấn Bác sĩ'),
+        ('elderly_weak_digestion',  'Dành cho Người già & Hệ tiêu hóa yếu'),
+        ('vitamin_mineral',         'Vitamin & Khoáng chất Bổ trợ'),
     ]
 
     DOSAGE_FORM_CHOICES = [
@@ -75,6 +72,10 @@ class MedicalProduct(models.Model):
     class Meta:
         ordering = ['-id']
         verbose_name = "Sản phẩm y tế"
+        verbose_name_plural = "Danh sách sản phẩm y tế"
+
+    def __str__(self):
+        return f"[{self.get_category_display()}] {self.name} {self.dosage_strength} – {self.price:,} VND"
         verbose_name_plural = "Danh sách sản phẩm y tế"
 
     def __str__(self):

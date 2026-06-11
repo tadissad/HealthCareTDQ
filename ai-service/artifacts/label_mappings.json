@@ -1,0 +1,38 @@
+{
+  "action_to_idx": {
+    "view": 0,
+    "click": 1,
+    "add_to_cart": 2,
+    "purchase": 3,
+    "wishlist": 4,
+    "review": 5,
+    "share": 6,
+    "compare": 7
+  },
+  "category_to_idx": {
+    "ulcer_hp_support": 0,
+    "reflux_heartburn": 1,
+    "probiotic_digestion": 2,
+    "herbal_extract": 3,
+    "stomach_nutrition": 4,
+    "equipment_device": 5,
+    "test_kit_home": 6,
+    "consultation_package": 7,
+    "elderly_weak_digestion": 8,
+    "vitamin_mineral": 9
+  },
+  "n_features": 25,
+  "n_actions": 8,
+  "seq_len": 5,
+  "learning_rate": 0.001,
+  "class_weight": {
+    "0": 0.5199833472106578,
+    "1": 0.7855345911949686,
+    "2": 0.7551390568319226,
+    "3": 0.9834645669291339,
+    "4": 1.6653333333333333,
+    "5": 1.8781954887218044,
+    "6": 1.6391076115485563,
+    "7": 1.389321468298109
+  }
+}

@@ -1,0 +1,94 @@
+@startuml class_dispensing
+' ============================================================
+' Class Diagram: Dispensing Service (Order + Payment + Shipping)
+' ============================================================
+skinparam classBackgroundColor #AEE2F0
+skinparam classBorderColor #BF360C
+skinparam classHeaderBackgroundColor #BF360C
+skinparam classHeaderFontColor #FFFFFF
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
+skinparam ArrowColor #BF360C
+skinparam ArrowThickness 1.5
+skinparam shadowing false
+skinparam linetype ortho
+
+package"dispensing-service :8005 (Django · dispensing_db)"#FBE9E7 {
+
+  class Order {
+    <<ORM Persistable · Aggregate Root>>
+    -ID : String (UUID)
+    -customer_id : String
+    -prescription_id : String
+    -status : String
+    -subtotal : Decimal
+    -discount_amount : Decimal
+    -total_amount : Decimal
+    -currency : String
+    -order_date : DateTime
+    -confirmed_date : DateTime
+    -dispensed_date : DateTime
+    -notes : String
+  }
+
+  class OrderItem {
+    <<ORM Persistable>>
+    -ID : String
+    -order_id : String
+    -product_id : String
+    -sku : String
+    -product_name : String
+    -qty_ordered : int
+    -qty_dispensed : int
+    -qty_unit : String
+    -unit_price : Decimal
+    -line_total : Decimal
+    -currency : String
+  }
+
+  class Payment {
+    <<ORM Persistable · Value Object>>
+    -ID : int
+    -order_id : String
+    -method : String
+    -status : String
+    -transaction_id : String
+    -reference_number : String
+    -paid_at : DateTime
+  }
+
+  class ShippingInfo {
+    <<ORM Persistable · Value Object>>
+    -ID : int
+    -order_id : String
+    -street : String
+    -city : String
+    -district : String
+    -postal_code : String
+    -country : String
+    -notes : String
+  }
+}
+
+note right of Order
+  **Status lifecycle:**
+  PENDING → CONFIRMED
+      → DISPENSED | CANCELLED
+
+  **payment.method:**
+  COD | BANK_TRANSFER | BHYT
+
+  **discount_amount = subtotal × 0.2**
+  khi bệnh nhân có BHYT
+end note
+
+note bottom of OrderItem
+  product_id → tham chiếu cross-service
+  đến pharmacy-service Product
+end note
+
+Order *--"1..*"OrderItem
+Order *--"0..1"Payment
+Order *--"0..1"ShippingInfo
+
+@enduml

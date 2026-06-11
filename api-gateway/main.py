@@ -256,9 +256,9 @@ def create_app():
                 'url': 'http://prescription-service:8004',
                 'health_check_url': 'http://prescription-service:8004/health'
             },
-            'clinical-advisory-service': {
-                'url': 'http://clinical-advisory-service:8005',
-                'health_check_url': 'http://clinical-advisory-service:8005/health'
+            'ai-service': {
+                'url': 'http://ai-service:8000',
+                'health_check_url': 'http://ai-service:8000/health/'
             },
             'auth-service': {
                 'url': 'http://auth-service:8006',
