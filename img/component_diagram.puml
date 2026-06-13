@@ -1,0 +1,86 @@
+@startuml ComponentDiagram_HealthMicroAI
+' ==========================================================
+'  Component Diagram cho dự án Health-Micro-AI (Flat Structure)
+'  Bám sát 100% layout và phong cách hình vẽ tay tham khảo
+' ==========================================================
+
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 80
+skinparam defaultTextAlignment center
+
+skinparam component {
+    BackgroundColor #F8F9FA
+    BorderColor #343A40
+    BorderThickness 1.5
+    FontSize 14
+    FontStyle bold
+}
+
+skinparam arrow {
+    Color #6C757D
+    Thickness 1.5
+}
+
+' ==========================================================
+'  Khai báo các component (Bỏ api-gateway, chỉ giữ Business)
+' ==========================================================
+
+component "patient-service\n<<component>>" as patient
+component "prescription-service\n<<component>>" as cart
+component "dispensing-service\n<<component>>" as order
+
+component "auth-service\n<<component>>" as auth
+component "pharmacy-service\n<<component>>" as pharmacy
+component "medical-catalog-service\n<<component>>" as catalog
+
+component "medical-review-service\n<<component>>" as review
+component "ai-service\n<<component>>" as ai
+
+' ==========================================================
+'  Sắp xếp layout tĩnh (ẩn mũi tên để xếp hàng ngang)
+' ==========================================================
+patient -[hidden]right-> cart
+cart -[hidden]right-> order
+
+auth -[hidden]right-> pharmacy
+pharmacy -[hidden]right-> catalog
+
+review -[hidden]right-> ai
+
+' Ép các dòng theo chiều dọc
+patient -[hidden]down-> auth
+cart -[hidden]down-> pharmacy
+order -[hidden]down-> catalog
+
+auth -[hidden]down-> review
+pharmacy -[hidden]down-> ai
+
+' ==========================================================
+'  Định nghĩa các luồng phụ thuộc (Dependencies)
+' ==========================================================
+
+' Patient check xác thực
+patient ..> auth
+
+' Order (dispensing) phụ thuộc
+order ..> cart 
+order ..> patient 
+order ..> pharmacy 
+
+' Cart lấy thông tin SP
+cart ..> pharmacy 
+
+' Catalog phân nhóm SP
+catalog ..> pharmacy 
+
+' Review phụ thuộc
+review ..> patient 
+review ..> pharmacy 
+
+' AI lấy dữ liệu để train/gợi ý
+ai ..> pharmacy 
+ai ..> patient 
+
+@enduml
